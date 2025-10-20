@@ -13,7 +13,7 @@ app.use(express.json());
 connectDB();
 
 app.get("/", (req, res) => {
-  res.send("CardVault API running");
+  res.send("CardVault API is for sure running");
 });
 
 const PORT = process.env.PORT || 5000;
