@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CardForm from "./CardForm";
 
-const CardList = () => {
+const CardList= () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -20,12 +20,12 @@ const CardList = () => {
   }, []);
 
   // Handler to add a new card from the form
-  const handleAddCard = (newCard) => {
+  const handleAddCard= (newCard) => {
     setCards([...cards, newCard]);
   };
 
   // Delete a card
-const handleDeleteCard = async (id) => {
+const handleDeleteCard= async (id) => {
   try {
     await axios.delete(`http://localhost:5000/api/cards/${id}`);
     setCards(cards.filter((card) => card._id !== id));
@@ -34,13 +34,13 @@ const handleDeleteCard = async (id) => {
   }
 };
 
-// Edit a card (simplest: prompt for new name)
-const handleEditCard = async (card) => {
-  const newName = prompt("Enter new name:", card.name);
+// Edit a card
+const handleEditCard= async (card) => {
+  const newName= prompt("Enter new name:", card.name);
   if (!newName) return;
 
   try {
-    const res = await axios.patch(`http://localhost:5000/api/cards/${card._id}`, {
+    const res= await axios.patch(`http://localhost:5000/api/cards/${card._id}`, {
       ...card,
       name: newName,
     });
@@ -52,6 +52,10 @@ const handleEditCard = async (card) => {
 
   return (
     <div>
+        <button className="theme-toggle" onClick={() => document.body.classList.toggle("dark-mode")}
+>   Toggle Dark Mode
+    </button>
+
       <h2>CardVault</h2>
 
       <CardForm onAdd={handleAddCard} />

@@ -1,12 +1,12 @@
 import express from "express";
 import Card from "../models/Card.js";
 
-const router = express.Router();
+const router= express.Router();
 
 // Get all cards
 router.get("/", async (req, res) => {
   try {
-    const cards = await Card.find();
+    const cards= await Card.find();
     res.json(cards);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -16,8 +16,8 @@ router.get("/", async (req, res) => {
 // Add a new card
 router.post("/", async (req, res) => {
   try {
-    const newCard = new Card(req.body);
-    const savedCard = await newCard.save();
+    const newCard= new Card(req.body);
+    const savedCard= await newCard.save();
     res.status(201).json(savedCard);
   } catch (err) {
     res.status(400).json({ message: err.message });

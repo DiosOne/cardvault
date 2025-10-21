@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const CardForm = ({ onAdd }) => {
+const CardForm= ({ onAdd }) => {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [rarity, setRarity] = useState("");
   const [value, setValue] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit= async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/api/cards", {

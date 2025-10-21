@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./db.js";
 
 dotenv.config();
-const app = express();
+const app= express();
 
 app.use(cors());
 app.use(express.json());
