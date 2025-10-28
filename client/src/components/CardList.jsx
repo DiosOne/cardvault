@@ -63,15 +63,22 @@ const handleEditCard= async (card) => {
       {cards.length === 0 ? (
         <p>No cards yet</p>
       ) : (
-        <ul>
-  {cards.map((card) => (
-    <li key={card._id}>
-      <strong>{card.name}</strong> ({card.type}) - {card.rarity} - ${card.value}
-      <button onClick={() => handleEditCard(card)}>Edit</button>
-      <button onClick={() => handleDeleteCard(card._id)}>Delete</button>
-    </li>
-  ))}
-</ul>
+        <div className="card-grid">
+        {cards.map((card) => (
+          <div className="card" key={card._id}>
+            <img
+              src="https://via.placeholder.com/300x180"
+              alt={card.name || "Card placeholder"}
+              className="card-image"
+            />
+            <h3>{card.name}</h3>
+            <p>{card.type} — {card.rarity}</p>
+            <p>${card.value}</p>
+            <button onClick={() => handleEditCard(card)}>Edit</button>
+            <button onClick={() => handleDeleteCard(card._id)}>Delete</button>
+          </div>
+        ))}
+      </div>
 
       )}
     </div>
