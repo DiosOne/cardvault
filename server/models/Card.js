@@ -6,7 +6,16 @@ const cardSchema = new mongoose.Schema({
   rarity: { type: String },
   value: { type: Number },
   description: { type: String },
-}, { timestamps: true });
 
-const Card = mongoose.model("Card", cardSchema);
+  //link cards to owners
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+}, 
+{ timestamps: true }
+);
+
+const Card= mongoose.model("Card", cardSchema);
 export default Card;
