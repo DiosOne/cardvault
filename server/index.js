@@ -27,3 +27,7 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
+import {errorHandler} from "./middleware/errorHandler.js";
+
+//global error handler
+app.use(errorHandler);
