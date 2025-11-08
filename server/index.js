@@ -24,10 +24,16 @@ app.get("/", (req, res) => {
   res.send("CardVault API is for sure running");
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 import {errorHandler} from "./middleware/errorHandler.js";
 
 //global error handler
 app.use(errorHandler);
+
+//export for testing
+export default app;
+
+//only start server if not running tests
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
