@@ -17,7 +17,7 @@ afterAll(async () => {
 });
 
 describe("Card API", () => {
-    it("should rreturn 401 when no token is provided", async () => {
+    it("should return 401 when no token is provided", async () => {
         const res= await request(app).get("/api/cards");
         expect(res.statusCode).toBe(401);
         expect(res.body.message).toMatch(/token/i);
@@ -49,7 +49,7 @@ it("should create a card and then update it", async () => {
         .send({ value: 4200});
 
     expect(updatedRes.statusCode).toBe(200);
-    expect(updatedRes.body.value).toBe(4200);
+    expect(updatedRes.body.data.value).toBe(4200);
 });
 
 it("should delete a card by ID", async () => {
@@ -67,5 +67,5 @@ it("should fetch all cards for authorised user", async () => {
         .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
+    expect(Array.isArray(res.body.data)).toBe(true);
 });
