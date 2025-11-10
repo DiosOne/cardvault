@@ -8,7 +8,7 @@ export default function Dashboard() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const {user} = useContext(AuthContext);
+  const {user, logout} = useContext(AuthContext);
 
   //fetch cards when page loads
   useEffect(() => {
@@ -70,7 +70,10 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      <h2>Welcome, {user?.username}</h2>
+      <div className="dashboard-header">
+        <h2>Welcome, {user?.username}!</h2>
+        <button type="button" onClick={logout}>Logout</button>
+      </div>
       <p>Your Cards</p>
       
       <CardForm onAdd={handleAddCard}/>
