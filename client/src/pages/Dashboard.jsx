@@ -1,19 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import API from "../api/api";
 import CardForm from "./components/CardForm";
 import CardList from "../components/CardList";
+import {AuthContext} from "../context/AuthContext";
 
 export default function Dashboard() {
   const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const {user} = useContext(AuthContext);
 
   //fetch cards when page loads
   useEffect(() => {
-    const fetchCards = async () => {
+    const fetchCards= async () => {
       try {
         const res = await API.get("/cards");
         setCards(res.data);
-      } catch (err) {
-        console.error("Error fetching cards:", err);
+      } catch {
+        setError("Failed to load your cards. Please try again.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchCards();
@@ -25,18 +31,21 @@ export default function Dashboard() {
       const res= await API.post("/cards", cardData);
       const newCard= res.data;
       setCards([...cards, newCard]);
-    } catch (err) {
-      console.error("Error adding card:", err);
+      alert("Card added successfully!");
+    } catch {
+      alert("Failed to add card!");
     }
   };
 
   //delete a card
   const handleDeleteCard= async (id) => {
+    if (!window.confirm("Are you sure you want to delete this card?")) return;
     try {
       await API.delete(`/cards/${id}`);
       setCards(cards.filter((card) => card._id !== id));
-    } catch (err) {
-      console.error("Delete failed", err);
+      alert("Card deleted successfully!");
+    } catch {
+      alert("Delete failed!");
     }
   };
 
@@ -50,14 +59,20 @@ export default function Dashboard() {
         name: newName,
       });
       setCards(cards.map(c => c._id === card._id ? res.data : c));
-    } catch (err) {
-      console.error("Edit failed:", err);
+      alert("Card updated successfully!");
+    } catch {
+      alert("Edit failed!");
     }
   };
 
+  if (loading) return <p>Loading your cards...</p>;
+  if (error) return <p style={{color: "red"}}>{error}</p>;
+
   return (
-    <div>
-      <h2>Your Cards</h2>
+    <div className="dashboard">
+      <h2>Welcome, {user?.username}</h2>
+      <p>Your Cards</p>
+      
       <CardForm onAdd={handleAddCard}/>
       <CardList cards={cards} onEdit={handleEditCard } onDelete={handleDeleteCard}/>
     </div>
