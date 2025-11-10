@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import API from "../api/api";
-import CardForm from "./components/CardForm";
+import CardForm from "../components/CardForm";
 import CardList from "../components/CardList";
 import {AuthContext} from "../context/AuthContext";
 
