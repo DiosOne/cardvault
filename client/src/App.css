@@ -176,3 +176,27 @@ button.active{
   color: var(--accent);
   margin: 1rem 0;
 }
+
+/* Login Buttons */
+.auth-container{
+  background-color: var(--card-bg) ;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 400%;
+}
+
+.auth-container h2{
+  margin-bottom: 1.5rem;
+}
+
+.auth-container input{
+  width: 100%;
+}
+
+.auth-container button{
+  width: 100%;
+  margin-top: 1rem;
+}
