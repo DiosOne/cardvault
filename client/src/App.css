@@ -8,7 +8,7 @@
 }
 
 /* Dark Mode */
-body.dark-mode{
+body.darkmode{
   --bg:#1e1e2f;
   --text:#f5f5f5;
   --card-bg:#2a2a40;
@@ -88,7 +88,7 @@ h2{
   background-color: #ccc;
 }
 
-body.dark-mode .card img{
+body.darkmode .card img{
   background-color: #444;
 }
 
@@ -110,7 +110,7 @@ input, textarea{
   font-size: 0.95rem;
 }
 
-body.dark-mode input, body.dark-mode.textarea{
+body.darkmode input, body.darkmode.textarea{
   background-color: #2f2f4a;
   border-color: #444;
   color: #f0f0f0;
