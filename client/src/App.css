@@ -144,22 +144,29 @@ button.active{
 
 /* Theme Toggle */
 .theme-toggle{
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
   background-color: transparent;
   border: 2px solid var(--accent);
   color: var(--accent);
   padding: 0.4rem 0.8rem;
-  border-radius: 20px;
+  border-radius: 50%;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   transition: all 0.3s ease;
 }
 
 .theme-toggle:hover{
   background-color: var(--accent);
   color: #fff;
+}
+
+.theme-toggle svg{
+  vertical-align: middle;
+  stroke-width: 2;
+  transition: transform 0.2s ease;
+}
+
+.theme-toggle:hover svg{
+  transform: rotate(15deg);
 }
 
 /* Utility */
@@ -200,3 +207,54 @@ button.active{
   width: 100%;
   margin-top: 1rem;
 }
+
+/* Navbar */
+.navbar{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.navbar h1{
+  color: var(--accent);
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.nav-right{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-right a{
+  text-decoration: none;
+  color: var(--text);
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.nav-right a:hover{
+  color: var(--accent);
+}
+
+.nav-right button{
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.nav-right button:hover{
+  background-color: #3a7ad9;
+}
+
