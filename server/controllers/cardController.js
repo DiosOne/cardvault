@@ -13,8 +13,30 @@ export const getUserCards= asyncHandler(async (req, res) => {
 
 //add an new card
 export const addCard= asyncHandler(async (req, res) => {
-    const newCard= new Card({...req.body, userId: req.user.id});
+    const {name, type, rarity, value, description, status} = req.body;
+
+    //validation
+    if (!name) {
+        res.status(400);
+        throw new Error(MESSAGES.MISSING_DATA);
+    }
+
+    //ensure status
+    const allowedStatuses= ["owned", "for trade", "wanted"];
+    const cardStatus= allowedStatuses.includes(status) ? status: "owned";
+
+    const newCard= new Card({
+        name,
+        type,
+        rarity,
+        value,
+        description,
+        status: cardStatus,
+        userId: req.user._id,
+    });
+
     const savedCard= await newCard.save();
+
     res.status(201).json({
         success: true,
         data: savedCard,

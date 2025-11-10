@@ -4,4 +4,5 @@ export const MESSAGES= {
     LOGIN_SUCCESS: "Login successful",
     INVALID_LOGIN: "Invalid or expired token",
     VALIDATION_ERROR: "Invalid request data",
+    MISSING_DATA: "All fields must be completed",
 };

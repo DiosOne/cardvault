@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 
-const cardSchema = new mongoose.Schema({
+const cardSchema= new mongoose.Schema({
   name: { type: String, required: true },
   type: { type: String },
   rarity: { type: String },
   value: { type: Number },
   description: { type: String },
+  status: {
+    type: String,
+    enum: ["owned", "for trade", "wanted"],
+    default: "owned",
+  },
 
   //link cards to owners
   userId: {
