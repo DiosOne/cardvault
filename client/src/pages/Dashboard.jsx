@@ -15,7 +15,7 @@ export default function Dashboard() {
     const fetchCards= async () => {
       try {
         const res = await API.get("/cards");
-        setCards(res.data);
+        setCards(res.data.data || []);
       } catch {
         setError("Failed to load your cards. Please try again.");
       } finally {
@@ -29,10 +29,15 @@ export default function Dashboard() {
   const handleAddCard= async (cardData) => {
     try {
       const res= await API.post("/cards", cardData);
-      const newCard= res.data;
+      const newCard= res.data.data || res.data;
       setCards([...cards, newCard]);
       alert("Card added successfully!");
-    } catch {
+    } catch (err) {
+      console.error("Failed to add card:", {
+        status: err.response?.status,
+        data: err.response?.data,
+        message: err.message,
+      });
       alert("Failed to add card!");
     }
   };
