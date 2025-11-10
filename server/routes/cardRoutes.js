@@ -5,10 +5,12 @@ import {
   addCard,
   updateCard,
   deleteCard,
+  getPublicCards,
 } from "../controllers/cardController.js";
 
 const router= express.Router();
 
+router.get("/public", getPublicCards);
 router.get("/", verifyToken, getUserCards);
 router.post("/", verifyToken, addCard);
 router.patch("/:id", verifyToken, updateCard);

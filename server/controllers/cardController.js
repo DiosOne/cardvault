@@ -11,6 +11,23 @@ export const getUserCards= asyncHandler(async (req, res) => {
     });
 });
 
+//get all public trade cards
+export const getPublicCards= asyncHandler(async (req,res) => {
+    const cards= await Card.find({status: "for trade"})
+        .populate("userId", "username email");
+
+    if (!cards || cards.length === 0) {
+        return res.status(404).json({
+            success: false,
+            message: MESSAGES.CARD_NOT_FOUND,
+        });
+    }
+    res.json({
+        success: true,
+        data: cards,
+    });
+});
+
 //add an new card
 export const addCard= asyncHandler(async (req, res) => {
     const {name, type, rarity, value, description, status} = req.body;
