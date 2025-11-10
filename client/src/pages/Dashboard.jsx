@@ -1,23 +1,23 @@
-import { useEffect, useState, useContext } from "react";
-import API from "../api/api";
-import CardForm from "../components/CardForm";
-import CardList from "../components/CardList";
-import {AuthContext} from "../context/AuthContext";
+import { useEffect, useState, useContext } from 'react';
+import API from '../api/api';
+import CardForm from '../components/CardForm';
+import CardList from '../components/CardList';
+import {AuthContext} from '../context/AuthContext';
 
 export default function Dashboard() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const {user, logout} = useContext(AuthContext);
 
   //fetch cards when page loads
   useEffect(() => {
     const fetchCards= async () => {
       try {
-        const res = await API.get("/cards");
+        const res = await API.get('/cards');
         setCards(res.data.data || []);
       } catch {
-        setError("Failed to load your cards. Please try again.");
+        setError('Failed to load your cards. Please try again.');
       } finally {
         setLoading(false);
       }
@@ -28,35 +28,35 @@ export default function Dashboard() {
   //add new card
   const handleAddCard= async (cardData) => {
     try {
-      const res= await API.post("/cards", cardData);
+      const res= await API.post('/cards', cardData);
       const newCard= res.data.data || res.data;
       setCards([...cards, newCard]);
-      alert("Card added successfully!");
+      alert('Card added successfully!');
     } catch (err) {
-      console.error("Failed to add card:", {
+      console.error('Failed to add card:', {
         status: err.response?.status,
         data: err.response?.data,
         message: err.message,
       });
-      alert("Failed to add card!");
+      alert('Failed to add card!');
     }
   };
 
   //delete a card
   const handleDeleteCard= async (id) => {
-    if (!window.confirm("Are you sure you want to delete this card?")) return;
+    if (!window.confirm('Are you sure you want to delete this card?')) return;
     try {
       await API.delete(`/cards/${id}`);
       setCards(cards.filter((card) => card._id !== id));
-      alert("Card deleted successfully!");
+      alert('Card deleted successfully!');
     } catch {
-      alert("Delete failed!");
+      alert('Delete failed!');
     }
   };
 
   //edit a card
   const handleEditCard= async (card) => {
-    const newName= prompt("Enter new name:", card.name);
+    const newName= prompt('Enter new name:', card.name);
     if (!newName) return;
     try {
       const res= await API.patch(`/cards/${cards._id}`, {
@@ -64,9 +64,9 @@ export default function Dashboard() {
         name: newName,
       });
       setCards(cards.map(c => c._id === card._id ? res.data : c));
-      alert("Card updated successfully!");
+      alert('Card updated successfully!');
     } catch {
-      alert("Edit failed!");
+      alert('Edit failed!');
     }
   };
 

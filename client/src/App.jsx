@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Navbar from "./components/Navbar";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Navbar from './components/Navbar';
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 
 export default function App() {
   const {user}= useContext(AuthContext);

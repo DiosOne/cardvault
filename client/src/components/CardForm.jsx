@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function CardForm({onAdd}) {
   const [form, setForm] = useState({
-    name: "",
-    type: "",
-    rarity: "",
-    value: "",    
+    name: '',
+    type: '',
+    rarity: '',
+    value: '',    
   });
 
   const handleChange= (e) =>
@@ -19,7 +19,7 @@ export default function CardForm({onAdd}) {
       rarity: form.rarity,
       value: Number(form.value),
     });
-    setForm({name: "", type: "", rarity: "", value: ""});
+    setForm({name: '', type: '', rarity: '', value: ''});
   };
 
   return (
