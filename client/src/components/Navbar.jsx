@@ -48,6 +48,7 @@ export default function Navbar() {
             <Link to="/">Home</Link>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>
+            <Link to="/public">Public Trades</Link>
           </>
         )}
 

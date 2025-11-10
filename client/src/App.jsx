@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+import PublicTrades from './pages/PublicTrades';
 
 export default function App() {
   const {user}= useContext(AuthContext);
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/public" element={<Public Trades />}/>
         {/* protected route */}
         <Route path="/dashboard" element={user? <Dashboard/> : <Navigate to="/login" replace/>}/>
       </Routes>
