@@ -166,3 +166,13 @@ button.active{
 .danger{
   color: var(--danger);
 }
+
+.loading{
+  color: var(--accent);
+  margin: 1rem 0;
+}
+
+.error{
+  color: var(--accent);
+  margin: 1rem 0;
+}

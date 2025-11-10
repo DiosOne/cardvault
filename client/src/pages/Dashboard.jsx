@@ -65,8 +65,8 @@ export default function Dashboard() {
     }
   };
 
-  if (loading) return <p>Loading your cards...</p>;
-  if (error) return <p style={{color: "red"}}>{error}</p>;
+  if (loading) return <p className="loading">Loading your cards...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="dashboard">
