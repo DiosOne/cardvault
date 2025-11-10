@@ -25,37 +25,39 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create Account</h2>
+    <div className='auth-container'>
+      <form onSubmit={handleSubmit}>
+        <h2>Create Account</h2>
 
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
-      <button type="submit">Register</button>
+        <button type="submit">Register</button>
 
-      <p>
-                Already have an account?{' '}
-        <Link to="/login">Log in here</Link>
-      </p>            
-    </form>
+        <p>
+                  Already have an account?{' '}
+          <Link to="/login">Log in here</Link>
+        </p>            
+      </form>
+    </div>
   );
 }
