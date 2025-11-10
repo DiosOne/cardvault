@@ -1,61 +1,34 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 
-const CardForm= ({ onAdd }) => {
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [rarity, setRarity] = useState("");
-  const [value, setValue] = useState("");
+export default function CardForm({onAdd}) {
+  const [form, setForm] = useState({
+    name: "",
+    type: "",
+    rarity: "",
+    value: "",    
+  });
 
-  const handleSubmit= async (e) => {
+  const handleChange= (e) =>
+    setForm({...form, [e.target.name]: e.target.value});
+
+  const handleSubmit= (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5000/api/cards", {
-        name,
-        type,
-        rarity,
-        value: Number(value),
-      });
-      onAdd(res.data); // pass new card to parent
-      setName(""); setType(""); setRarity(""); setValue("");
-    } catch (err) {
-      console.error("Error adding card:", err);
-    }
+    onAdd({
+      name: form.name,
+      type: form.type,
+      rarity: form.rarity,
+      value: Number(form.value),
+    });
+    setForm({name: "", type: "", rarity: "", value: ""});
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Type"
-        value={type}
-        onChange={(e) => setType(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Rarity"
-        value={rarity}
-        onChange={(e) => setRarity(e.target.value)}
-        required
-      />
-      <input
-        type="number"
-        placeholder="Value"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        required
-      />
+      <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required/>
+      <input name="type" placeholder="Type" value={form.type} onChange={handleChange} required/>
+      <input name="rarity" placeholder="Rarity" value={form.rarity} onChange={handleChange} required/>
+      <input name="value" placeholder="Value" value={form.value}  onChange={handleChange} required/>
       <button type="submit">Add Card</button>
     </form>
   );
-};
-
-export default CardForm;
+}
