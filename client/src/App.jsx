@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/public" element={<Public Trades />}/>
+        <Route path="/public" element={<PublicTrades />}/>
         {/* protected route */}
         <Route path="/dashboard" element={user? <Dashboard/> : <Navigate to="/login" replace/>}/>
       </Routes>

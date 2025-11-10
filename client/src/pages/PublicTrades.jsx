@@ -11,7 +11,12 @@ export default function PublicTrades() {
         const res= await API.get('/cards/public');
         setCards(res.data.data || []);
       } catch (err) {
-        alert(err.response?.data?.message || 'Failed to load public trade cards');
+        //no 404json on screen
+        if (err.response?.status === 404) {
+          setCards([]);
+        } else {
+          alert(err.response?.data?.message || 'Failed to load public trade cards');
+        }
       } finally {
         setLoading(false);
       }

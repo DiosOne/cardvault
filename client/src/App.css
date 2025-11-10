@@ -73,6 +73,25 @@ h2{
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+.card-actions{
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.card-actions .card-btn{
+  flex: 1;
+  padding: 0.55rem 0.8rem;
+}
+
+.card-btn.edit{
+  background-color: var(--accent);
+}
+
+.card-btn.delete{
+  background-color: var(--danger);
+}
+
 .card-hover{
   transform: translateY(-4px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
@@ -130,15 +149,15 @@ button{
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.95rem;
-  transition: background-color 0.2 ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-button.hover{
+button:hover{
   background-color: #3a7ad9;
   transform: translateY(-2px);
 }
 
-button.active{
+button:active{
   transform: translateY(0);
 }
 

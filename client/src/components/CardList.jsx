@@ -9,8 +9,22 @@ export default function CardList({cards, onEdit, onDelete}) {
           <h3>{card.name}</h3>
           <p>{card.type} - {card.rarity}</p>
           <p>${card.value}</p>
-          <button onClick={() => onEdit(card)}>Edit</button>
-          <button onClick={() => onDelete(card._id)}>Delete</button>
+          <div className="card-actions">
+            <button
+              className="card-btn edit"
+              type="button"
+              onClick={() => onEdit(card)}
+            >
+              Edit
+            </button>
+            <button
+              className="card-btn delete"
+              type="button"
+              onClick={() => onDelete(card._id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))} 
     </div>
