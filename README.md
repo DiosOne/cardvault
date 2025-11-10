@@ -19,7 +19,7 @@ It follows industry standard patterns for modular controllers, middleware, and g
 | dotenv                   | Loads environment variables from a .env file.           | Protects sensitive configuration (DB URI, JWT secret) from exposure in code repositories.                       | MIT     |
 | Jest & Supertest         | Automated testing framework and HTTP assertion library. | Industry-standard combo for backend integration tests in Node ecosystems.                                       | MIT     |
 
-___
+---
 
 ## Setup and Installation
 
@@ -54,7 +54,6 @@ The API will start at `http://localhost:5000`.
 
 Automated tests were writtrn using **Jest** (test runner) and **Supertest** (HTTP intergration library) to verify all major API routes behave as expected.
 
-
 The test suite focuses on essential application functionality:
 
 - **Authentication**: Ensures protected routes return `401 Unauthorised` when no token is provided.
@@ -73,7 +72,7 @@ npm test
 
 ---
 
- ## Code Style and Conventions
+### Code Style and Conventions
 
  CardVault follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript?tab=readme-ov-file#airbnb-javascript-style-guide-) to maintain a consistent, readable, and professional codebase.  
  An ESLint config file (/server/eslint.config.js) uses the AirBnB Base preset, compatible with ESLintv9.  
@@ -118,7 +117,7 @@ This helps to ensure predictable API response with minimal code duplication.
 | GET    | /api/cards         | Retrieve cards for current user |       Y       |
 | POST   | /api/cards         | Create a new card               |       Y       |
 | PATCH  | /api/cards/:id     | Update a specific card          |       Y       |
-| DELETE | /api/cards/:id     | Delete a specific card          |       Y       
+| DELETE | /api/cards/:id     | Delete a specific card          |       Y       |
 
 ---
 
