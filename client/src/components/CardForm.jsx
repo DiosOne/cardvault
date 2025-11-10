@@ -5,7 +5,8 @@ export default function CardForm({onAdd}) {
     name: '',
     type: '',
     rarity: '',
-    value: '',    
+    value: '',
+    status: 'owned',
   });
 
   const handleChange= (e) =>
@@ -29,6 +30,11 @@ export default function CardForm({onAdd}) {
       <input name="rarity" placeholder="Rarity" value={form.rarity} onChange={handleChange} required/>
       <input name="value" placeholder="Value" value={form.value}  onChange={handleChange} required/>
       <button type="submit">Add Card</button>
+      <select name="status" value={form.status || 'owned'} onChange={handleChange}>
+        <option value='owned'>Owned</option>
+        <option value='for trade'>For Trade</option>
+        <option value='wanted'>Wanted</option>
+      </select>
     </form>
   );
 }
