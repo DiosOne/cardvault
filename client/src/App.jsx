@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* protected route */}
-        <Route path="/dashboard" element={user? <Dashboard/> : Login}/>
+        <Route path="/dashboard" element={user? <Dashboard/> : <Navigate to="/login" replace/>}/>
       </Routes>
     </Router>
   );
