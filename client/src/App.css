@@ -277,6 +277,7 @@ button:active{
   text-decoration: none;
   color: var(--text);
   font-weight: bold;
+  position: relative;
   transition: color 0.2s;
 }
 
@@ -296,6 +297,40 @@ button:active{
 
 .nav-right button:hover{
   background-color: #3a7ad9;
+}
+
+/* active NavLink */
+.nav-right a.active{
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+}
+
+.nav-right a.active::after{
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+.nav-right a::after{
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.nav-right a:hover::after,
+.nav-right a.active::after{
+  width: 100%;
 }
 
 /* Home */

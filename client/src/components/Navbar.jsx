@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import {Moon, Sun} from 'lucide-react';
 
@@ -36,9 +36,9 @@ export default function Navbar() {
       <nav className='navbar' role='navigation' aria-label='Main navigation'>
         <div className='nav-list'>
           <h1>
-            <Link to='/' aria-label='Go to CardVault homepage'>
+            <NavLink to='/' aria-label='Go to CardVault homepage'>
               CardVault
-            </Link>
+            </NavLink>
           </h1>
         </div>
 
@@ -46,9 +46,14 @@ export default function Navbar() {
           {user ? (
             <>
               <li>
-                <Link to='/dashboard' aria-label='Go to your dashboard'>
+                <NavLink to='/dashboard' aria-label='Go to your dashboard'>
                   Dashboard
-                </Link>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to='/public' aria-label='See the cards up for trade'>
+                  Public Trades
+                </NavLink>
               </li>
               <li>
                 <button
@@ -63,24 +68,24 @@ export default function Navbar() {
           ) : (
             <>
               <li>
-                <Link to='/' aria-label='Go to homepage'>
+                <NavLink to='/' aria-label='Go to homepage'>
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/login' aria-label='Go to login page'>
+                <NavLink to='/login' aria-label='Go to login page'>
                   Login
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/register' aria-label='Go to registration page'>
+                <NavLink to='/register' aria-label='Go to registration page'>
                   Register
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/public' aria-label='Browse public trades'>
+                <NavLink to='/public' aria-label='Browse public trades'>
                   Public Trades
-                </Link>
+                </NavLink>
               </li>
             </>
           )}
