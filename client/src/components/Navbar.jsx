@@ -32,30 +32,71 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="nav-left">
-        <h1>CardVault</h1>
-      </div>
+    <header>
+      <nav className='navbar' role='navigation' aria-label='Main navigation'>
+        <div className='nav-list'>
+          <h1>
+            <Link to='/' aria-label='Go to CardVault homepage'>
+              CardVault
+            </Link>
+          </h1>
+        </div>
 
-      <div className="nav-right">
-        {user ? (
-          <>
-            <Link to="/dashboard">Dashboard</Link>
-            <button onClick={handleLogout}>Logout</button>
-          </>
-        ) : (
-          <>
-            <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-            <Link to="/public">Public Trades</Link>
-          </>
-        )}
+        <ul className='nav-right'>
+          {user ? (
+            <>
+              <li>
+                <Link to='/dashboard' aria-label='Go to your dashboard'>
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <button
+                  type='button'
+                  onClick={handleLogout}
+                  aria-label='Log out of your account'
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to='/' aria-label='Go to homepage'>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to='/login' aria-label='Go to login page'>
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to='/register' aria-label='Go to registration page'>
+                  Register
+                </Link>
+              </li>
+              <li>
+                <Link to='/public' aria-label='Browse public trades'>
+                  Public Trades
+                </Link>
+              </li>
+            </>
+          )}
 
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {darkMode? <Sun size={18}/>:<Moon size={18}/>}
-        </button>
-      </div>
-    </nav>
+          <li>
+            <button
+              className='theme-toggle'
+              type='button'
+              onClick={toggleTheme}
+              aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {darkMode ? <Sun size={18}/> : <Moon size={18}/>}
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
