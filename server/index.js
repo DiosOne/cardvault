@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./db.js";
 import cardRoutes from "./routes/cardRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-
+import tradeRoutes from "./routes/tradeRoutes.js";
 
 dotenv.config();
 const app= express();
@@ -18,6 +18,7 @@ connectDB();
 //Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/cards", cardRoutes);
+app.use("/api/trades", tradeRoutes);
 
 //Root route
 app.get("/", (req, res) => {

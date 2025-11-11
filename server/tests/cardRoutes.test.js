@@ -40,7 +40,7 @@ it("should create a card and then update it", async () => {
         .send(newCard);
 
     expect([200, 201]).toContain(createRes.statusCode);
-    createdCardId= createRes.body._id;
+    createdCardId= createRes.body.data?._id || createRes.body._id;
 
     //update card
     const updatedRes= await request(app)

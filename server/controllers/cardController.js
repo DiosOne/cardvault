@@ -49,7 +49,7 @@ export const addCard= asyncHandler(async (req, res) => {
         value,
         description,
         status: cardStatus,
-        userId: req.user._id,
+        userId: req.user.id,
     });
 
     const savedCard= await newCard.save();
