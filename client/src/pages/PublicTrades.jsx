@@ -24,26 +24,40 @@ export default function PublicTrades() {
     fetchPublicCards();
   }, []);
   
-  if (loading) return <p>Loading public trades...</p>;
+  if (loading) 
+    return (
+      <section className='loading' aria-busy='true' aria-live='polite' >
+        <p>Loading public trades...</p>
+      </section>
+    );
   
   return (
-    <div className='public-trades'>
-      <h2>Public Trade Listings</h2>
+    <main className='public-trades' role='main' aria-labelledby='public-trades-heading'>
+      <header> 
+        <h2 id='public-trades-heading'>Public Trade Listings</h2>
+      </header>
+
       {cards.length === 0 ? (
         <p>No cards currently listed for trade.</p>
       ) : (
-        <ul>
-          {cards.map((card) => (
-            <li key={card._id}>
-              <strong>{card.name}</strong> ({card.rarity})
-              <br />
-              {card.type} - Value: {card.value ?? '?'}
-              <br />
-              <small>Listed by: {card.userId?.username}</small>
-            </li>
-          ))}
-        </ul>
+        <section aria-live='polite'>
+          <ul aria-label='List of cards, up for public trade'>
+            {cards.map((card) => (
+              <li key={card._id}>
+                <article className='card' aria-label={`Card: ${card.name}`}>
+                  <h3>{card.name}</h3>
+                  <p>
+                    <strong>Rarity:</strong> {card.rarity} <br/>
+                    <strong>Type:</strong> {card.type} <br/>
+                    <strong>Value:</strong> {card.value} <br/>
+                  </p>
+                  <small>Listed by: {card.userId?.username || 'Unknown user'}</small>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
-    </div>
+    </main>
   );
 }

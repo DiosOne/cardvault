@@ -2,15 +2,19 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
-    <main className="home">
-      <section className="hero">
-        <h1>CardVault</h1>
-        <p>Store and manage your cared collection in one secure place,</p>
-        <div className="hero-actions">
-          <Link className="btn primary" to="/register">Create Account</Link>
-          <Link className="btn secondary" to="/login">Log In</Link>
-        </div>
-      </section>
+    <main className="home" role='main'>
+      <header className="hero" aria-labelledby='site-title'>
+        <h1 id='site -title'>CardVault</h1>
+        <p>Store and manage your <strong>card collection</strong> in one secure place.</p>
+        <nav className="hero-actions" aria-label='Primary navigation'>
+          <Link className="btn primary" to="/register" aria-label='Create a CardVault account'>
+            Create Account
+          </Link>
+          <Link className="btn secondary" to="/login" aria-label='Log in to CardVault'>
+            Log In
+          </Link>
+        </nav>
+      </header>      
     </main>
   );
 }

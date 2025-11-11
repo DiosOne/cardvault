@@ -21,17 +21,45 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container">
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
+    <main className="auth-container" role='main'>
+      <form onSubmit={handleSubmit} aria-labelledby='login-heading'>
+        <h2 id='login-heading'>Login</h2>
+
+        <label htmlFor='login-email' className='visually-hidden'>
+          Email address
+        </label>
+        <input 
+          id='login-email'
+          type='email'
+          placeholder='Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          aria-required='true'
+        />
+
+        <label htmlFor='login-password' className='visually-hidden'>
+          Password
+        </label>
+        <input 
+          id='login-password'
+          type='password'
+          placeholder='Password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          aria-required='true'
+        />
+
+        <button type='submit'>Login</button>
+
         <p>
-                    Don't have an account?{' '}
-          <Link to="/register">Register here</Link>
+          Don't have an account?{' '}
+          <Link to='/register' aria-label='Go to registration page'>
+            Register Here
+          </Link>
         </p>
       </form>
-    </div>
+    </main>
   );
 }

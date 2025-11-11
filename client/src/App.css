@@ -55,6 +55,19 @@ h2{
   margin-bottom: 1rem;
 }
 
+.footer{
+  margin-top: auto;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text);
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+body.darkmode .footer{
+  color: rgba(245,245,245,0.8);
+}
+
 /* Card Grid */
 .card-grid{
   display: grid;
@@ -225,6 +238,14 @@ button:active{
 .auth-container button{
   width: 100%;
   margin-top: 1rem;
+}
+
+.visually-hidden{
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /* Navbar */

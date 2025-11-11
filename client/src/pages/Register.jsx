@@ -25,39 +25,58 @@ export default function Register() {
   };
 
   return (
-    <div className='auth-container'>
-      <form onSubmit={handleSubmit}>
-        <h2>Create Account</h2>
+    <main className='auth-container' role='main'>
+      <form onSubmit={handleSubmit} aria-labelledby='register-heading'>
+        <h2 id='register-heading'>Create Account</h2>
 
-        <input
-          type="text"
-          placeholder="Username"
+        <label htmlFor='reg-username' className='visually-hidden'>
+          Username
+        </label>
+        <input 
+          id='reg-username'
+          type='text'
+          placeholder='Username'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          aria-required='true'
         />
+
+        <label htmlFor='reg-email' className='visually-hidden'>
+          Email address
+        </label>
         <input
-          type="email"
-          placeholder="Email"
+          id='reg-email'
+          type='email'
+          placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          aria-required='true'
         />
+
+        <label htmlFor='reg-password' className='visually-hidden'>
+          Password
+        </label>
         <input
-          type="password"
-          placeholder="Password"
+          id='reg-password'
+          type='password'
+          placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          aria-required='true'
         />
 
         <button type="submit">Register</button>
 
         <p>
-                  Already have an account?{' '}
-          <Link to="/login">Log in here</Link>
+          Already have an account?{' '} 
+          <Link to="/login" aria-label='Go to login page'>
+            Log in here
+          </Link>
         </p>            
       </form>
-    </div>
+    </main>
   );
 }

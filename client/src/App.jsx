@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
 import PublicTrades from './pages/PublicTrades';
@@ -23,6 +24,7 @@ export default function App() {
         {/* protected route */}
         <Route path="/dashboard" element={user? <Dashboard/> : <Navigate to="/login" replace/>}/>
       </Routes>
+      <Footer/>
     </Router>
   );
 }

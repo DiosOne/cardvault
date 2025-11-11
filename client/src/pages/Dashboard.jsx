@@ -57,9 +57,7 @@ export default function Dashboard() {
   };
 
   //edit a card
-  const handleEditCard= (card) => {
-    setEditingCard(card);
-  };
+  const handleEditCard= (card) => setEditingCard(card);
 
   const handleSaveCard= (updatedCard) => {
     setCards(cards.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
@@ -68,33 +66,50 @@ export default function Dashboard() {
 
   const handleCancelEdit= () => setEditingCard(null);
 
-  if (loading) return <p className="loading">Loading your cards...</p>;
-  if (error) return <p className="error">{error}</p>;
+  //loads and errors
+  if (loading) 
+    return (
+      <section className='loading' aria-busy='true' aria-live='polite'>
+        <p>Loading your cards...</p>;
+      </section>
+    );
+
+  if (error) 
+    return ( 
+      <section className='error' role='alert'>
+        <p>{error}</p>;
+      </section>
+    );
 
   return (
-    <div className="dashboard">
-      <div className="dashboard-header">
+    <main className='dashboard' role='main'>
+      <header className='dashboard-header'>
         <h2>Welcome, {user?.username}!</h2>
-        <button type="button" onClick={logout}>Logout</button>
-      </div>
-      <p>Your Cards</p>
+        <button 
+          type="button" 
+          onClick={logout} 
+          aria-label='Log out of CardVault'>
+          Logout
+        </button>
+      </header>
       
-      <CardForm onAdd={handleAddCard}/>
-      
-      {editingCard && (
-        <EditCardForm
-          card={editingCard}
-          onSave={handleSaveCard}
-          onCancel={handleCancelEdit}
-        />
-      )}
+      <section className='dashboard-cards'>
+        <p>Your Cards</p>
+        
+        <CardForm onAdd={handleAddCard}/>
+        
+        {editingCard && (
+          <EditCardForm
+            card={editingCard}
+            onSave={handleSaveCard}
+            onCancel={handleCancelEdit}/>
+        )}
 
-      <CardList
-        cards={cards}
-        onEdit={handleEditCard}
-        onDelete={handleDeleteCard}
-      />
-    </div>
+        <CardList
+          cards={cards}
+          onEdit={handleEditCard}
+          onDelete={handleDeleteCard}/>
+      </section>
+    </main>
   );
-
 }
