@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import API from '../api/api';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -72,9 +72,9 @@ export default function Register() {
 
         <p>
           Already have an account?{' '} 
-          <Link to="/login" aria-label='Go to login page'>
+          <NavLink to="/login" aria-label='Go to login page'>
             Log in here
-          </Link>
+          </NavLink>
         </p>            
       </form>
     </main>

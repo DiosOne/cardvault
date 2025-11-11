@@ -2,11 +2,15 @@ import { useContext, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import {Moon, Sun} from 'lucide-react';
+import { TradeContext } from '../context/TradeContext';
+import { MdNotificationsActive } from 'react-icons/md';
+
 
 export default function Navbar() {
   const {user, logout} = useContext(AuthContext);
   const navigate= useNavigate();
   const [darkMode, setDarkMode] = useState(false);
+  const {hasNewTrades} = useContext(TradeContext);
 
   //darkmode + remember
   const toggleTheme= () => {
@@ -50,11 +54,19 @@ export default function Navbar() {
                   Dashboard
                 </NavLink>
               </li>
+
               <li>
                 <NavLink to='/public' aria-label='See the cards up for trade'>
                   Public Trades
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink to='/trades' aria-label='Open trades inbox' className={({ isActive}) => (isActive ? 'active': undefined)}>
+                  Trade Inbox {hasNewTrades && (<MdNotificationsActive className='trade-bell' aria-label='New trade requests'/>)}
+                </NavLink>
+              </li>
+              
               <li>
                 <button
                   type='button'

@@ -3,6 +3,12 @@ import API from '../api/api';
 import { AuthContext } from './AuthContext';
 import { TradeContext } from './TradeContext';
 
+const getEntityId= (entity) => {
+  if (!entity) return null;
+  if (typeof entity === 'string') return entity;
+  return entity._id || entity.id || null;
+};
+
 export const TradeProvider= ({ children }) => {
   const {user} = useContext(AuthContext);
   const [trades, setTrades] = useState([]);
@@ -10,6 +16,14 @@ export const TradeProvider= ({ children }) => {
 
   //fetch trades for user
   const fetchTrades= useCallback(async () => {
+    const userId= getEntityId(user);
+
+    if (!userId) {
+      setTrades([]);
+      setHasNewTrades(false);
+      return;
+    }
+
     try {
       const res= await API.get('/trades');
       const data= res.data.data || res.data;
@@ -17,7 +31,7 @@ export const TradeProvider= ({ children }) => {
 
       //check for new or pending trades
       const pending= data.filter(
-        (t) => t.toUser === user?.id && t.status === 'pending',
+        (trade) => getEntityId(trade.toUser) === userId && trade.status === 'pending',
       );
       setHasNewTrades(pending.length > 0);
     } catch (err) {
@@ -27,10 +41,10 @@ export const TradeProvider= ({ children }) => {
 
   //fetch on login
   useEffect(() => {
-    if (user) fetchTrades();
-  }, [user, fetchTrades]);
+    fetchTrades();
+  }, [fetchTrades]);
 
-  const clearNotifications= () => setHasNewTrades(false);
+  const clearNotifications= useCallback(() => setHasNewTrades(false), []);
 
   return (
     <TradeContext.Provider

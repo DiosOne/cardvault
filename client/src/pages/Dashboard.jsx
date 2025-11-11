@@ -4,6 +4,9 @@ import CardForm from '../components/CardForm';
 import CardList from '../components/CardList';
 import {AuthContext} from '../context/AuthContext';
 import EditCardForm from '../components/EditCardForm';
+import { TradeContext } from '../context/TradeContext';
+import { NavLink } from 'react-router-dom';
+import { MdNotificationsActive } from 'react-icons/md';
 
 export default function Dashboard() {
   const [cards, setCards] = useState([]);
@@ -11,6 +14,7 @@ export default function Dashboard() {
   const [error, setError] = useState('');
   const [editingCard, setEditingCard] = useState(null);
   const {user, logout} = useContext(AuthContext);
+  const {hasNewTrades} = useContext(TradeContext);
 
   //fetch cards when page loads
   useEffect(() => {
@@ -93,6 +97,21 @@ export default function Dashboard() {
         </button>
       </header>
       
+      <section className='trade-inbox-link'>
+        {hasNewTrades ? (
+          <p> 
+            <MdNotificationsActive className="trade-bell" aria-label="New trade requests"/>
+              You have new trade requests{' '}
+            <NavLink to='/trades' className='btn secondary'>
+              View Trade Inbox
+            </NavLink>
+          </p>
+        ) : ( 
+          <NavLink to='/trades' className='btn secondary'>
+            Go to Trade Inbox
+          </NavLink>
+        )}
+      </section>
       <section className='dashboard-cards'>
         <p>Your Cards</p>
         

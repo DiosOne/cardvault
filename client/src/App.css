@@ -333,6 +333,36 @@ button:active{
   width: 100%;
 }
 
+/* Bell styling */
+.trade-bell{
+  margin-left: 6px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+  color: #000; /*default light*/
+  animation: ring 1.5s infinite ease-in-out;
+}
+
+/* yellow glow */
+.trade-bell{
+  filter: drop-shadow(0 0 3px #ffcc00);
+}
+
+/* Darkmode */
+body.darkmode .trade-bell{
+  color: #fff;
+  filter: drop-shadow(0 0 4px #ffcc00);
+}
+
+@keyframes ring{
+  0% {transform: rotate(0deg);}
+  15% { transform: rotate(10deg); }
+  30% { transform: rotate(-8deg); }
+  45% { transform: rotate(6deg); }
+  60% { transform: rotate(-4deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
 /* Home */
 .home{
   width: 100%;
@@ -366,6 +396,94 @@ button:active{
 
 body.darkmode .hero p{
   color: rgba(245,245,245,0.8);
+}
+
+/* Trade Inbox */
+.trade-inbox{
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  text-align: left;
+}
+
+.trade-inbox__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.trade-inbox__header h2{
+  margin: 0;
+}
+
+.trade-list{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trade-card{
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.trade-badge{
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.trade-badge.incoming{
+  background-color: rgba(76, 175, 80, 0.15);
+  color: #2e7d32;
+}
+
+.trade-badge.outgoing{
+  background-color: rgba(74, 144, 226, 0.15);
+  color: #2f6fb8;
+}
+
+.trade-message{
+  margin: 0.5rem 0 1rem;
+  font-style: italic;
+}
+
+.trade-meta{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+}
+
+.trade-empty{
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 640px) {
+  .trade-inbox__header{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trade-meta{
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
 .hero-actions{

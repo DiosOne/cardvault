@@ -1,12 +1,14 @@
 import { useState, useContext } from 'react';
 import API from '../api/api';
 import { AuthContext } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { TradeContext } from '../context/TradeContext';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
+  const {fetchTrades} = useContext(TradeContext);
   const navigate= useNavigate();
 
   const handleSubmit= async (e) => {
@@ -14,6 +16,7 @@ export default function Login() {
     try {
       const res= await API.post('/auth/login', {email, password});
       login(res.data);
+      fetchTrades();
       navigate('/dashboard');
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');
@@ -55,9 +58,9 @@ export default function Login() {
 
         <p>
           Don't have an account?{' '}
-          <Link to='/register' aria-label='Go to registration page'>
+          <NavLink to='/register' aria-label='Go to registration page'>
             Register Here
-          </Link>
+          </NavLink>
         </p>
       </form>
     </main>

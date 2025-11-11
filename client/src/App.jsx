@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
 import PublicTrades from './pages/PublicTrades';
+import TradeInbox from './pages/TradeInbox';
 
 export default function App() {
   const {user}= useContext(AuthContext);
@@ -21,8 +22,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/public" element={<PublicTrades />}/>
-        {/* protected route */}
+        {/* protected routes */}
         <Route path="/dashboard" element={user? <Dashboard/> : <Navigate to="/login" replace/>}/>
+        <Route path='/trades' element={user ? <TradeInbox/>: <Navigate to='/login' replace/>}/>
       </Routes>
       <Footer/>
     </Router>
