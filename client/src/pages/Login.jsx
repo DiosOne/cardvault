@@ -3,12 +3,15 @@ import API from '../api/api';
 import { AuthContext } from '../context/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TradeContext } from '../context/TradeContext';
+import { resolveApiError } from '../utility/messages';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
   const {fetchTrades} = useContext(TradeContext);
+  const [error, setError] = useState('');
+  const LOGIN_ERROR= 'Login error';
   const navigate= useNavigate();
 
   const handleSubmit= async (e) => {
@@ -19,7 +22,7 @@ export default function Login() {
       fetchTrades();
       navigate('/dashboard');
     } catch (err) {
-      alert(err.response?.data?.message || 'Login failed');
+      setError(resolveApiError(err, LOGIN_ERROR));
     }
   };
 
@@ -27,6 +30,8 @@ export default function Login() {
     <main className="auth-container" role='main'>
       <form onSubmit={handleSubmit} aria-labelledby='login-heading'>
         <h2 id='login-heading'>Login</h2>
+
+        {error && <p className="error" role="alert">{error}</p>}
 
         <label htmlFor='login-email' className='visually-hidden'>
           Email address

@@ -7,6 +7,7 @@ import EditCardForm from '../components/EditCardForm';
 import { TradeContext } from '../context/TradeContext';
 import { NavLink } from 'react-router-dom';
 import { MdNotificationsActive } from 'react-icons/md';
+import { getMessage, resolveApiError } from '../utility/messages';
 
 export default function Dashboard() {
   const [cards, setCards] = useState([]);
@@ -22,8 +23,8 @@ export default function Dashboard() {
       try {
         const res = await API.get('/cards');
         setCards(res.data.data || []);
-      } catch {
-        setError('Failed to load your cards. Please try again.');
+      } catch (err) {
+        setError(resolveApiError(err, 'CARD_FETCH_ERROR'));
       } finally {
         setLoading(false);
       }
@@ -37,14 +38,9 @@ export default function Dashboard() {
       const res= await API.post('/cards', cardData);
       const newCard= res.data.data || res.data;
       setCards([...cards, newCard]);
-      alert('Card added successfully!');
+      alert(getMessage('CARD_ADD_SUCCESS'));
     } catch (err) {
-      console.error('Failed to add card:', {
-        status: err.response?.status,
-        data: err.response?.data,
-        message: err.message,
-      });
-      alert('Failed to add card!');
+      alert(resolveApiError(err, 'CARD_ADD_ERROR'));
     }
   };
 
@@ -54,9 +50,9 @@ export default function Dashboard() {
     try {
       await API.delete(`/cards/${id}`);
       setCards(cards.filter((card) => card._id !== id));
-      alert('Card deleted successfully!');
-    } catch {
-      alert('Delete failed!');
+      alert(getMessage('CARD_DELETE_SUCCESS'));
+    } catch (err) {
+      alert(resolveApiError(err, 'CARD_DELETE_ERROR'));
     }
   };
 

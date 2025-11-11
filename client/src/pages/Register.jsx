@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import API from '../api/api';
 import { useNavigate, NavLink } from 'react-router-dom';
+import { getMessage, resolveApiError } from '../utility/messages';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -16,10 +17,10 @@ export default function Register() {
         email,
         password,
       });
-      alert(res.data.message || 'Registration successful!');
+      alert(res.data.message || getMessage('REGISTER_SUCCESS'));
       navigate('/login');
     } catch (err) {
-      alert(err.response?.data?.message || 'Registration failed');
+      alert(resolveApiError(err, 'REGISTER_ERROR'));
       console.error('register error:', err);
     }
   };
