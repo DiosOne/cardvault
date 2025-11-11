@@ -29,64 +29,106 @@ export default function EditCardForm({card, onSave, onCancel}) {
   };
 
   return (
-    <div className='edit-card-container'>
-      <form onSubmit={handleSubmit} className='edit-card-form'>
-        <h3>Edit Card</h3>
+    <section
+      className="edit-card-container"
+      aria-labelledby="edit-card-heading"
+      role="region"
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="edit-card-form"
+        aria-describedby="edit-card-instructions"
+      >
+        <h3 id="edit-card-heading">Edit Card</h3>
+        <p id="edit-card-instructions" className="visually-hidden">
+          Update card details and click Save to confirm changes.
+        </p>
+
+        <label htmlFor="edit-name" className="visually-hidden">
+          Card name
+        </label>
         <input
-          name='name'
-          type='text'
+          id="edit-name"
+          name="name"
+          type="text"
           value={formData.name}
           onChange={handleChange}
-          placeholder='Card Name'
+          placeholder="Card Name"
           required
+          aria-required="true"
         />
 
+        <label htmlFor="edit-type" className="visually-hidden">
+          Card type
+        </label>
         <input
-          name='type'
-          type='text'
+          id="edit-type"
+          name="type"
+          type="text"
           value={formData.type}
           onChange={handleChange}
-          placeholder='Type'
+          placeholder="Type"
         />
 
+        <label htmlFor="edit-rarity" className="visually-hidden">
+          Card rarity
+        </label>
         <input
-          name='rarity'
-          type='text'
-          value= {formData.rarity}
+          id="edit-rarity"
+          name="rarity"
+          type="text"
+          value={formData.rarity}
           onChange={handleChange}
-          placeholder='Rarity'
+          placeholder="Rarity"
         />
 
+        <label htmlFor="edit-value" className="visually-hidden">
+          Card value
+        </label>
         <input
-          name='value'
-          type='number'
+          id="edit-value"
+          name="value"
+          type="number"
           value={formData.value}
           onChange={handleChange}
-          placeholder='Value'
+          placeholder="Value"
+          inputMode="numeric"
         />
 
+        <label htmlFor="edit-description" className="visually-hidden">
+          Description
+        </label>
         <textarea
-          name='description'
+          id="edit-description"
+          name="description"
           value={formData.description}
           onChange={handleChange}
-          placeholder='Description'
+          placeholder="Description"
+          rows="3"
         />
 
+        <label htmlFor="edit-status" className="visually-hidden">
+          Card status
+        </label>
         <select
-          name='status'
+          id="edit-status"
+          name="status"
           value={formData.status}
           onChange={handleChange}
+          aria-label="Select card status"
         >
           <option value="owned">Owned</option>
           <option value="for trade">For Trade</option>
           <option value="wanted">Wanted</option>
         </select>
 
-        <div className='form-buttons'>
-          <button type='submit'>Save</button>
-          <button type='button' onClick={onCancel}>Cancel</button>
+        <div className="form-buttons">
+          <button type="submit">Save</button>
+          <button type="button" onClick={onCancel}>
+            Cancel
+          </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }
