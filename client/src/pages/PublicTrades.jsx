@@ -3,6 +3,7 @@ import API from '../api/api';
 import { AuthContext } from '../context/AuthContext';
 import { TradeContext } from '../context/TradeContext';
 import { getMessage, resolveApiError } from '../utility/messages';
+import { notifySuccess, notifyError } from '../utility/notifications';
 
 export default function PublicTrades() {
   const [cards, setCards] = useState([]);
@@ -33,13 +34,13 @@ export default function PublicTrades() {
 
   const handleRequestTrade = async (card) => {
     if (!userId) {
-      alert(getMessage('AUTH_REQUIRED'));
+      notifyError(getMessage('AUTH_REQUIRED'));
       return;
     }
 
     const ownerId = card.userId?._id || card.userId?.id || card.userId;
     if (ownerId === userId) {
-      alert(getMessage('OWN_LISTING'));
+      notifyError(getMessage('OWN_LISTING'));
       return;
     }
 
@@ -49,7 +50,7 @@ export default function PublicTrades() {
     );
     const message = messageInput?.trim() || '';
     if (!message) {
-      alert(getMessage('MESSAGE_REQUIRED'));
+      notifyError(getMessage('MESSAGE_REQUIRED'));
       return;
     }
 
@@ -59,10 +60,10 @@ export default function PublicTrades() {
         cardId: card._id,
         message,
       });
-      alert(getMessage('TRADE_SEND_SUCCESS'));
+      notifySuccess('TRADE_SEND_SUCCESS');
       fetchTrades();
     } catch (err) {
-      alert(resolveApiError(err, 'TRADE_SEND_ERROR'));
+      notifyError(err, 'TRADE_SEND_ERROR');
     }
   };
 

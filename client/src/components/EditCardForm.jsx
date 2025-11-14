@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import API from '../api/api';
+import { notifySuccess, notifyError } from '../utility/notifications';
 
 export default function EditCardForm({card, onSave, onCancel}) {
   const [formData, setFormData] = useState({
@@ -22,9 +23,9 @@ export default function EditCardForm({card, onSave, onCancel}) {
     try {
       const res= await API.patch(`/cards/${card._id}`, formData);
       onSave(res.data.data); //pass updated card back
-      alert('Card updated successfully!');
+      notifySuccess('CARD_UPDATE_SUCCESS');
     } catch (err) {
-      alert(err.response?.data?.message || 'Edit failed!');
+      notifyError(err, 'CARD_UPDATE_ERROR');
     }
   };
 

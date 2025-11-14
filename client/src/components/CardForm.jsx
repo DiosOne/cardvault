@@ -19,6 +19,7 @@ export default function CardForm({onAdd}) {
       type: form.type,
       rarity: form.rarity,
       value: Number(form.value),
+      status: form.status,
     });
     setForm({name: '', type: '', rarity: '', value: ''});
   };
