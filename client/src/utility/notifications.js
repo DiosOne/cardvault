@@ -1,5 +1,5 @@
 import {toast} from 'react-toastify';
-import {getMessage, resolveApiError} from '/messages';
+import {getMessage, resolveApiError} from '../utility/messages';
 
 export const notifySuccess= (key) => {
   toast.success(getMessage(key));

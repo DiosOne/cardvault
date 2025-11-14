@@ -45,7 +45,7 @@ export default function Navbar() {
             CardVault
           </NavLink>
         </h1>
-        <p className='brand-tagline'>.Track, Trade, Treasure.</p>
+        <p className='brand-tagline'>Track, Trade, Treasure</p>
       </div>
 
       <nav className='navbar' role='navigation' aria-label='Main navigation'>

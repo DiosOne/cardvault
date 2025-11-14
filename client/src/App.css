@@ -293,6 +293,7 @@ body.darkmode .brand-title a{
 .brand-tagline{
   margin: 0.25rem 0 0;
   font-size: 0.95rem;
+  font-weight: 600;
   color: rgba(34,34,34,0.75);
 }
 
