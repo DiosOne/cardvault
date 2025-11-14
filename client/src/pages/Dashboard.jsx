@@ -7,14 +7,15 @@ import EditCardForm from '../components/EditCardForm';
 import { TradeContext } from '../context/TradeContext';
 import { NavLink } from 'react-router-dom';
 import { MdNotificationsActive } from 'react-icons/md';
-import { getMessage, resolveApiError } from '../utility/messages';
+import { resolveApiError } from '../utility/messages';
+import { notifySuccess, notifyError, confirmAction } from '../utility/notifications';
 
 export default function Dashboard() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [editingCard, setEditingCard] = useState(null);
-  const {user, logout} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
   const {hasNewTrades} = useContext(TradeContext);
 
   //fetch cards when page loads
@@ -38,21 +39,21 @@ export default function Dashboard() {
       const res= await API.post('/cards', cardData);
       const newCard= res.data.data || res.data;
       setCards([...cards, newCard]);
-      alert(getMessage('CARD_ADD_SUCCESS'));
+      notifySuccess('CARD_ADD_SUCCESS');
     } catch (err) {
-      alert(resolveApiError(err, 'CARD_ADD_ERROR'));
+      notifyError(err, 'CARD_ADD_ERROR');
     }
   };
 
   //delete a card
   const handleDeleteCard= async (id) => {
-    if (!window.confirm('Are you sure you want to delete this card?')) return;
+    if (!confirmAction('CARD_DELETE_CONFIRM')) return;
     try {
       await API.delete(`/cards/${id}`);
       setCards(cards.filter((card) => card._id !== id));
-      alert(getMessage('CARD_DELETE_SUCCESS'));
+      notifySuccess('CARD_DELETE_SUCCESS');
     } catch (err) {
-      alert(resolveApiError(err, 'CARD_DELETE_ERROR'));
+      notifyError(err, 'CARD_DELETE_ERROR');
     }
   };
 
@@ -85,12 +86,6 @@ export default function Dashboard() {
     <main className='dashboard' role='main'>
       <header className='dashboard-header'>
         <h2>Welcome, {user?.username}!</h2>
-        <button 
-          type="button" 
-          onClick={logout} 
-          aria-label='Log out of CardVault'>
-          Logout
-        </button>
       </header>
       
       <section className='trade-inbox-link'>
