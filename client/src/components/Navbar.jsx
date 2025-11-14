@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import {Moon, Sun} from 'lucide-react';
 import { TradeContext } from '../context/TradeContext';
 import { MdNotificationsActive } from 'react-icons/md';
+import {confirmAction} from '../utility/notifications';
 
 
 export default function Navbar() {
@@ -31,21 +32,23 @@ export default function Navbar() {
 
   //handle logout and nav home
   const handleLogout= () => {
+    if (!confirmAction('LOGOUT_CONFIRM')) return;
     logout();
     navigate('/login');
   };
 
   return (
-    <header>
-      <nav className='navbar' role='navigation' aria-label='Main navigation'>
-        <div className='nav-list'>
-          <h1>
-            <NavLink to='/' aria-label='Go to CardVault homepage'>
-              CardVault
-            </NavLink>
-          </h1>
-        </div>
+    <header className='site-header'>
+      <div className='brand-row'>
+        <h1 className='brand-title'>
+          <NavLink to='/' aria-label='Go to CardVault homepage'>
+            CardVault
+          </NavLink>
+        </h1>
+        <p className='brand-tagline'>.Track, Trade, Treasure.</p>
+      </div>
 
+      <nav className='navbar' role='navigation' aria-label='Main navigation'>
         <ul className='nav-right'>
           {user ? (
             <>

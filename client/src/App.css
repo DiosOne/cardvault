@@ -75,6 +75,7 @@ body.darkmode .footer{
   gap: 1.5rem;
   width: 100%;
   margin-top: 2rem;
+  justify-items: center;
 }
 
 /* Card Styling */
@@ -84,6 +85,8 @@ body.darkmode .footer{
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
+  width: min(100%, 340px);
+  margin: 0 auto;
 }
 
 .card-actions{
@@ -216,6 +219,20 @@ button:active{
   margin: 1rem 0;
 }
 
+.error-boundary{
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 480px;
+  margin: 3rem auto;
+}
+
+.error-boundary button{
+  margin-top: 1rem;
+}
+
 /* Login Buttons */
 .auth-container{
   background-color: var(--card-bg) ;
@@ -249,10 +266,44 @@ button:active{
 }
 
 /* Navbar */
+.site-header{
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.brand-row{
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.brand-title{
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+}
+
+.brand-title a{
+  color: var(--accent);
+  text-decoration: none;
+}
+
+body.darkmode .brand-title a{
+  color: #9fa8ff;
+}
+
+.brand-tagline{
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  color: rgba(34,34,34,0.75);
+}
+
+body.darkmode .brand-tagline{
+  color: rgba(245,245,245,0.75);
+}
+
 .navbar{
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 1rem 2rem;
   background-color: var(--card-bg);
@@ -261,14 +312,10 @@ button:active{
   margin-bottom: 2rem;
 }
 
-.navbar h1{
-  color: var(--accent);
-  margin: 0;
-  font-size: 1.4rem;
-}
-
 .nav-right{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
 }
@@ -351,6 +398,50 @@ button:active{
 body.darkmode .trade-bell{
   color: #fff;
   filter: drop-shadow(0 0 4px #ffcc00);
+}
+
+/* Public trades layout */
+.public-trades ul{
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.public-trades li{
+  display: flex;
+  justify-content: center;
+}
+
+.public-trades .card{
+  width: min(100%, 360px);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  #root{
+    padding: 1rem;
+  }
+
+  .card-grid{
+    grid-template-columns: 1fr;
+  }
+
+  form{
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbar{
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px){
+  input, textarea, select{
+    width: 100%;
+  }
 }
 
 @keyframes ring{
