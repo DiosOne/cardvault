@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import API from '../api/api';
 import { AuthContext } from '../context/AuthContext';
 import { TradeContext } from '../context/TradeContext';
@@ -86,6 +87,20 @@ export default function PublicTrades() {
         </section>
       )}
 
+      {!user && (
+        <section className='trade-auth-cta'>
+          <p>Sign in or create an account to send trade requests.</p>
+          <div className='cta-buttons'>
+            <NavLink className='btn primary' to='/login'>
+              Login
+            </NavLink>
+            <NavLink className='btn secondary' to='/register'>
+              Register
+            </NavLink>
+          </div>
+        </section>
+      )}
+
       {cards.length === 0 ? (
         <p>No cards currently listed for trade.</p>
       ) : (
@@ -106,8 +121,9 @@ export default function PublicTrades() {
                       type='button'
                       onClick={() => handleRequestTrade(card)}
                       aria-label={`Request trade for ${card.name}`}
+                      disabled={!userId}
                     >
-                      Request Trade
+                      {userId ? 'Request Trade' : 'Sign in to trade'}
                     </button>
                   </footer>
                 </article>
