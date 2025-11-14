@@ -1,27 +1,31 @@
 import { useState } from 'react';
 import API from '../api/api';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { getMessage, resolveApiError } from '../utility/messages';
+import { resolveApiError } from '../utility/messages';
+import { notifySuccess, notifyError } from '../utility/notifications';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('') ;
   const navigate= useNavigate();
 
   const handleSubmit= async (e) => {
     e.preventDefault();
     try {
-      const res= await API.post('/auth/register', {
+      await API.post('/auth/register', {
         username,
         email,
         password,
       });
-      alert(res.data.message || getMessage('REGISTER_SUCCESS'));
+      notifySuccess('REGISTER_SUCCESS');
+      setError('');
       navigate('/login');
     } catch (err) {
-      alert(resolveApiError(err, 'REGISTER_ERROR'));
-      console.error('register error:', err);
+      const friendlyMessage= resolveApiError(err, 'REGISTER_ERROR');
+      setError(friendlyMessage);
+      notifyError(err, 'REGISTER_ERROR');
     }
   };
 
@@ -29,6 +33,8 @@ export default function Register() {
     <main className='auth-container' role='main'>
       <form onSubmit={handleSubmit} aria-labelledby='register-heading'>
         <h2 id='register-heading'>Create Account</h2>
+
+        {error && <p className='error' role='alert'>(error)</p>}
 
         <label htmlFor='reg-username' className='visually-hidden'>
           Username

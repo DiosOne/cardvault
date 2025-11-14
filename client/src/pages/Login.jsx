@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { TradeContext } from '../context/TradeContext';
 import { resolveApiError } from '../utility/messages';
+import { notifySuccess, notifyError } from '../utility/notifications';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,7 +12,6 @@ export default function Login() {
   const { login } = useContext(AuthContext);
   const {fetchTrades} = useContext(TradeContext);
   const [error, setError] = useState('');
-  const LOGIN_ERROR= 'Login error';
   const navigate= useNavigate();
 
   const handleSubmit= async (e) => {
@@ -19,10 +19,13 @@ export default function Login() {
     try {
       const res= await API.post('/auth/login', {email, password});
       login(res.data);
+      notifySuccess('LOGIN_SUCCESS');
       fetchTrades();
       navigate('/dashboard');
     } catch (err) {
-      setError(resolveApiError(err, LOGIN_ERROR));
+      const friendlyMessage= resolveApiError(err, 'LOGIN_ERROR');
+      setError(friendlyMessage);
+      notifyError(err, 'LOGIN_ERROR');
     }
   };
 
