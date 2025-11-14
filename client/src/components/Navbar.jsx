@@ -37,11 +37,13 @@ export default function Navbar() {
     navigate('/login');
   };
 
+  const brandDestination= user ? '/dashboard' : '/';
+
   return (
     <header className='site-header'>
       <div className='brand-row'>
         <h1 className='brand-title'>
-          <NavLink to='/' aria-label='Go to CardVault homepage'>
+          <NavLink to={brandDestination} aria-label='Go to CardVault homepage'>
             CardVault
           </NavLink>
         </h1>

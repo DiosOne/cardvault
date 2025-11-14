@@ -68,57 +68,61 @@ export default function Dashboard() {
   const handleCancelEdit= () => setEditingCard(null);
 
   //loads and errors
-  if (loading) 
+  if (loading)
     return (
       <section className='loading' aria-busy='true' aria-live='polite'>
-        <p>Loading your cards...</p>;
+        <p>Loading your cards...</p>
       </section>
     );
 
-  if (error) 
-    return ( 
+  if (error)
+    return (
       <section className='error' role='alert'>
-        <p>{error}</p>;
+        <p>{error}</p>
       </section>
     );
 
   return (
     <main className='dashboard' role='main'>
       <header className='dashboard-header'>
-        <h2>Welcome, {user?.username}!</h2>
-      </header>
-      
-      <section className='trade-inbox-link'>
-        {hasNewTrades ? (
-          <p> 
-            <MdNotificationsActive className="trade-bell" aria-label="New trade requests"/>
-              You have new trade requests{' '}
-            <NavLink to='/trades' className='btn secondary'>
-              View Trade Inbox
-            </NavLink>
+        <div>
+          <h2>Welcome, {user?.username}!</h2>
+          <p className='dashboard-subtitle'>
+            Manage your collection and keep tabs on incoming trades.
           </p>
-        ) : ( 
-          <NavLink to='/trades' className='btn secondary'>
-            Go to Trade Inbox
-          </NavLink>
-        )}
-      </section>
+        </div>
+        <div className='dashboard-actions'>
+          {hasNewTrades ? (
+            <NavLink to='/trades' className='btn secondary dashboard-alert'>
+              <MdNotificationsActive className='trade-bell' aria-label='New trade requests' />
+              <span>View Trade Inbox</span>
+            </NavLink>
+          ) : (
+            <NavLink to='/trades' className='btn secondary'>
+              Go to Trade Inbox
+            </NavLink>
+          )}
+        </div>
+      </header>
       <section className='dashboard-cards'>
-        <p>Your Cards</p>
-        
-        <CardForm onAdd={handleAddCard}/>
-        
-        {editingCard && (
-          <EditCardForm
-            card={editingCard}
-            onSave={handleSaveCard}
-            onCancel={handleCancelEdit}/>
-        )}
+        <div className='dashboard-cards__heading'>
+          <h3>Your Cards</h3>
+          <p>Keep your owned, wanted, and trade-ready cards organized.</p>
+        </div>
 
-        <CardList
-          cards={cards}
-          onEdit={handleEditCard}
-          onDelete={handleDeleteCard}/>
+        <div className='dashboard-card-panel'>
+          <CardForm onAdd={handleAddCard} />
+
+          {editingCard && (
+            <EditCardForm
+              card={editingCard}
+              onSave={handleSaveCard}
+              onCancel={handleCancelEdit}
+            />
+          )}
+
+          <CardList cards={cards} onEdit={handleEditCard} onDelete={handleDeleteCard} />
+        </div>
       </section>
     </main>
   );
