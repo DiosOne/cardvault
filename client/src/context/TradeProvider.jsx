@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useCallback } from 'react';
+import { useContext, useEffect, useState, useCallback, useRef } from 'react';
 import API from '../api/api';
 import { AuthContext } from './AuthContext';
 import { TradeContext } from './TradeContext';
@@ -9,10 +9,17 @@ const getEntityId= (entity) => {
   return entity._id || entity.id || null;
 };
 
+const getStoredSeenAt= () => {
+  if (typeof window === 'undefined') return 0;
+  const stored= window.localStorage.getItem('tradeInboxSeenAt');
+  return stored ? Number(stored) : 0;
+};
+
 export const TradeProvider= ({ children }) => {
   const {user} = useContext(AuthContext);
   const [trades, setTrades] = useState([]);
   const [hasNewTrades, setHasNewTrades] = useState(false);
+  const lastSeenRef= useRef(getStoredSeenAt());
 
   //fetch trades for user
   const fetchTrades= useCallback(async () => {
@@ -33,7 +40,11 @@ export const TradeProvider= ({ children }) => {
       const pending= data.filter(
         (trade) => getEntityId(trade.toUser) === userId && trade.status === 'pending',
       );
-      setHasNewTrades(pending.length > 0);
+      const hasFreshPending= pending.some((trade) => {
+        const created= trade.createdAt ? new Date(trade.createdAt).getTime() : Date.now();
+        return created > lastSeenRef.current;
+      });
+      setHasNewTrades(hasFreshPending);
     } catch (err) {
       console.error('Failed to fetch trades', err);
     }
@@ -44,7 +55,14 @@ export const TradeProvider= ({ children }) => {
     fetchTrades();
   }, [fetchTrades]);
 
-  const clearNotifications= useCallback(() => setHasNewTrades(false), []);
+  const clearNotifications= useCallback(() => {
+    const now= Date.now();
+    setHasNewTrades(false);
+    lastSeenRef.current= now;
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('tradeInboxSeenAt', String(now));
+    }
+  }, []);
 
   return (
     <TradeContext.Provider

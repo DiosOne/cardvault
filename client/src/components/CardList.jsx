@@ -23,7 +23,7 @@ export default function CardList({cards, onEdit, onDelete}) {
           aria-label={`Card: ${card.name}, ${card.type}, ${card.rarity}`}
         >
           <img 
-            src='https://placehold.com/300x180?text=Card+Image' 
+            src='https://via.placeholder.com/300x180?text=Card+Image'
             alt={`${card.name} card illustration`}
             width='300'
             height='180'

@@ -34,7 +34,7 @@ export default function Register() {
       <form onSubmit={handleSubmit} aria-labelledby='register-heading'>
         <h2 id='register-heading'>Create Account</h2>
 
-        {error && <p className='error' role='alert'>(error)</p>}
+        {error && <p className='error' role='alert'>{error}</p>}
 
         <label htmlFor='reg-username' className='visually-hidden'>
           Username
