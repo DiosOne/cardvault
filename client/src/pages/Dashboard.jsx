@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import { MdNotificationsActive } from 'react-icons/md';
 import { resolveApiError } from '../utility/messages';
 import { notifySuccess, notifyError, confirmAction } from '../utility/notifications';
+import TradeAlertButton from '../components/TradeAlertButton';
 
 
 export default function Dashboard() {
@@ -94,16 +95,7 @@ export default function Dashboard() {
           </p>
         </div>
         <div className='dashboard-actions'>
-          {hasNewTrades ? (
-            <NavLink to='/trades' className='btn secondary dashboard-alert'>
-              <MdNotificationsActive className='trade-bell' aria-label='New trade requests' />
-              <span>View Trade Inbox</span>
-            </NavLink>
-          ) : (
-            <NavLink to='/trades' className='btn secondary'>
-              Go to Trade Inbox
-            </NavLink>
-          )}
+          <TradeAlertButton hasNewTrades={hasNewTrades}/>
         </div>
       </header>
       <CardPanel
