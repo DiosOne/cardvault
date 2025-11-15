@@ -6,8 +6,6 @@ import CardPanel from '../components/CardPanel';
 import {AuthContext} from '../context/AuthContext';
 import EditCardForm from '../components/EditCardForm';
 import { TradeContext } from '../context/TradeContext';
-import { NavLink } from 'react-router-dom';
-import { MdNotificationsActive } from 'react-icons/md';
 import { resolveApiError } from '../utility/messages';
 import { notifySuccess, notifyError, confirmAction } from '../utility/notifications';
 import TradeAlertButton from '../components/TradeAlertButton';

@@ -1,32 +1,26 @@
-export default function CardList({cards, onEdit, onDelete}) {
-  if (!cards.length) 
+import Section from './Section';
+
+export default function CardList({ cards, onEdit, onDelete }) {
+  if (!cards.length)
     return (
-      <section aria-live='polite'>
+      <Section title="Your Card Collection" className="card-grid" aria-live="polite">
         <p>No cards yet.</p>
-      </section>
+      </Section>
     );
 
   return (
-    <section
-      className='card-grid'
-      aria-labelledby='user-card-collection'
-      role='region'
-    >
-      <h3 id='user-card-collection' className='visually-hidden'>
-        Your Card Collection
-      </h3>
-
+    <Section title="Your Card Collection" className="card-grid" role="region">
       {cards.map((card) => (
         <article
           key={card._id}
-          className='card'
+          className="card"
           aria-label={`Card: ${card.name}, ${card.type}, ${card.rarity}`}
         >
-          <img 
-            src='https://via.placeholder.com/300x180?text=Card+Image'
+          <img
+            src="https://via.placeholder.com/300x180?text=Card+Image"
             alt={`${card.name} card illustration`}
-            width='300'
-            height='180'
+            width="300"
+            height="180"
           />
           <header>
             <h4>{card.name}</h4>
@@ -39,19 +33,19 @@ export default function CardList({cards, onEdit, onDelete}) {
             <strong>Value:</strong> ${card.value}
           </p>
 
-          <footer className='card-actions'>
+          <footer className="card-actions">
             <button
-              className='card-btn edit'
-              type='button'
+              className="card-btn edit"
+              type="button"
               onClick={() => onEdit(card)}
               aria-label={`Edit ${card.name}`}
             >
               Edit
             </button>
 
-            <button 
-              className='card-btn delete'
-              type='button'
+            <button
+              className="card-btn delete"
+              type="button"
               onClick={() => onDelete(card._id)}
               aria-label={`Delete ${card.name}`}
             >
@@ -60,6 +54,6 @@ export default function CardList({cards, onEdit, onDelete}) {
           </footer>
         </article>
       ))}
-    </section>
+    </Section>
   );
 }

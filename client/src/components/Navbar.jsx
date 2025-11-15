@@ -10,25 +10,19 @@ import {confirmAction} from '../utility/notifications';
 export default function Navbar() {
   const {user, logout} = useContext(AuthContext);
   const navigate= useNavigate();
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('theme') === 'dark');
   const {hasNewTrades} = useContext(TradeContext);
 
   //darkmode + remember
   const toggleTheme= () => {
     const newMode= !darkMode;
     setDarkMode(newMode);
-    document.body.classList.toggle('darkmode', newMode);
-    localStorage.setItem('theme', newMode ? 'dark':'light');
   };
-    
-  //load theme on mount
+
   useEffect(() => {
-    const savedTheme= localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setDarkMode(true);
-      document.body.classList.add('darkmode');
-    }
-  }, []);
+    document.body.classList.toggle('darkmode', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark':'light');
+  }, [darkMode]);
 
   //handle logout and nav home
   const handleLogout= () => {

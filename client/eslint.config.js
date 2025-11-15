@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
+const baseConfig = js.configs.recommended;
 const hooksConfig = reactHooks.configs['recommended-latest'];
 const refreshConfig = reactRefresh.configs.vite;
 
@@ -16,7 +17,7 @@ export default defineConfig([
       'react-refresh': reactRefresh,
     },
     languageOptions: {
-      ecmaVersion: 2020,
+      ...baseConfig.languageOptions,
       globals: globals.browser,
       parserOptions: {
         ecmaVersion: 'latest',
@@ -29,6 +30,7 @@ export default defineConfig([
       ...(refreshConfig.settings || {}),
     },
     rules: {
+      ...(baseConfig.rules || {}),
       ...(hooksConfig.rules || {}),
       ...(refreshConfig.rules || {}),
       indent: ['error', 2, { SwitchCase: 1 }],
@@ -37,6 +39,7 @@ export default defineConfig([
       'comma-dangle': ['error', 'always-multiline'],
       'arrow-body-style': ['error', 'as-needed'],
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ]);
