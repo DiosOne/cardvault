@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import API from '../api/api';
 import CardForm from '../components/CardForm';
 import CardList from '../components/CardList';
+import CardPanel from '../components/CardPanel';
 import {AuthContext} from '../context/AuthContext';
 import EditCardForm from '../components/EditCardForm';
 import { TradeContext } from '../context/TradeContext';
@@ -9,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import { MdNotificationsActive } from 'react-icons/md';
 import { resolveApiError } from '../utility/messages';
 import { notifySuccess, notifyError, confirmAction } from '../utility/notifications';
+
 
 export default function Dashboard() {
   const [cards, setCards] = useState([]);
@@ -104,26 +106,26 @@ export default function Dashboard() {
           )}
         </div>
       </header>
-      <section className='dashboard-cards'>
-        <div className='dashboard-cards__heading'>
-          <h3>Your Cards</h3>
-          <p>Keep your owned, wanted, and trade-ready cards organized.</p>
-        </div>
+      <CardPanel
+        title='Your Cards'
+        description='Keep your owned, wanted, and trade-ready cards organised.'
+      >
+        <CardForm onAdd={handleAddCard} />
 
-        <div className='dashboard-card-panel'>
-          <CardForm onAdd={handleAddCard} />
+        {editingCard && (
+          <EditCardForm
+            card={editingCard}
+            onSave={handleSaveCard}
+            onCancel={handleCancelEdit}
+          />
+        )}
 
-          {editingCard && (
-            <EditCardForm
-              card={editingCard}
-              onSave={handleSaveCard}
-              onCancel={handleCancelEdit}
-            />
-          )}
-
-          <CardList cards={cards} onEdit={handleEditCard} onDelete={handleDeleteCard} />
-        </div>
-      </section>
+        <CardList
+          cards={cards}
+          onEdit={handleEditCard}
+          onDelete={handleDeleteCard}
+        />
+      </CardPanel>
     </main>
   );
 }
