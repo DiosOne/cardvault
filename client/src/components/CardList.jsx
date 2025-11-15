@@ -18,7 +18,7 @@ export default function CardList({ cards, onEdit, onDelete }) {
         >
           <img
             src={`https://picsum.photos/200/300?grayscale&random=${index + 1}`}
-            alt={`${card.name} placeholder`}
+            alt={`${card.name} placeholder artwork`}
             width="200"
             height="300"
           />

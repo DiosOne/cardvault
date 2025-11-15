@@ -109,11 +109,11 @@ export default function PublicTrades() {
             {cards.map((card, index) => (
               <li key={card._id}>
                 <article className='card' aria-label={`Card: ${card.name}`}>
-                  <img 
-                    src={`https://picsum.photos/200/300?grayscale&random=${index + 1}`} 
-                    alt={`${card.name} placeholder`} 
-                    width="200" 
-                    height="300"
+                  <img
+                    src={`https://picsum.photos/200/300?grayscale&random=${index + 1}`}
+                    alt={`${card.name} placeholder artwork`}
+                    width='200'
+                    height='300'
                   />
                   <h3>{card.name}</h3>
                   <p>

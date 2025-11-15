@@ -303,7 +303,8 @@ button:disabled,
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   padding: 2rem;
   margin: 3rem auto;
-  width: min(100%, 420px);
+  width: min(90%, 420px);
+  box-sizing: border-box;
 }
 
 .auth-container h2{
@@ -331,6 +332,15 @@ button:disabled,
   margin-top: 1rem;
 }
 
+.auth-container a{
+  color: var(--accent);
+  font-weight: 600;
+}
+
+body.darkmode .auth-container a{
+  color: #9fa8ff;
+}
+
 .visually-hidden{
   position: absolute;
   left: -9999px;
@@ -343,6 +353,8 @@ button:disabled,
 .site-header{
   width: 100%;
   margin-bottom: 2rem;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .brand-row{
@@ -493,7 +505,7 @@ body.darkmode .trade-bell{
 }
 
 .public-trades .card{
-  width: min(100%, 360px);
+  width: min(100%, 340px);
 }
 
 .trade-auth-cta{
@@ -648,6 +660,8 @@ body.darkmode .hero p{
   border-radius: 12px;
   padding: 1.25rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: min(100%, 360px);
+  margin: 0 auto;
 }
 
 .trade-badge{
