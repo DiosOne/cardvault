@@ -1,10 +1,11 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
+import { MESSAGES } from "../utility/messages.js";
 
 export const verifyToken= (req, res, next) => {
     try {
         const authHeader= req.headers.authorization;
         if (!authHeader || !authHeader.startsWith("Bearer")) {
-            return res.status(401).json({message: "Access denied. No token provided."});
+            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
         }
 
         const token= authHeader.split(" ")[1];
@@ -14,6 +15,6 @@ export const verifyToken= (req, res, next) => {
         next();
     } catch (err) {
         console.error("JWT verification failed:", err.message);
-        res.status(403).json({message: "Invalid or expired token."});
+        res.status(403).json({message: MESSAGES.TOKEN_INVALID});
     }
 }
