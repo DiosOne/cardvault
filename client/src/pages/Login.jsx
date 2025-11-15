@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { TradeContext } from '../context/TradeContext';
 import { resolveApiError } from '../utility/messages';
 import { notifySuccess, notifyError } from '../utility/notifications';
+import AuthLayout from '../components/AuthLayout';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -30,47 +31,48 @@ export default function Login() {
   };
 
   return (
-    <main className="auth-container" role='main'>
-      <form onSubmit={handleSubmit} aria-labelledby='login-heading'>
-        <h2 id='login-heading'>Login</h2>
+    <AuthLayout
+      title='Login'
+      subtitle='Access your CardVault account'
+      onSubmit={handleSubmit}
+    >
+      {error && <p className='error' role='alert'>{error}</p>}
+      
+      
+      <label htmlFor="login-email" className="visually-hidden">
+        Email address
+      </label>
+      <input
+        id="login-email"
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        aria-required="true"
+      />
 
-        {error && <p className="error" role="alert">{error}</p>}
+      <label htmlFor="login-password" className="visually-hidden">
+        Password
+      </label>
+      <input
+        id="login-password"
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        aria-required="true"
+      />
 
-        <label htmlFor='login-email' className='visually-hidden'>
-          Email address
-        </label>
-        <input 
-          id='login-email'
-          type='email'
-          placeholder='Email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          aria-required='true'
-        />
+      <button type="submit">Login</button>
 
-        <label htmlFor='login-password' className='visually-hidden'>
-          Password
-        </label>
-        <input 
-          id='login-password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          aria-required='true'
-        />
-
-        <button type='submit'>Login</button>
-
-        <p>
-          Don't have an account?{' '}
-          <NavLink to='/register' aria-label='Go to registration page'>
-            Register Here
-          </NavLink>
-        </p>
-      </form>
-    </main>
+      <p>
+        Don't have an account?{' '}
+        <NavLink to="/register" aria-label="Go to registration page">
+          Register Here
+        </NavLink>
+      </p>
+    </AuthLayout>
   );
 }
