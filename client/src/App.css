@@ -514,28 +514,61 @@ body.darkmode .trade-bell{
 }
 
 /* Responsive tweaks */
-@media (max-width: 768px) {
-  #root{
+/* extra small */
+@media only screen and (max-width: 600px) {
+  .navbar,
+  .dashboard-card-panel,
+  .auth-container {
     padding: 1rem;
   }
-
-  .card-grid{
-    grid-template-columns: 1fr;
-  }
-
-  form{
+  .dashboard-header,
+  .trade-inbox_header,
+  .trade-auth-cta .cta-buttons {
     flex-direction: column;
     align-items: stretch;
   }
-
-  .navbar{
-    padding: 1rem;
+  .btn,
+  .card-actions button {
+    width: 100%;
   }
 }
 
-@media (max-width: 480px){
-  input, textarea, select{
-    width: 100%;
+/* small */
+@media only screen and (min-width: 600px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+/* medium */
+@media only screen and (min-width: 768px) {
+  .dashboard {
+    padding: 0 1.5rem;
+  }
+  .trade-auth-cta .cta-buttons {
+    flex-direction: row;
+  }
+}
+
+/* large */
+@media only screen and (min-width: 992px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .dashboard-card-panel {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+/* extra large */
+@media only screen and (min-width: 1200px) {
+  #root {
+    max-width: 1400px;
+  }
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 }
 
