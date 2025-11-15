@@ -8,4 +8,5 @@ export const MESSAGES = {
   REGISTER_ERROR: "Server error during registration.",
   TOKEN_MISSING: "Access denied. No token provided.",
   TOKEN_INVALID: "Invalid or expired token.",
+  SERVER_ERROR: "Server error during login. Please try again."
 };

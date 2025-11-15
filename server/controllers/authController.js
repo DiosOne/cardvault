@@ -1,18 +1,24 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import { MESSAGES } from "../utility/messages.js";
 
 export const login= async (req, res) => {
     try {
         const {email, password}= req.body;
+
+        //if blank
+        if (!email || !password) {
+          return res.status(400).json({message: MESSAGES.MISSING_DATA});
+        }
         
         //find by email
         const user= await User.findOne({email});
-        if (!user) return res.status(400).json({message: "User not found."});
+        if (!user) return res.status(400).json({message: MESSAGES.INVALID_LOGIN});
         
         //check PW
         const isMatch= await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({message: "Invalid password."});
+        if (!isMatch) return res.status(400).json({message: MESSAGES.INVALID_LOGIN});
 
         //generate jwt token
         const token= jwt.sign({id: user._id}, process.env.JWT_SECRET, {
@@ -20,9 +26,13 @@ export const login= async (req, res) => {
         });
 
         //return token and info
-        res.status(200).json({token, user});
+        res.status(200).json({
+          message: MESSAGES.LOGIN_SUCCESS,
+          token,
+          user,
+        });
     } catch (err) {
         console.error("Login Error:", err);
-        res.status(500).json({message: "Server error", error: err.message});
+        res.status(500).json({message: MESSAGES.SERVER_ERROR});
     }
 };
