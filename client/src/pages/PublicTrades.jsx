@@ -106,9 +106,15 @@ export default function PublicTrades() {
       ) : (
         <section aria-live='polite'>
           <ul aria-label='List of cards, up for public trade'>
-            {cards.map((card) => (
+            {cards.map((card, index) => (
               <li key={card._id}>
                 <article className='card' aria-label={`Card: ${card.name}`}>
+                  <img 
+                    src={`https://picsum.photos/200/300?grayscale&random=${index + 1}`} 
+                    alt={`${card.name} placeholder`} 
+                    width="200" 
+                    height="300"
+                  />
                   <h3>{card.name}</h3>
                   <p>
                     <strong>Rarity:</strong> {card.rarity} <br />

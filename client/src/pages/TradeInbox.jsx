@@ -46,12 +46,18 @@ export default function TradeInbox() {
       {renderHeader()}
 
       <section className='trade-list' aria-live='polite'>
-        {trades.map((trade) => {
+        {trades.map((trade, index) => {
           const incoming= getId(trade.toUser) === userId;
           const counterparty= incoming ? trade.fromUser : trade.toUser;
 
           return (
             <article key={trade._id} className='trade-card' aria-label='Trade request'>
+              <img 
+                src={`https://picsum.photos/200/300?grayscale&random=${index + 1}`} 
+                alt={`${trade.cardId?.name || 'Trade card'} placeholder`} 
+                width="200" 
+                height="300"
+              />
               <header>
                 <span className={`trade-badge ${incoming ? 'incoming' : 'outgoing'}`}>
                   {incoming ? 'Incoming' : 'Outgoing'}
