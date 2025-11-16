@@ -18,6 +18,7 @@ export const CLIENT_MESSAGES= {
   TRADE_ACCEPT_SUCCESS: 'Trade accepted.',
   TRADE_DECLINE_SUCCESS: 'Trade declined.',
   TRADE_ACTION_ERROR: 'Unable to update the trade. Please try again.',
+  TRADE_FETCH_ERROR: 'Unable to load your trades right now.',
   AUTH_REQUIRED: 'Please log in to continue.',
   OWN_LISTING: 'You already listed this card.',
   MESSAGE_REQUIRED: 'Please enter a message before sending.',

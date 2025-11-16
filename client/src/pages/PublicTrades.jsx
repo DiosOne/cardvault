@@ -23,7 +23,9 @@ export default function PublicTrades() {
         if (err.response?.status === 404) {
           setCards([]);
         } else {
-          setError(resolveApiError(err, 'PUBLIC_TRADES_ERROR'));
+          const friendly= resolveApiError(err, 'PUBLIC_TRADES_ERROR');
+          setError(friendly);
+          notifyError(err, 'PUBLIC_TRADES_ERROR');
         }
       } finally {
         setLoading(false);
@@ -120,6 +122,7 @@ export default function PublicTrades() {
                     <strong>Rarity:</strong> {card.rarity} <br />
                     <strong>Type:</strong> {card.type} <br />
                     <strong>Value:</strong> {card.value} <br />
+                    <strong>Status:</strong> {card.status || 'for trade'}
                   </p>
                   <small>Listed by: {card.userId?.username || 'Unknown user'}</small>
                   <footer className='card-actions'>

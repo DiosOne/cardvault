@@ -12,4 +12,9 @@ export default defineConfig({
       /.*\.ngrok-free\.dev$/,
     ],
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.js',
+    globals: true,
+  },
 });

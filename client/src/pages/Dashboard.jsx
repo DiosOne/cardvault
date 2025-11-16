@@ -26,7 +26,9 @@ export default function Dashboard() {
         const res = await API.get('/cards');
         setCards(res.data.data || []);
       } catch (err) {
-        setError(resolveApiError(err, 'CARD_FETCH_ERROR'));
+        const friendly= resolveApiError(err, 'CARD_FETCH_ERROR');
+        setError(friendly);
+        notifyError(err, 'CARD_FETCH_ERROR');
       } finally {
         setLoading(false);
       }

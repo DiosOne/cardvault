@@ -1,6 +1,7 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { TradeContext } from '../context/TradeContext';
 import { AuthContext } from '../context/AuthContext';
+import { notifyError, notifySuccess } from '../utility/notifications';
 
 const getId= (value) => {
   if (!value) return null;
@@ -10,13 +11,31 @@ const getId= (value) => {
 
 export default function TradeInbox() {
   const {user} = useContext(AuthContext);
-  const {trades, fetchTrades, clearNotifications} = useContext(TradeContext);
+  const {trades, fetchTrades, clearNotifications, respondToTrade} = useContext(TradeContext);
   const userId= getId(user);
+  const [responses, setResponses] = useState({});
 
   useEffect(() => {
     fetchTrades();
     clearNotifications();
   }, [fetchTrades, clearNotifications]);
+
+  const handleResponseChange= (tradeId, value) => {
+    setResponses((prev) => ({...prev, [tradeId]: value}));
+  };
+
+  const handleTradeAction= async (tradeId, action) => {
+    try {
+      await respondToTrade(tradeId, {
+        status: action,
+        responseMessage: responses[tradeId] || '',
+      });
+      notifySuccess(action === 'accepted' ? 'TRADE_ACCEPT_SUCCESS' : 'TRADE_DECLINE_SUCCESS');
+      setResponses((prev) => ({...prev, [tradeId]: ''}));
+    } catch (error) {
+      notifyError(error, 'TRADE_ACTION_ERROR');
+    }
+  };
 
   const renderHeader= () => (
     <header className='trade-inbox__header'>
@@ -81,6 +100,40 @@ export default function TradeInbox() {
                   {trade.createdAt ? new Date(trade.createdAt).toLocaleString() : 'N/A'}
                 </li>
               </ul>
+
+              {trade.responseMessage && (
+                <p className='trade-response'>
+                  Response: {trade.responseMessage}
+                </p>
+              )}
+
+              {incoming && trade.status === 'pending' && !trade.responseMessage && (
+                <div className='trade-actions'>
+                  <label htmlFor={`trade-reply-${trade._id}`}>Reply message</label>
+                  <textarea
+                    id={`trade-reply-${trade._id}`}
+                    value={responses[trade._id] || ''}
+                    onChange={(event) => handleResponseChange(trade._id, event.target.value)}
+                    placeholder='Add a short note for this trader'
+                  />
+                  <div className='trade-actions__buttons'>
+                    <button
+                      type='button'
+                      className='accept'
+                      onClick={() => handleTradeAction(trade._id, 'accepted')}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      type='button'
+                      className='decline'
+                      onClick={() => handleTradeAction(trade._id, 'declined')}
+                    >
+                      Decline
+                    </button>
+                  </div>
+                </div>
+              )}
             </article>
           );
         })}

@@ -1,34 +1,90 @@
-# CardVault - Backend API
+# CardVault – Full Stack MERN Project
 
-CardVault is a full-stack MERN application designed to manage collectible trading cards.
+CardVault is a training assignment that ships both halves of a MERN stack:
 
-The backend provides secure user authentification, and persistent card "storage" in MongoDB Atlas, and RESTful CRUD endpoints built using Node.js and Express.
+- **Frontend (client/)** - React 19 + Vite SPA with authenticated dashboard, shared card panel components, public trade listings, trade inbox messaging (accept/decline + reply notes), responsive CSS, and Vitest/Testing Library coverage.
+- **Backend (server/)** - Node/Express API with JWT auth, MongoDB Atlas via Mongoose, modular controllers/middleware, global error handling, and Jest + Supertest integration tests.
 
-It follows industry standard patterns for modular controllers, middleware, and global error handling.
-
----
-
-## Technologies Used
-
-| Technology               | Purpose                                                 | Industry Relevance & Comparison                                                                                 | License |
-|--------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|---------|
-| Node.js                  | JavaScript runtime for executing backend code.          | Enables a unified language across client and server; faster prototyping than Java or Python stacks.             | MIT     |
-| Express.js               | Web framework handling routes and middleware.           | Lightweight, minimalist alternative to Flask or Django; widely adopted in production APIs.                      | MIT     |
-| MongoDB Atlas + Mongoose | Cloud-hosted NoSQL database with schema enforcement.    | Flexible document model ideal for rapidly changing data; simpler scaling than relational SQL.                   | SSPL    |
-| JWT & bcrypt             | Authentication and password hashing.                    | JWT supports stateless tokens for distributed systems; bcrypt ensures passwords are never stored in plain text. | MIT     |
-| dotenv                   | Loads environment variables from a .env file.           | Protects sensitive configuration (DB URI, JWT secret) from exposure in code repositories.                       | MIT     |
-| Jest & Supertest         | Automated testing framework and HTTP assertion library. | Industry-standard combo for backend integration tests in Node ecosystems.                                       | MIT     |
+The following sections split the documentation into two obvious parts so graders can find everything in one file.
 
 ---
 
-## Setup and Installation
+## 1. Frontend (client/)
 
-### Prerequsites
+### Tech Stack
 
-- Node 18 or later
-- npm (comes with Node)
-- MongoDB Atlas account with connection string
-- `.env` file in `/server` directory containing:
+| Technology | Purpose | Notes |
+|------------|---------|-------|
+| React 19 + Vite | SPA + fast dev server | HMR, modern JSX, easy deployment |
+| React Router DOM | Client routing & protected routes | Used by navbar + trade views |
+| Axios | HTTP client with interceptor for JWT headers | `src/api/api.js` centralizes baseURL |
+| React Context (Auth/Trade) | Shares user/token + trade notifications across app | Persists auth in `localStorage`, tracks `hasNewTrades` |
+| React Toastify | Accessible toasts for success/error messaging | Messages pulled from `src/utility/messages.js` |
+| ESLint (Airbnb base) + Prettier | Style enforcement | `npm run lint` keeps React code consistent |
+| Vitest + Testing Library | Component testing for cards/forms/trade inbox | One spec (`PublicTrades.test.jsx`) is currently skipped pending router fix |
+
+### Setup
+
+```bash
+cd cardvault/client
+npm install
+npm run dev      # http://localhost:5173
+```
+
+To preview on a phone from WSL/Ubuntu, forward ports 5173 and 5000 through Windows:
+
+```powershell
+netsh interface portproxy add v4tov4 listenport=5173 listenaddress=0.0.0.0 connectport=5173 connectaddress=<WSL-IP>
+netsh interface portproxy add v4tov4 listenport=5000 listenaddress=0.0.0.0 connectport=5000 connectaddress=<WSL-IP>
+```
+
+### Scripts
+
+- `npm run dev` - Vite dev server
+- `npm run build` / `npm run preview` - production bundle + local preview
+- `npm run lint` - ESLint (Airbnb config)
+- `npm run test` - Vitest suite
+
+### Testing Overview
+
+Current coverage (`npm run test`) includes:
+
+- `CardForm.test.jsx` - verifies `onAdd` receives name/type/rarity/value/status.
+- `CardList.test.jsx` - empty state + edit/delete callbacks.
+- `TradeAlertButton.test.jsx` - CTA text vs bell icon state (NavLink mock).
+- `TradeInbox.test.jsx` - empty state and incoming trade render.
+- `PublicTrades.test.jsx` - **skipped** with a TODO because Vitest currently errors on `useLocation` (router context). The spec remains in the suite but does not run until the fix is implemented.
+
+### Key Frontend Features
+
+- **Card Panel** - wraps `CardForm`, `EditCardForm`, and `CardList` inside a styled panel component.
+- **Trade Inbox Messaging** - `TradeProvider` + `TradeInbox` allow accepting/declining trades with optional response message via `PATCH /api/trades/:id`.
+- **Notification CTA** - `TradeAlertButton` centralizes the “View Trade Inbox” vs “Go to Trade Inbox” button with bell icon.
+- **Accessibility** - `Section` component injects visually hidden headings, ARIA labels, and keeps semantic `<main>/<section>` structure.
+- **Responsive CSS** - `src/App.css` covers ≤400px up to ≥1200px breakpoints, tested on Pixel/iPhone/iPad presets. Placeholder images use `https://picsum.photos/200/300?grayscale&random=…` to avoid copyrighted art.
+
+---
+
+## 2. Backend (server/)
+
+### Tech Stack
+
+| Technology | Purpose | Notes |
+|------------|---------|-------|
+| Node.js + Express | REST API | Modular controllers/routes with JWT middleware |
+| MongoDB Atlas + Mongoose | Data persistence | Card, User, and TradeRequest schemas |
+| JWT + bcrypt | Auth/token issuing & password hashing | Tokens stored in `localStorage` on the client |
+| dotenv | Env var management | `.env` holds `MONGO_URI`, `JWT_SECRET`, etc. |
+| Jest + Supertest | Integration tests | Validates auth + card CRUD routes |
+
+### Setup
+
+```bash
+cd cardvault/server
+npm install
+```
+
+Create `server/.env` with:
 
 ```bash
 MONGO_URI=your_mongodb_atlas_connection
@@ -37,103 +93,53 @@ NODE_ENV=development
 PORT=5000
 ```
 
-### Installation Steps
+Start the API:
 
 ```bash
-# Clone the repo
-git clone https://github.com/DiosOne/cardvault.git
-cd cardvault/server
-
-# Install dependencies
-npm install
+npm run dev   # nodemon, http://localhost:5000
 ```
 
-The API will start at `http://localhost:5000`.
-
-### Testing Overview
-
-Automated tests were writtrn using **Jest** (test runner) and **Supertest** (HTTP intergration library) to verify all major API routes behave as expected.
-
-The test suite focuses on essential application functionality:
-
-- **Authentication**: Ensures protected routes return `401 Unauthorised` when no token is provided.
-- **Card Creation**: Confirms that valid requestscreate new cards in the database.
-- **Card Update**: Verifys users can modify existing cards with valid authentication.
-- **Card Deletion**: Checks that cards are removed correctly and returns a success message.
-- **Data Retrieval**: Confirms that the `/api/cards` route returns all cards belonging to the authorised user.
+Lint & test:
 
 ```bash
-# Run the server (nodemon in dev mode)
-npm run dev
-
-# Run tests
-npm test
+npm run lint  # ESLint (flat config)
+npm test      # Jest + Supertest
 ```
 
----
+`npm test` covers authentication (401s without tokens), card creation/update/delete, and `/api/cards` retrieval scoped to the logged-in user.
 
-### Code Style and Conventions
+### Error Handling & DRY
 
- CardVault follows the [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript?tab=readme-ov-file#airbnb-javascript-style-guide-) to maintain a consistent, readable, and professional codebase.  
- An ESLint config file (/server/eslint.config.js) uses the AirBnB Base preset, compatible with ESLintv9.  
- To check or autofix issues:
+- `asyncHandler.js` wraps controllers to avoid repeated `try/catch`.
+- `errorHandler.js` centralizes API error responses (400/401/403/404/500).
+- `messages.js` stores reusable response strings shared with the client.
 
- ```bash
- npx eslint  
- npx eslint --fix
- ```
+### API Routes
 
- This ensures:
+| Method | Endpoint           | Description                     | Auth |
+|--------|--------------------|---------------------------------|:----:|
+| POST   | /api/auth/register | Register a new user             |  No  |
+| POST   | /api/auth/login    | Log in and receive JWT token    |  No  |
+| GET    | /api/cards         | Retrieve cards for current user | Yes  |
+| POST   | /api/cards         | Create a new card               | Yes  |
+| PATCH  | /api/cards/:id     | Update a specific card          | Yes  |
+| DELETE | /api/cards/:id     | Delete a specific card          | Yes  |
+| GET    | /api/cards/public  | Public listings (status “for trade”/“wanted”) | No |
+| POST   | /api/trades        | Create trade request            | Yes  |
+| GET    | /api/trades        | List incoming/outgoing trades   | Yes  |
+| PATCH  | /api/trades/:id    | Accept/decline + response message | Yes |
 
-- Consistent indentation, spacing, and quote style
-- Unified import/export syntax for ES Modules
-- Readable and maintainable code that matches modern Node.js standards
+### Code Style
 
----
-
-## Error Handling and DRY Principles  
-
-The backend applies DRY principles throughout:
-
-- `asyncHandler.js` wraps all asyncronous route controllers to remove repeated `try/catch` blocks.
-- `errorHandler.js` acts as a global middleware to handle validation, authentification, and server errors in one place.
-- `messages.js` centralises all reuseable response messages for consistency.
-Common error categories include:
-- `400 Bad Request` - Invalid input or malformed ID
-- `401/403` - Unauthorised or invalid token
-- `404 Not Found` - The Classic
-- `500 Internal Server Error` - as a generic fallback
-
-This helps to ensure predictable API response with minimal code duplication.
+- Both client and server follow the Airbnb JavaScript style guide via ESLint flat configs plus Prettier formatting.
+- Run `npm run lint` in each folder before committing to keep imports/hooks ordering consistent.
 
 ---
 
-## API Routes and Usage
+## Collaboration & License
 
-| Method | Endpoint           | Description                     | Authorisation |
-|--------|--------------------|---------------------------------|:-------------:|
-| POST   | /api/auth/register | Register a new user             |       N       |
-| POST   | /api/auth/login    | Log in and receive JWT token    |       N       |
-| GET    | /api/cards         | Retrieve cards for current user |       Y       |
-| POST   | /api/cards         | Create a new card               |       Y       |
-| PATCH  | /api/cards/:id     | Update a specific card          |       Y       |
-| DELETE | /api/cards/:id     | Delete a specific card          |       Y       |
+Solo project but tracked with Git (feature commits, linted code). Big thanks to [tablesgenerator.com](https://www.tablesgenerator.com/markdown_tables#) for Markdown tables.
 
----
-
-## Collaboration & Version Control
-
-This was a solo project, but I still tried to use proper version control practices throughout.
-All progress was tracked with Git and pushed to GitHub in regular, more meaningful commits — from setting up routes and models to adding JWT authentication, testing, and improving error handling.
-Each commit focused on a specific task or fix so the history shows the project’s development step by step.
-Big shout-out to [tablesgenerator.com](https://www.tablesgenerator.com/markdown_tables#) for making Markdown tables less of a pain.
-
----
-
-### License
-
-This project is released under the [MIT License](https://github.com/airbnb/javascript/blob/master/LICENSE.md). Huge shout out to [Tables Generator](https://www.tablesgenerator.com/markdown_tables#) for making Markdown tables less of a pain.
-
----
+Code is released under the [MIT License](https://github.com/airbnb/javascript/blob/master/LICENSE.md).
 
 &copy; 2025 Dom Andrewartha.

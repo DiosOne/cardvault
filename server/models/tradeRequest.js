@@ -23,6 +23,7 @@ const tradeRequestSchema= new mongoose.Schema(
             enum: ["pending", "accepted", "declined"],
             default: "pending",
         },
+        responseMessage: {type: String, default: ""},
     },
     {timestamps: true}
 );

@@ -2,6 +2,8 @@
 
 The CardVault client is a React + Vite single‑page application that pairs with the Express/Mongo backend in this repository. It provides authenticated card management, public trade browsing, and a lightweight “trade inbox” notification experience built around shared React Context providers.
 
+> **Note:** This README covers only the frontend deliverable. The backend (submitted previously) lives at the repo root with its own README (`../README.md`). Use both together for the full MERN stack.
+
 ---
 
 ## Feature Overview

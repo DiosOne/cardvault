@@ -595,6 +595,16 @@ body.darkmode .trade-bell{
     grid-template-columns: 1fr;
   }
 
+  .card-grid{
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .card-actions{
+    flex-direction: column;
+    width: 100%;
+  }
+
   .dashboard-card-panel {
     padding: 1rem 0.75rem;
   }
@@ -702,6 +712,11 @@ body.darkmode .trade-bell{
     align-items: stretch;
   }
 
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
   .btn.secondary,
   .trade-auth-cta .cta-buttons .btn {
     min-width: 200px;
@@ -719,12 +734,13 @@ body.darkmode .trade-bell{
     padding: 1.1rem;
   }
 
-  .card-actions button {
-    width: auto;
+  .card-actions {
+    flex-direction: column;
   }
 
   .trade-list,
   .public-trades ul {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 
@@ -870,6 +886,7 @@ body.darkmode .trade-bell{
     
   .public-trades ul,
   .trade-list {    
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
   }
@@ -936,6 +953,7 @@ body.darkmode .trade-bell{
 
   .public-trades ul,
   .trade-list {
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2.25rem;
   }
@@ -1065,6 +1083,58 @@ body.darkmode .hero p{
   gap: 1.5rem;
   flex-wrap: wrap;
   font-size: 0.95rem;
+}
+
+.trade-response{
+  margin: 0.5rem 0;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.trade-actions{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.trade-actions label{
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.trade-actions textarea{
+  min-height: 80px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.15);
+  padding: 0.6rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+body.darkmode .trade-actions textarea{
+  background-color: #2a2a40;
+  color: #fff;
+  border-color: rgba(255,255,255,0.2);
+}
+
+.trade-actions__buttons{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.trade-actions__buttons button{
+  flex: 1 1 150px;
+}
+
+.trade-actions__buttons button.accept{
+  background-color: #2e7d32;
+}
+
+.trade-actions__buttons button.decline{
+  background-color: #c62828;
 }
 
 .trade-empty{

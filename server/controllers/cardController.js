@@ -13,7 +13,7 @@ export const getUserCards= asyncHandler(async (req, res) => {
 
 //get all public trade cards
 export const getPublicCards= asyncHandler(async (req,res) => {
-    const cards= await Card.find({status: "for trade"})
+    const cards= await Card.find({status: {$in: ["for trade", "wanted"]}})
         .populate("userId", "username email");
 
     if (!cards || cards.length === 0) {

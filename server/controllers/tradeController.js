@@ -39,3 +39,53 @@ export const getTrades= asyncHandler(async (req,res) => {
         data: trades,
     });
 });
+
+//update trade status or response
+export const updateTrade= asyncHandler(async (req, res) => {
+    const {status, responseMessage} = req.body;
+    const trade= await TradeRequest.findById(req.params.id);
+
+    if (!trade) {
+        const error= new Error(MESSAGES.CARD_NOT_FOUND);
+        error.statusCode= 404;
+        throw error;
+    }
+
+    const requesterId= req.user.id;
+    const isParticipant=
+        trade.fromUser.toString() === requesterId ||
+        trade.toUser.toString() === requesterId;
+
+    if (!isParticipant) {
+        const error= new Error(MESSAGES.TOKEN_INVALID);
+        error.statusCode= 403;
+        throw error;
+    }
+
+    if (status) {
+        const allowed= ["pending", "accepted", "declined"];
+        if (!allowed.includes(status)) {
+            const error= new Error(MESSAGES.MISSING_DATA);
+            error.statusCode= 400;
+            throw error;
+        }
+        trade.status= status;
+    }
+
+    if (typeof responseMessage === "string") {
+        trade.responseMessage= responseMessage;
+    }
+
+    await trade.save();
+
+    await trade.populate([
+        {path: "fromUser", select: "username email"},
+        {path: "toUser", select: "username email"},
+        {path: "cardId", select: "name"},
+    ]);
+
+    res.json({
+        success: true,
+        data: trade,
+    });
+});

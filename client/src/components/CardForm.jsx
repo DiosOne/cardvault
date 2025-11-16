@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Section from './Section';
 
 export default function CardForm({onAdd}) {
   const [form, setForm] = useState({
@@ -25,11 +26,12 @@ export default function CardForm({onAdd}) {
   };
 
   return (
-    <section aria-labelledby="add-card-heading">
-      <h3 id="add-card-heading" className="visually-hidden">
-        Add a new card to your collection
-      </h3>
-
+    <Section
+      title="Add a new card to your collection"
+      className="card-form"
+      role="region"
+      live="polite"
+    >
       <form onSubmit={handleSubmit} aria-describedby="form-instructions">
         <p id="form-instructions" className="visually-hidden">
           Enter card details and choose its status, then click Add Card.
@@ -105,6 +107,6 @@ export default function CardForm({onAdd}) {
 
         <button type="submit">Add Card</button>
       </form>
-    </section>
+    </Section>
   );
 }

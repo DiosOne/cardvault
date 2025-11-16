@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useCallback, useRef } from 'react';
 import API from '../api/api';
 import { AuthContext } from './AuthContext';
 import { TradeContext } from './TradeContext';
+import { notifyError } from '../utility/notifications';
 
 const getEntityId= (entity) => {
   if (!entity) return null;
@@ -47,6 +48,7 @@ export const TradeProvider= ({ children }) => {
       setHasNewTrades(hasFreshPending);
     } catch (err) {
       console.error('Failed to fetch trades', err);
+      notifyError(err, 'TRADE_FETCH_ERROR');
     }
   }, [user]);
 
@@ -54,6 +56,21 @@ export const TradeProvider= ({ children }) => {
   useEffect(() => {
     fetchTrades();
   }, [fetchTrades]);
+
+  const respondToTrade= useCallback(
+    async (tradeId, payload) => {
+      if (!tradeId) return;
+      try {
+        const res= await API.patch(`/trades/${tradeId}`, payload);
+        await fetchTrades();
+        return res.data.data || res.data;
+      } catch (error) {
+        console.error('Unable to update trade', error);
+        throw error;
+      }
+    },
+    [fetchTrades],
+  );
 
   const clearNotifications= useCallback(() => {
     const now= Date.now();
@@ -66,7 +83,14 @@ export const TradeProvider= ({ children }) => {
 
   return (
     <TradeContext.Provider
-      value={{ trades, setTrades, hasNewTrades, fetchTrades, clearNotifications }}
+      value={{
+        trades,
+        setTrades,
+        hasNewTrades,
+        fetchTrades,
+        clearNotifications,
+        respondToTrade,
+      }}
     >
       {children}
     </TradeContext.Provider>
