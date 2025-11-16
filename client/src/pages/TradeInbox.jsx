@@ -19,7 +19,7 @@ export default function TradeInbox() {
   }, [fetchTrades, clearNotifications]);
 
   const renderHeader= () => (
-    <header className='trade-inbox_header'>
+    <header className='trade-inbox__header'>
       <div>
         <h2>Trade Inbox</h2>
         <p>Review the trade requests tied to your account.</p>

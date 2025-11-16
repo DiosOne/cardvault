@@ -138,7 +138,7 @@ body.darkmode .footer{
 .card{
   background-color: var(--card-bg);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 0.5rem 0.75rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   width: min(100%, 340px);
@@ -349,6 +349,27 @@ body.darkmode .auth-container a{
   overflow: hidden;
 }
 
+/* Global small tweaks */
+.auth-container form input,
+.auth-container form button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-card-panel form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dashboard-card-panel form input,
+.dashboard-card-panel form select,
+.dashboard-card-panel form button {
+  flex: 1 1 200px;
+  min-width: 200px;
+}
+
 /* Navbar */
 .site-header{
   width: 100%;
@@ -528,49 +549,349 @@ body.darkmode .trade-bell{
 /* Responsive tweaks */
 /* extra small */
 @media only screen and (max-width: 600px) {
+  #root{
+    padding: 1.5rem 1rem;
+  }
+
   .navbar,
   .dashboard-card-panel,
+  .auth-container{
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .navbar{
+    border-radius: 0.85rem;
+  }
+
+  .dashboard-header,
+  .trade-inbox__header{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trade-auth-cta .cta-buttons{
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .trade-auth-cta .btn {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .btn,
+  .card-actions button{
+    width: 100%;
+  }
+
+  .public-trades ul{
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card-panel {
+    padding: 1rem 0.75rem;
+  }
+
+  .public-trades .card,
+  .trade-card{
+    padding: 0.85rem;
+    width: min(100%, 320px);
+  }
+
+  .dashboard-card-panel form {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.65rem;
+  }
+  .dashboard-card-panel form input,
+  .dashboard-card-panel form select,
+  .dashboard-card-panel form button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .public-trades .cta-buttons {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .public-trades .cta-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .public-trades .card,
+  .trade-card {
+    padding: 0.9rem;
+    width: min(100%, 320px);
+  }
+
+  .public-trades .card img,
+  .trade-card img {
+    display: block;
+    margin: 0 auto 0.75rem;
+    width: min(100%, 200px);
+    height: auto;
+  }
+
+  .trade-inbox__header{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .trade-inbox__header button{
+    align-self: center;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #root {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .card-grid {
+    margin-top: 1rem;
+    gap: 1rem;
+  }
+
+  .dashboard-card-panel,
+  .public-trades .card,
+  .trade-card {
+    padding: 1rem;
+    width: 100%;
+  }
+
   .auth-container {
     padding: 1rem;
   }
-  .dashboard-header,
-  .trade-inbox_header,
-  .trade-auth-cta .cta-buttons {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .btn,
-  .card-actions button {
+
+  .auth-container input,
+  .auth-container button {
     width: 100%;
   }
 }
 
 /* small */
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .navbar {
+    width: min(100%, 760px);
+    margin: 0 auto 1.5rem;
+    padding: 0.85rem 1.5rem;
+  }
+
+  .auth-container {
+    width: min(90%, 500px);
+    margin: 2.5rem auto;
+    padding: 2rem;
+    text-align: left;
+  }
+
+  .auth-container form,
   .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    align-items: stretch;
+  }
+
+  .btn.secondary,
+  .trade-auth-cta .cta-buttons .btn {
+    min-width: 200px;
+  }
+
+  .dashboard {
+    padding: 0 1rem;
+  }
+
+  .dashboard-card-panel,
+  .public-trades .card,
+  .trade-card {
+    max-width: 340px;
+    margin: 0 auto;
+    padding: 1.1rem;
+  }
+
+  .card-actions button {
+    width: auto;
+  }
+
+  .trade-list,
+  .public-trades ul {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .trade-inbox__header{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
   }
 }
 
 /* medium */
-@media only screen and (min-width: 768px) {
-  .dashboard {
-    padding: 0 1.5rem;
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  #root {
+    padding: 2rem;
   }
-  .trade-auth-cta .cta-buttons {
+
+  .dashboard {
+    padding: 0 2rem;
+    margin: 2.5rem auto;
+    max-width: 1100px;
+  }
+
+  .auth-container {
+    width: min(80%, 520px);
+    margin: 3rem auto;
+  }
+
+  .navbar {
+    max-width: 960px;
+    margin: 0 auto 2rem;
+    padding: 1.1rem 2rem;
+    justify-content: center;
     flex-direction: row;
+    align-items: center;
+    border-radius: 12px;
+  }
+
+  .brand { 
+    font-size: clamp(1.6rem, 2vw, 2rem);
+    text-align: center;
+  }
+
+  .nav-right {
+    gap: 1.25rem;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .dashboard-card-panel {
+    flex-direction: row;
+    gap: 1.75rem;
+  }
+
+  .dashboard-card-panel .card {
+    padding: 1.25rem;
+    width: min(100%, 340px);
+    margin: 0 auto;
+  }
+
+  .public-trades ul,
+  .trade-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .public-trades .card,
+  .trade-card {
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.25rem;
+  }
+
+  .trade-inbox__header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .trade-inbox__header button {
+    width: auto;    
+  }
+
+  .card-actions button {
+    width: auto;
   }
 }
 
 /* large */
-@media only screen and (min-width: 992px) {
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  #root {
+    padding: 2.5rem 3rem;
   }
+
+  .dashboard {
+    max-width: 1200px;
+    padding: 0 3rem;
+  }
+
+  .auth-container{
+    width: min(70%, 540px);
+    margin: 3rem auto;
+  }
+
+  .navbar {
+    max-width: 1100px;
+    margin: 0 auto 2.5rem;
+    padding: 1.5rem 3rem;
+    justify-content: center;
+  }
+
+  .brand {
+    font-size: clamp(1.9rem, 2.2vw, 2.4rem);
+  }
+
+  .nav-right {
+    gap: 1.75rem;
+  }
+
+  .auth-container,
+  .auth-layout .panel,
+  .card-panel {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    column-gap: 2rem;
+    row-gap: 2rem;
+  }
+
   .dashboard-card-panel {
-    flex-direction: row;
+    gap: 3rem;
+  }
+    
+  .public-trades ul,
+  .trade-list {    
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+  }
+
+  .public-trades .card,
+  .trade-card {
+    padding: 1.25rem;
+    max-width: 360px;
+    width: 100%;
+  }
+
+  .trade-inbox__header {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .trade-inbox__header button {
+    width: auto;
+  }
+   
+  .card-actions button {
+    width: auto;
   }
 }
 
@@ -578,11 +899,57 @@ body.darkmode .trade-bell{
 @media only screen and (min-width: 1200px) {
   #root {
     max-width: 1400px;
+    padding: 0 4rem;
   }
+  
+  .dashboard {
+    padding: 0 4rem;
+  }
+
+  .navbar {
+    max-width: 1200px;
+    padding: 1.5rem 3rem;
+    margin: 0 auto 2.5rem;
+    justify-content: center;
+  }
+
+  .brand {
+    font-size: clamp(2rem, 2.4vw, 2.8rem);
+  }
+
+  .brand-title {
+    font-size: clamp(2rem, 2.5vw, 2.6rem);
+  }
+
+  .nav-right a {
+    font-size: 1rem;
+  }
+
+  .auth-layout .panel,
+  .card-panel {
+    max-width: 1100px;
+  }
+  
   .card-grid {
+    gap: 2rem;
+  }
+
+  .public-trades ul,
+  .trade-list {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.25rem;
+  }
+
+  .public-trades .card,
+  .trade-card {
+    width: min(100%, 440px);
+  }
+
+  .dashboard-card-panel {
+    gap: 3rem;
   }
 }
+
 
 @keyframes ring{
   0% {transform: rotate(0deg);}
@@ -598,7 +965,7 @@ body.darkmode .trade-bell{
 .home{
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: center;  
   align-items: center;
   margin-top: 4rem;
 }
