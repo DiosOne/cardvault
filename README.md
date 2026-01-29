@@ -11,10 +11,10 @@ The following sections split the documentation into two obvious parts so graders
 
 ## 1. Frontend (client/)
 
-### Tech Stack
+### Frontend Tech Stack
 
 | Technology | Purpose | Notes |
-|------------|---------|-------|
+| ------------ | --------- | ------- |
 | React 19 + Vite | SPA + fast dev server | HMR, modern JSX, easy deployment |
 | React Router DOM | Client routing & protected routes | Used by navbar + trade views |
 | Axios | HTTP client with interceptor for JWT headers | `src/api/api.js` centralizes baseURL |
@@ -23,7 +23,7 @@ The following sections split the documentation into two obvious parts so graders
 | ESLint (Airbnb base) + Prettier | Style enforcement | `npm run lint` keeps React code consistent |
 | Vitest + Testing Library | Component testing for cards/forms/trade inbox | One spec (`PublicTrades.test.jsx`) is currently skipped pending router fix |
 
-### Setup
+### Frontend Setup
 
 ```bash
 cd cardvault/client
@@ -67,17 +67,17 @@ Current coverage (`npm run test`) includes:
 
 ## 2. Backend (server/)
 
-### Tech Stack
+### Backend Tech Stack
 
 | Technology | Purpose | Notes |
-|------------|---------|-------|
+| ----------- | --------- | ------- |
 | Node.js + Express | REST API | Modular controllers/routes with JWT middleware |
 | MongoDB Atlas + Mongoose | Data persistence | Card, User, and TradeRequest schemas |
 | JWT + bcrypt | Auth/token issuing & password hashing | Tokens stored in `localStorage` on the client |
 | dotenv | Env var management | `.env` holds `MONGO_URI`, `JWT_SECRET`, etc. |
 | Jest + Supertest | Integration tests | Validates auth + card CRUD routes |
 
-### Setup
+### Backend Setup
 
 ```bash
 cd cardvault/server
@@ -116,18 +116,18 @@ npm test      # Jest + Supertest
 
 ### API Routes
 
-| Method | Endpoint           | Description                     | Auth |
-|--------|--------------------|---------------------------------|:----:|
-| POST   | /api/auth/register | Register a new user             |  No  |
-| POST   | /api/auth/login    | Log in and receive JWT token    |  No  |
-| GET    | /api/cards         | Retrieve cards for current user | Yes  |
-| POST   | /api/cards         | Create a new card               | Yes  |
-| PATCH  | /api/cards/:id     | Update a specific card          | Yes  |
-| DELETE | /api/cards/:id     | Delete a specific card          | Yes  |
-| GET    | /api/cards/public  | Public listings (status “for trade”/“wanted”) | No |
-| POST   | /api/trades        | Create trade request            | Yes  |
-| GET    | /api/trades        | List incoming/outgoing trades   | Yes  |
-| PATCH  | /api/trades/:id    | Accept/decline + response message | Yes |
+| Method | Endpoint           | Description                                   | Auth |
+|--------|--------------------|---------------------------------              |:----:|
+| POST   | /api/auth/register | Register a new user                           |  No  |
+| POST   | /api/auth/login    | Log in and receive JWT token                  |  No  |
+| GET    | /api/cards         | Retrieve cards for current user               | Yes  |
+| POST   | /api/cards         | Create a new card                             | Yes  |
+| PATCH  | /api/cards/:id     | Update a specific card                        | Yes  |
+| DELETE | /api/cards/:id     | Delete a specific card                        | Yes  |
+| GET    | /api/cards/public  | Public listings (status “for trade”/“wanted”) | No   |
+| POST   | /api/trades        | Create trade request                          | Yes  |
+| GET    | /api/trades        | List incoming/outgoing trades                 | Yes  |
+| PATCH  | /api/trades/:id    | Accept/decline + response message             | Yes  |
 
 ### Code Style
 
@@ -138,7 +138,10 @@ npm test      # Jest + Supertest
 
 ## Collaboration & License
 
-Solo project but tracked with Git (feature commits, linted code). Big thanks to [tablesgenerator.com](https://www.tablesgenerator.com/markdown_tables#) for Markdown tables.
+<!-- ~~Solo project but~~ tracked with Git (feature commits, linted code). -->
+
+Current collaborators - Dom Andrewartha [(DiosOne)](https://github.com/DiosOne), Shane W. Miller [(TheOmegaFett)](https://github.com/TheOmegaFett).  
+Big thanks to [tablesgenerator.com](https://www.tablesgenerator.com/markdown_tables#) for Markdown tables.
 
 Code is released under the [MIT License](https://github.com/airbnb/javascript/blob/master/LICENSE.md).
 
