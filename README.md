@@ -20,7 +20,7 @@ The following sections split the documentation into two obvious parts so graders
 | Axios | HTTP client with interceptor for JWT headers | `src/api/api.js` centralizes baseURL |
 | React Context (Auth/Trade) | Shares user/token + trade notifications across app | Persists auth in `localStorage`, tracks `hasNewTrades` |
 | React Toastify | Accessible toasts for success/error messaging | Messages pulled from `src/utility/messages.js` |
-| ESLint (Airbnb base) + Prettier | Style enforcement | `npm run lint` keeps React code consistent |
+| ESLint v9 (flat config) | Style enforcement | `eslint .` with React hooks/refresh plugins |
 | Vitest + Testing Library | Component testing for cards/forms/trade inbox | One spec (`PublicTrades.test.jsx`) is currently skipped pending router fix |
 
 ### Frontend Setup
@@ -42,8 +42,18 @@ netsh interface portproxy add v4tov4 listenport=5000 listenaddress=0.0.0.0 conne
 
 - `npm run dev` - Vite dev server
 - `npm run build` / `npm run preview` - production bundle + local preview
-- `npm run lint` - ESLint (Airbnb config)
+- `npm run lint` - ESLint (flat config)
 - `npm run test` - Vitest suite
+- `npm run test:watch` - Vitest watch mode
+
+### Run From Repo Root
+
+```bash
+npm run dev -w server
+npm run dev -w client
+npm run lint            # runs both workspaces
+npm run test            # runs both workspaces
+```
 
 ### Testing Overview
 
@@ -103,7 +113,7 @@ Lint & test:
 
 ```bash
 npm run lint  # ESLint (flat config)
-npm test      # Jest + Supertest
+npm test      # Jest + Supertest (ESM via --experimental-vm-modules)
 ```
 
 `npm test` covers authentication (401s without tokens), card creation/update/delete, and `/api/cards` retrieval scoped to the logged-in user.
@@ -131,8 +141,8 @@ npm test      # Jest + Supertest
 
 ### Code Style
 
-- Both client and server follow the Airbnb JavaScript style guide via ESLint flat configs plus Prettier formatting.
-- Run `npm run lint` in each folder before committing to keep imports/hooks ordering consistent.
+- Both client and server use ESLint v9 flat configs.
+- Run `npm run lint -w server` and `npm run lint -w client` (or `npm run lint` from repo root) before committing.
 
 ---
 
