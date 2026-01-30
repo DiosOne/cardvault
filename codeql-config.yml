@@ -1,0 +1,11 @@
+name: 'CardVault CodeQL Config'
+queries:
+  - uses: security-and-quality
+paths:
+  - client
+  - server
+paths-ignore:
+  - '**/node_modules'
+  - '**/dist'
+  - '**/build'
+  
