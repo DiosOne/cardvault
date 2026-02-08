@@ -1,6 +1,6 @@
 import express from "express";
+import rateLimit from "express-rate-limit";
 import { verifyToken } from "../middleware/authMiddleware.js";
-import { readLimiter, writeLimiter } from "../middleware/rateLimit.js";
 import {
   getUserCards,
   addCard,
@@ -10,11 +10,19 @@ import {
 } from "../controllers/cardController.js";
 
 const router= express.Router();
+const baseLimiterOptions= {
+  windowMs: 60_000,
+  standardHeaders: true,
+  legacyHeaders: false,
+};
+const readLimiter= rateLimit({...baseLimiterOptions, max: 60});
+const writeLimiter= rateLimit({...baseLimiterOptions, max: 30});
+
 router.get("/public", readLimiter, getPublicCards);
-router.get("/", verifyToken, readLimiter, getUserCards);
-router.post("/", verifyToken, writeLimiter, addCard);
-router.patch("/:id", verifyToken, writeLimiter, updateCard);
-router.delete("/:id", verifyToken, writeLimiter, deleteCard);
+router.get("/", readLimiter, verifyToken, getUserCards);
+router.post("/", writeLimiter, verifyToken, addCard);
+router.patch("/:id", writeLimiter, verifyToken, updateCard);
+router.delete("/:id", writeLimiter, verifyToken, deleteCard);
 
 
 export default router;
