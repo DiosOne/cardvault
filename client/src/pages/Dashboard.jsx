@@ -41,7 +41,7 @@ export default function Dashboard() {
     try {
       const res= await API.post('/cards', cardData);
       const newCard= res.data.data || res.data;
-      setCards([...cards, newCard]);
+      setCards((prev) => [...prev, newCard]);
       notifySuccess('CARD_ADD_SUCCESS');
     } catch (err) {
       notifyError(err, 'CARD_ADD_ERROR');
@@ -53,7 +53,7 @@ export default function Dashboard() {
     if (!confirmAction('CARD_DELETE_CONFIRM')) return;
     try {
       await API.delete(`/cards/${id}`);
-      setCards(cards.filter((card) => card._id !== id));
+      setCards((prev) => prev.filter((card) => card._id !== id));
       notifySuccess('CARD_DELETE_SUCCESS');
     } catch (err) {
       notifyError(err, 'CARD_DELETE_ERROR');
@@ -64,7 +64,7 @@ export default function Dashboard() {
   const handleEditCard= (card) => setEditingCard(card);
 
   const handleSaveCard= (updatedCard) => {
-    setCards(cards.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
+    setCards((prev) => prev.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
     setEditingCard(null);
   };
 

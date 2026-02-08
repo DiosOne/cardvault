@@ -4,7 +4,7 @@ import {MESSAGES} from "../utility/messages.js";
 
 //get all cards for the logged in user
 export const getUserCards= asyncHandler(async (req, res) => {
-    const cards= await Card.find({userId: req.user.id});
+    const cards= await Card.find({userId: req.user.id}).lean();
     res.status(200).json({
         success: true,
         data: cards,
@@ -14,7 +14,8 @@ export const getUserCards= asyncHandler(async (req, res) => {
 //get all public trade cards
 export const getPublicCards= asyncHandler(async (req,res) => {
     const cards= await Card.find({status: {$in: ["for trade", "wanted"]}})
-        .populate("userId", "username email");
+        .populate("userId", "username email")
+        .lean();
 
     if (!cards || cards.length === 0) {
         return res.status(404).json({

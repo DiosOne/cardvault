@@ -18,14 +18,13 @@ const getStoredSeenAt= () => {
 
 export const TradeProvider= ({ children }) => {
   const {user} = useContext(AuthContext);
+  const userId= getEntityId(user);
   const [trades, setTrades] = useState([]);
   const [hasNewTrades, setHasNewTrades] = useState(false);
   const lastSeenRef= useRef(getStoredSeenAt());
 
   //fetch trades for user
   const fetchTrades= useCallback(async () => {
-    const userId= getEntityId(user);
-
     if (!userId) {
       setTrades([]);
       setHasNewTrades(false);
@@ -37,20 +36,26 @@ export const TradeProvider= ({ children }) => {
       const data= res.data.data || res.data;
       setTrades(data);
 
-      //check for new or pending trades
-      const pending= data.filter(
-        (trade) => getEntityId(trade.toUser) === userId && trade.status === 'pending',
-      );
-      const hasFreshPending= pending.some((trade) => {
-        const created= trade.createdAt ? new Date(trade.createdAt).getTime() : Date.now();
-        return created > lastSeenRef.current;
-      });
+      //check for new or pending trades in a single pass
+      const lastSeen= lastSeenRef.current;
+      const fallbackCreated= Date.now();
+      let hasFreshPending= false;
+      for (const trade of data) {
+        if (getEntityId(trade.toUser) !== userId || trade.status !== 'pending') {
+          continue;
+        }
+        const created= trade.createdAt ? new Date(trade.createdAt).getTime() : fallbackCreated;
+        if (created > lastSeen) {
+          hasFreshPending= true;
+          break;
+        }
+      }
       setHasNewTrades(hasFreshPending);
     } catch (err) {
       console.error('Failed to fetch trades', err);
       notifyError(err, 'TRADE_FETCH_ERROR');
     }
-  }, [user]);
+  }, [userId]);
 
   //fetch on login
   useEffect(() => {
