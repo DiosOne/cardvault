@@ -51,11 +51,8 @@ export default function PublicTrades() {
       'Add a note for your trade request (optional):',
       '',
     );
-    const message = messageInput?.trim() || '';
-    if (!message) {
-      notifyError(getMessage('MESSAGE_REQUIRED'));
-      return;
-    }
+    if (messageInput === null) return;
+    const message = messageInput.trim();
 
     try {
       await API.post('/trades', {

@@ -1,4 +1,5 @@
 import express from "express";
+import rateLimit from "express-rate-limit";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import dotenv from "dotenv";
@@ -6,9 +7,15 @@ import { MESSAGES } from "../utility/messages.js";
 
 dotenv.config();
 const router= express.Router();
+const authLimiter= rateLimit({
+    windowMs: 60_000,
+    max: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
 
 //register
-router.post('/register', async (req, res) => {
+router.post('/register', authLimiter, async (req, res) => {
     try {
         const {username, email, password} = req.body;
 
@@ -34,7 +41,7 @@ router.post('/register', async (req, res) => {
 });
 
 //login
-router.post("/login", async (req,res) => {
+router.post("/login", authLimiter, async (req,res) => {
     try {
         const {email, password}= req.body;
 
