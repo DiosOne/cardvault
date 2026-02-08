@@ -1,11 +1,109 @@
 # CardVault – Full Stack MERN Project
 
+![License: MIT](https://img.shields.io/badge/License-MIT-green) ![Stack: MERN](https://img.shields.io/badge/Stack-MERN-0ea5e9) ![Frontend: React 19](https://img.shields.io/badge/Frontend-React%2019-61dafb) ![Backend: Express](https://img.shields.io/badge/Backend-Express-111827) ![Tests: Jest + Vitest](https://img.shields.io/badge/Tests-Jest%20%2B%20Vitest-6366f1)
+
 CardVault is a training assignment that ships both halves of a MERN stack:
 
 - **Frontend (client/)** - React 19 + Vite SPA with authenticated dashboard, shared card panel components, public trade listings, trade inbox messaging (accept/decline + reply notes), responsive CSS, and Vitest/Testing Library coverage.
 - **Backend (server/)** - Node/Express API with JWT auth, MongoDB Atlas via Mongoose, modular controllers/middleware, global error handling, and Jest + Supertest integration tests.
 
-The following sections split the documentation into two obvious parts so graders can find everything in one file.
+The sections below start with quick grading aids, then split the detailed documentation into two obvious parts so graders can find everything in one file.
+
+---
+
+## Quick Start
+
+Prerequisites:
+- Node.js (LTS recommended)
+- npm
+- MongoDB Atlas connection string
+
+```bash
+# from repo root
+cd server && npm install
+cd ../client && npm install
+
+# terminal 1
+cd server && npm run dev
+
+# terminal 2
+cd client && npm run dev
+```
+
+---
+
+## Live Demo
+
+Live demo URL: TODO (add deployed link)
+
+Local demo:
+- Frontend: http://localhost:5173
+- API: http://localhost:5000
+
+---
+
+## Screenshots
+
+Add screenshots in `docs/screenshots/` and update the links below.
+
+![Dashboard](docs/screenshots/dashboard.png)
+![Trade Inbox](docs/screenshots/trade-inbox.png)
+![Public Trades](docs/screenshots/public-trades.png)
+
+---
+
+## Project Structure
+
+```text
+cardvault/
+├─ client/
+│  ├─ src/
+│  ├─ public/
+│  └─ package.json
+├─ server/
+│  ├─ controllers/
+│  ├─ middleware/
+│  ├─ models/
+│  ├─ routes/
+│  ├─ tests/
+│  └─ package.json
+├─ README.md
+└─ license.md
+```
+
+---
+
+## Sample API Usage
+
+Register:
+```bash
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"demo","email":"demo@example.com","password":"password123"}'
+```
+
+Login:
+```bash
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"demo@example.com","password":"password123"}'
+```
+
+Create a card (replace TOKEN):
+```bash
+curl -X POST http://localhost:5000/api/cards \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Charizard","type":"Fire","rarity":"Rare","value":350,"status":"for trade"}'
+```
+
+Create a trade request (replace TOKEN and CARD_ID):
+```bash
+curl -X POST http://localhost:5000/api/trades \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"cardId":"CARD_ID","note":"Interested in trading. Let me know!"}'
+```
 
 ---
 
@@ -145,6 +243,32 @@ npm test      # Jest + Supertest (ESM via --experimental-vm-modules)
 - Run `npm run lint -w server` and `npm run lint -w client` (or `npm run lint` from repo root) before committing.
 
 ---
+
+## Known Issues / TODO
+
+- `client/src/__tests__/PublicTrades.test.jsx` is skipped pending a router-context fix.
+- Add deployment URL to the Live Demo section.
+- Replace placeholder screenshots with real UI captures.
+
+---
+
+## Testing & Coverage
+
+Frontend:
+```bash
+cd client
+npm run test
+```
+
+Backend:
+```bash
+cd server
+npm test
+```
+
+Notes:
+- Frontend tests include cards/forms/trade inbox; one public trades spec is currently skipped.
+- Backend tests validate auth and card CRUD plus trade routes.
 
 ## Collaboration & License
 
