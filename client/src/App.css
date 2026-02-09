@@ -134,6 +134,141 @@ body.darkmode .footer{
   justify-items: center;
 }
 
+/* Card Filters and Columns */
+.card-collection{
+  width: 100%;
+}
+
+.card-filters{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-end;
+  margin-top: 1rem;
+}
+
+.card-filter{
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.card-filter label{
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-filter input,
+.card-filter select{
+  width: 180px;
+}
+
+.card-columns{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.card-column{
+  border: 1px solid rgba(34,34,34,0.1);
+  border-radius: 12px;
+  padding: 0.75rem;
+  background-color: rgba(74,144,226,0.04);
+}
+
+body.darkmode .card-column{
+  border-color: rgba(245,245,245,0.12);
+  background-color: rgba(123,97,255,0.08);
+}
+
+.card-column__header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-column__header h4{
+  margin: 0;
+}
+
+.card-column__count{
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(34,34,34,0.1);
+  color: var(--text);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+}
+
+body.darkmode .card-column__count{
+  background: rgba(245,245,245,0.15);
+}
+
+.card-column__list{
+  display: grid;
+  gap: 1rem;
+  justify-items: stretch;
+}
+
+.card-column__empty{
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.card-item__header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.card-status-pill{
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.card-status-pill--owned{
+  background: rgba(74,144,226,0.15);
+  color: #2b6cb0;
+}
+
+.card-status-pill--trade{
+  background: rgba(46,125,50,0.18);
+  color: #1b5e20;
+}
+
+.card-status-pill--wanted{
+  background: rgba(255,152,0,0.2);
+  color: #a15c00;
+}
+
+body.darkmode .card-status-pill--owned{
+  background: rgba(144,202,249,0.2);
+  color: #90caf9;
+}
+
+body.darkmode .card-status-pill--trade{
+  background: rgba(129,199,132,0.2);
+  color: #a5d6a7;
+}
+
+body.darkmode .card-status-pill--wanted{
+  background: rgba(255,204,128,0.2);
+  color: #ffcc80;
+}
+
 /* Card Styling */
 .card{
   background-color: var(--card-bg);
@@ -145,10 +280,24 @@ body.darkmode .footer{
   margin: 0 auto;
 }
 
+.card-column__list .card{
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.card-column__list .card img{
+  height: 135px;
+}
+
 .card-actions{
   display: flex;
   gap: 0.75rem;
   margin-top: 1rem;
+}
+
+.card-collection .card-actions{
+  flex-wrap: wrap;
 }
 
 .card-actions .card-btn{
@@ -162,6 +311,15 @@ body.darkmode .footer{
 
 .card-btn.delete{
   background-color: var(--danger);
+}
+
+.card-btn.cancel{
+  background-color: #6b7280;
+}
+
+body.darkmode .card-btn.cancel{
+  background-color: #9ca3af;
+  color: #1e1e2f;
 }
 
 .card-hover{
@@ -1144,6 +1302,12 @@ body.darkmode .trade-actions textarea{
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
+@media (max-width: 960px) {
+  .card-columns{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 640px) {
   .trade-inbox__header{
     flex-direction: column;
@@ -1162,6 +1326,15 @@ body.darkmode .trade-actions textarea{
   .trade-meta{
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .card-columns{
+    grid-template-columns: 1fr;
+  }
+
+  .card-filter input,
+  .card-filter select{
+    width: 100%;
   }
 }
 
