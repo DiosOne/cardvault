@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import { MESSAGES } from "../utility/messages.js";
+import { expressjwt } from "express-jwt";
 
 /**
  * Verify JWT from the Authorization header and attach user payload to the request.
@@ -8,39 +8,42 @@ import { MESSAGES } from "../utility/messages.js";
  * @param {import("express").NextFunction} next
  * @returns {void}
  */
-export const verifyToken= (req, res, next) => {
-    try {
+const jwtMiddleware= expressjwt({
+    secret: process.env.JWT_SECRET,
+    algorithms: ["HS256"],
+    requestProperty: "user",
+    getToken: (req) => {
         const authHeader= req.headers.authorization;
-        if (typeof authHeader !== "string") {
-            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
-        }
+        if (typeof authHeader !== "string") return null;
 
         const trimmedHeader= authHeader.trim();
-        if (trimmedHeader.length > 4096) {
-            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
-        }
+        if (trimmedHeader.length > 4096) return null;
 
         const spaceIndex= trimmedHeader.indexOf(" ");
-        if (spaceIndex === -1) {
-            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
-        }
+        if (spaceIndex === -1) return null;
 
         const scheme= trimmedHeader.slice(0, spaceIndex).toLowerCase();
-        if (scheme !== "bearer") {
-            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
-        }
+        if (scheme !== "bearer") return null;
 
-        //Split "Bearer <token>" to isolate the JWT payload.
         const token= trimmedHeader.slice(spaceIndex + 1).trim();
-        if (!token) {
+        return token || null;
+    },
+});
+
+export const verifyToken= (req, res, next) => {
+    jwtMiddleware(req, res, (err) => {
+        if (!err) {
+            return next();
+        }
+
+        if (err.code === "credentials_required") {
             return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
         }
-        const decoded= jwt.verify(token, process.env.JWT_SECRET);
 
-        req.user= decoded; //available as req.user.id
-        next();
-    } catch (err) {
-        console.error("JWT verification failed:", err.message);
-        res.status(403).json({message: MESSAGES.TOKEN_INVALID});
-    }
+        if (err.code === "invalid_token") {
+            return res.status(403).json({message: MESSAGES.TOKEN_INVALID});
+        }
+
+        return next(err);
+    });
 };

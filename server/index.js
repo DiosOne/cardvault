@@ -12,24 +12,16 @@ const app= express();
 app.use(cors());
 app.use(express.json());
 /**
- * Normalize user-provided values to avoid log injection.
- * @param {unknown} value
- * @returns {string}
- */
-const sanitizeForLog= (value) =>
-  String(value ?? '')
-    .replace(/[\r\n\t]/g, ' ')
-    .slice(0, 500);
-
-/**
  * Log inbound HTTP requests with basic routing metadata.
  * @param {import("express").Request} req
  * @param {import("express").Response} res
  * @param {import("express").NextFunction} next
  * @returns {void}
  */
+const allowedMethods= new Set(["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"]);
+
 const requestLogger= (req, res, next) => {
-  const method= sanitizeForLog(req.method);
+  const method= allowedMethods.has(req.method) ? req.method : "UNKNOWN";
   console.log(`[${new Date().toISOString()}] ${method}`);
   next();
 };
