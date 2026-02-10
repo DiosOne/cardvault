@@ -101,7 +101,7 @@ export default function CardList({
       return true;
     });
 
-  const filteredCards = useMemo(computeFilteredCards, [cards, filters]);
+  const filteredCards = useMemo(() => computeFilteredCards(), [cards, filters]);
 
   /**
    * Group filtered cards by status for column rendering.
@@ -116,7 +116,7 @@ export default function CardList({
     return groups;
   };
 
-  const groupedCards = useMemo(computeGroupedCards, [filteredCards]);
+  const groupedCards = useMemo(() => computeGroupedCards(), [filteredCards]);
 
   if (!cards.length)
     return (

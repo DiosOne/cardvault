@@ -156,37 +156,37 @@ export default function PublicTrades() {
               const statusMeta = STATUS_META[statusKey];
               return (
                 <li key={card._id}>
-                <article className='card' aria-label={`Card: ${card.name}`}>
-                  <img
-                    src={`https://picsum.photos/200/300?grayscale&random=${index + 1}`}
-                    alt={`${card.name} placeholder artwork`}
-                    width='200'
-                    height='300'
-                  />
-                  <header className='card-item__header'>
-                    <h3>{card.name}</h3>
-                    <span className={`card-status-pill card-status-pill--${statusMeta.className}`}>
-                      {statusMeta.pill}
-                    </span>
-                  </header>
-                  <p>
-                    <strong>Rarity:</strong> {card.rarity} <br />
-                    <strong>Type:</strong> {card.type} <br />
-                    <strong>Value:</strong> {card.value}
-                  </p>
-                  <small>Listed by: {card.userId?.username || 'Unknown user'}</small>
-                  <footer className='card-actions'>
-                    <button
-                      type='button'
-                      onClick={() => handleRequestTrade(card)}
-                      aria-label={`Request trade for ${card.name}`}
-                      disabled={!userId}
-                    >
-                      {userId ? 'Request Trade' : 'Sign in to trade'}
-                    </button>
-                  </footer>
-                </article>
-              </li>
+                  <article className='card' aria-label={`Card: ${card.name}`}>
+                    <img
+                      src={`https://picsum.photos/200/300?grayscale&random=${index + 1}`}
+                      alt={`${card.name} placeholder artwork`}
+                      width='200'
+                      height='300'
+                    />
+                    <header className='card-item__header'>
+                      <h3>{card.name}</h3>
+                      <span className={`card-status-pill card-status-pill--${statusMeta.className}`}>
+                        {statusMeta.pill}
+                      </span>
+                    </header>
+                    <p>
+                      <strong>Rarity:</strong> {card.rarity} <br />
+                      <strong>Type:</strong> {card.type} <br />
+                      <strong>Value:</strong> {card.value}
+                    </p>
+                    <small>Listed by: {card.userId?.username || 'Unknown user'}</small>
+                    <footer className='card-actions'>
+                      <button
+                        type='button'
+                        onClick={() => handleRequestTrade(card)}
+                        aria-label={`Request trade for ${card.name}`}
+                        disabled={!userId}
+                      >
+                        {userId ? 'Request Trade' : 'Sign in to trade'}
+                      </button>
+                    </footer>
+                  </article>
+                </li>
               );
             })}
           </ul>
