@@ -5,6 +5,21 @@ import {MESSAGES} from "../utility/messages.js";
 
 const isValidObjectId= (value) => mongoose.Types.ObjectId.isValid(value);
 
+const normalizeString= (value) =>
+    typeof value === "string" ? value.trim() : "";
+
+const normalizeOptionalString= (value) => {
+    if (value === undefined || value === null) return undefined;
+    if (typeof value !== "string") return undefined;
+    return value.trim();
+};
+
+const normalizeNumber= (value) => {
+    if (value === undefined || value === null || value === "") return undefined;
+    const parsed= Number(value);
+    return Number.isFinite(parsed) ? parsed : undefined;
+};
+
 //get all cards for the logged in user
 /**
  * Return all cards owned by the authenticated user.
@@ -53,9 +68,16 @@ export const getPublicCards= asyncHandler(async (req,res) => {
  */
 export const addCard= asyncHandler(async (req, res) => {
     const {name, type, rarity, value, description, status} = req.body;
+    const normalizedName= normalizeString(name);
 
     //validation
-    if (!name) {
+    if (!normalizedName) {
+        res.status(400);
+        throw new Error(MESSAGES.MISSING_DATA);
+    }
+
+    const normalizedValue= normalizeNumber(value);
+    if (value !== undefined && normalizedValue === undefined) {
         res.status(400);
         throw new Error(MESSAGES.MISSING_DATA);
     }
@@ -65,11 +87,11 @@ export const addCard= asyncHandler(async (req, res) => {
     const cardStatus= allowedStatuses.includes(status) ? status: "owned";
 
     const newCard= new Card({
-        name,
-        type,
-        rarity,
-        value,
-        description,
+        name: normalizedName,
+        type: normalizeOptionalString(type),
+        rarity: normalizeOptionalString(rarity),
+        value: normalizedValue,
+        description: normalizeOptionalString(description),
         status: cardStatus,
         userId: req.user.id,
     });
@@ -97,9 +119,68 @@ export const updateCard= asyncHandler(async (req, res) => {
         throw error;
     }
 
+    const updates= {};
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "name")) {
+        const normalizedName= normalizeString(req.body.name);
+        if (!normalizedName) {
+            const error= new Error(MESSAGES.MISSING_DATA);
+            error.statusCode= 400;
+            throw error;
+        }
+        updates.name= normalizedName;
+    }
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "type")) {
+        const normalizedType= normalizeOptionalString(req.body.type);
+        if (normalizedType !== undefined) {
+            updates.type= normalizedType;
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "rarity")) {
+        const normalizedRarity= normalizeOptionalString(req.body.rarity);
+        if (normalizedRarity !== undefined) {
+            updates.rarity= normalizedRarity;
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "value")) {
+        const normalizedValue= normalizeNumber(req.body.value);
+        if (normalizedValue === undefined) {
+            const error= new Error(MESSAGES.MISSING_DATA);
+            error.statusCode= 400;
+            throw error;
+        }
+        updates.value= normalizedValue;
+    }
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "description")) {
+        const normalizedDescription= normalizeOptionalString(req.body.description);
+        if (normalizedDescription !== undefined) {
+            updates.description= normalizedDescription;
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(req.body, "status")) {
+        const allowedStatuses= ["owned", "for trade", "wanted"];
+        if (!allowedStatuses.includes(req.body.status)) {
+            const error= new Error(MESSAGES.MISSING_DATA);
+            error.statusCode= 400;
+            throw error;
+        }
+        updates.status= req.body.status;
+    }
+
+    if (!Object.keys(updates).length) {
+        const error= new Error(MESSAGES.MISSING_DATA);
+        error.statusCode= 400;
+        throw error;
+    }
+
     const updatedCard= await Card.findOneAndUpdate(
         {_id: cardId, userId: req.user.id},
-        req.body,
+        updates,
         {new: true, runValidators: true}
     );
 
