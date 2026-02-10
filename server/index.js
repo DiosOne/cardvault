@@ -12,6 +12,16 @@ const app= express();
 app.use(cors());
 app.use(express.json());
 /**
+ * Normalize user-provided values to avoid log injection.
+ * @param {unknown} value
+ * @returns {string}
+ */
+const sanitizeForLog= (value) =>
+  String(value ?? '')
+    .replace(/[\r\n\t]/g, ' ')
+    .slice(0, 500);
+
+/**
  * Log inbound HTTP requests with basic routing metadata.
  * @param {import("express").Request} req
  * @param {import("express").Response} res
@@ -19,7 +29,11 @@ app.use(express.json());
  * @returns {void}
  */
 const requestLogger= (req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl} Host: ${req.headers.host} Origin: ${req.headers.origin}`);
+  const method= sanitizeForLog(req.method);
+  const url= sanitizeForLog(req.originalUrl);
+  const host= sanitizeForLog(req.headers.host);
+  const origin= sanitizeForLog(req.headers.origin);
+  console.log(`[${new Date().toISOString()}] ${method} ${url} Host: ${host} Origin: ${origin}`);
   next();
 };
 

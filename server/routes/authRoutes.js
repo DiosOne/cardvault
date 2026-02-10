@@ -15,6 +15,22 @@ const authLimiter= rateLimit({
 });
 
 /**
+ * Normalize a string input by trimming whitespace.
+ * @param {unknown} value
+ * @returns {string}
+ */
+const normalizeString= (value) =>
+    typeof value === "string" ? value.trim() : "";
+
+/**
+ * Normalize email input to lowercase and trimmed form.
+ * @param {unknown} value
+ * @returns {string}
+ */
+const normalizeEmail= (value) =>
+    typeof value === "string" ? value.toLowerCase().trim() : "";
+
+/**
  * Handle user registration requests.
  * @param {import("express").Request} req
  * @param {import("express").Response} res
@@ -23,19 +39,25 @@ const authLimiter= rateLimit({
 const handleRegister= async (req, res) => {
     try {
         const {username, email, password} = req.body;
+        const normalizedUsername= normalizeString(username);
+        const normalizedEmail= normalizeEmail(email);
 
         //basic validation
-        if (!username || !email || !password) {
+        if (!normalizedUsername || !normalizedEmail || typeof password !== "string" || !password) {
           return res.status(400).json({message: MESSAGES.MISSING_DATA});
         }
 
         //check for user
-        const existingUser= await User.findOne({email});
+        const existingUser= await User.findOne({email: normalizedEmail});
         if (existingUser) {
             return res.status(400).json({message: "Email already registered."});
         }
         //create new
-        const user= new User({username, email, password});
+        const user= new User({
+            username: normalizedUsername,
+            email: normalizedEmail,
+            password,
+        });
         await user.save();
 
         res.status(201).json({message: MESSAGES.REGISTER_SUCCESS});
@@ -57,14 +79,15 @@ router.post('/register', authLimiter, handleRegister);
 const handleLogin= async (req,res) => {
     try {
         const {email, password}= req.body;
+        const normalizedEmail= normalizeEmail(email);
 
         //basic validation
-        if (!email || !password) {
+        if (!normalizedEmail || typeof password !== "string" || !password) {
             return res.status(400).json({message: MESSAGES.MISSING_DATA});
         }
 
         //check user exists
-        const user= await User.findOne({email});
+        const user= await User.findOne({email: normalizedEmail});
         if (!user) {
             return res.status(400).json({message: MESSAGES.INVALID_LOGIN});
         }
