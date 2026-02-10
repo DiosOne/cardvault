@@ -41,7 +41,7 @@ export default function Dashboard() {
     try {
       const res= await API.post('/cards', cardData);
       const newCard= res.data.data || res.data;
-      setCards([...cards, newCard]);
+      setCards((prev) => [...prev, newCard]);
       notifySuccess('CARD_ADD_SUCCESS');
     } catch (err) {
       notifyError(err, 'CARD_ADD_ERROR');
@@ -53,10 +53,50 @@ export default function Dashboard() {
     if (!confirmAction('CARD_DELETE_CONFIRM')) return;
     try {
       await API.delete(`/cards/${id}`);
-      setCards(cards.filter((card) => card._id !== id));
+      setCards((prev) => prev.filter((card) => card._id !== id));
       notifySuccess('CARD_DELETE_SUCCESS');
     } catch (err) {
       notifyError(err, 'CARD_DELETE_ERROR');
+    }
+  };
+
+  const handleMoveToTrade = async (card) => {
+    try {
+      const res= await API.patch(`/cards/${card._id}`, {status: 'for trade'});
+      const updatedCard= res.data.data || res.data;
+      setCards((prev) => prev.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
+      notifySuccess('CARD_UPDATE_SUCCESS');
+    } catch (err) {
+      notifyError(err, 'CARD_UPDATE_ERROR');
+    }
+  };
+
+  const handleCancelTrade = async (card) => {
+    try {
+      const res= await API.patch(`/cards/${card._id}`, {status: 'owned'});
+      const updatedCard= res.data.data || res.data;
+      setCards((prev) => prev.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
+      notifySuccess('CARD_UPDATE_SUCCESS');
+    } catch (err) {
+      notifyError(err, 'CARD_UPDATE_ERROR');
+    }
+  };
+
+  const handleAddWanted = async (card) => {
+    try {
+      const res= await API.post('/cards', {
+        name: card.name,
+        type: card.type,
+        rarity: card.rarity,
+        value: card.value,
+        description: card.description,
+        status: 'wanted',
+      });
+      const newCard= res.data.data || res.data;
+      setCards((prev) => [...prev, newCard]);
+      notifySuccess('CARD_ADD_SUCCESS');
+    } catch (err) {
+      notifyError(err, 'CARD_ADD_ERROR');
     }
   };
 
@@ -64,7 +104,7 @@ export default function Dashboard() {
   const handleEditCard= (card) => setEditingCard(card);
 
   const handleSaveCard= (updatedCard) => {
-    setCards(cards.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
+    setCards((prev) => prev.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
     setEditingCard(null);
   };
 
@@ -116,6 +156,9 @@ export default function Dashboard() {
           cards={cards}
           onEdit={handleEditCard}
           onDelete={handleDeleteCard}
+          onMoveToTrade={handleMoveToTrade}
+          onCancelTrade={handleCancelTrade}
+          onAddWanted={handleAddWanted}
         />
       </CardPanel>
     </main>

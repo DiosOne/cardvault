@@ -18,7 +18,9 @@ export function AuthProvider({ children }) {
   const logout= () => {
     setUser(null);
     setToken(null);
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('tradeInboxSeenAt');
   };
 
   return (

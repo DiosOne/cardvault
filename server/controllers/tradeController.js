@@ -32,7 +32,8 @@ export const getTrades= asyncHandler(async (req,res) => {
     })
         .populate("fromUser", "username email")
         .populate("toUser", "username email")
-        .populate("cardId", "name");
+        .populate("cardId", "name")
+        .lean();
     
     res.json({
         success: true,
