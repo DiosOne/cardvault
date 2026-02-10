@@ -674,7 +674,7 @@ body.darkmode .trade-bell{
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
@@ -896,10 +896,13 @@ body.darkmode .trade-bell{
     flex-direction: column;
   }
 
-  .trade-list,
-  .public-trades ul {
+  .trade-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .public-trades ul {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
   }
 
   .trade-inbox__header{
@@ -962,10 +965,15 @@ body.darkmode .trade-bell{
     margin: 0 auto;
   }
 
-  .public-trades ul,
   .trade-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .public-trades ul {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
     gap: 1.5rem;
     width: 100%;
   }
@@ -1042,10 +1050,14 @@ body.darkmode .trade-bell{
     gap: 3rem;
   }
     
-  .public-trades ul,
   .trade-list {    
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .public-trades ul {    
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
     gap: 2rem;
   }
 
@@ -1109,10 +1121,14 @@ body.darkmode .trade-bell{
     gap: 2rem;
   }
 
-  .public-trades ul,
   .trade-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.25rem;
+  }
+
+  .public-trades ul {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
     gap: 2.25rem;
   }
 
