@@ -87,36 +87,27 @@ export default function CardList({
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  /**
-   * Apply active filters to the full card list.
-   * @returns {Array<object>}
-   */
-  const computeFilteredCards = () =>
-    cards.filter((card) => {
-      if (!matchesText(card.name, filters.name)) return false;
-      if (!matchesText(card.type, filters.type)) return false;
-      if (!matchesText(card.rarity, filters.rarity)) return false;
-      if (!matchesMinValue(card.value, filters.value)) return false;
-      if (filters.status !== 'all' && normalizeStatus(card.status) !== filters.status) return false;
-      return true;
-    });
+  const filteredCards = useMemo(
+    () =>
+      cards.filter((card) => {
+        if (!matchesText(card.name, filters.name)) return false;
+        if (!matchesText(card.type, filters.type)) return false;
+        if (!matchesText(card.rarity, filters.rarity)) return false;
+        if (!matchesMinValue(card.value, filters.value)) return false;
+        if (filters.status !== 'all' && normalizeStatus(card.status) !== filters.status) return false;
+        return true;
+      }),
+    [cards, filters],
+  );
 
-  const filteredCards = useMemo(() => computeFilteredCards(), [cards, filters]);
-
-  /**
-   * Group filtered cards by status for column rendering.
-   * @returns {{ owned: Array<object>, 'for trade': Array<object>, wanted: Array<object> }}
-   */
-  const computeGroupedCards = () => {
+  const groupedCards = useMemo(() => {
     const groups = { owned: [], 'for trade': [], wanted: [] };
     filteredCards.forEach((card) => {
       const statusKey = normalizeStatus(card.status);
       (groups[statusKey] || groups.owned).push(card);
     });
     return groups;
-  };
-
-  const groupedCards = useMemo(() => computeGroupedCards(), [filteredCards]);
+  }, [filteredCards]);
 
   if (!cards.length)
     return (
