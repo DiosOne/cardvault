@@ -6,25 +6,53 @@ import app from "../index.js";
 let token;  //define globaly
 let createdCardId; //track card id
 
-beforeAll(() => {
+/**
+ * Create a JWT for authenticated test requests.
+ * @returns {void}
+ */
+const setAuthToken= () => {
     token= jwt.sign({id: new mongoose.Types.ObjectId() }, process.env.JWT_SECRET, {
         expiresIn: "1h",
     });
-});
+};
 
-afterAll(async () => {
+beforeAll(setAuthToken);
+
+/**
+ * Close the mongoose connection after the test suite completes.
+ * @returns {Promise<void>}
+ */
+const closeConnection= async () => {
     await mongoose.connection.close();
-});
+};
 
-describe("Card API", () => {
-    it("should return 401 when no token is provided", async () => {
-        const res= await request(app).get("/api/cards");
-        expect(res.statusCode).toBe(401);
-        expect(res.body.message).toMatch(/token/i);
-    });
-});
+afterAll(closeConnection);
 
-it("should create a card and then update it", async () => {
+/**
+ * Verify unauthenticated access is rejected.
+ * @returns {Promise<void>}
+ */
+const shouldReturn401WhenNoTokenProvided= async () => {
+    const res= await request(app).get("/api/cards");
+    expect(res.statusCode).toBe(401);
+    expect(res.body.message).toMatch(/token/i);
+};
+
+/**
+ * Card API test suite setup.
+ * @returns {void}
+ */
+const cardApiSuite= () => {
+    it("should return 401 when no token is provided", shouldReturn401WhenNoTokenProvided);
+};
+
+describe("Card API", cardApiSuite);
+
+/**
+ * Create a card and then update a field to verify write paths.
+ * @returns {Promise<void>}
+ */
+const shouldCreateAndUpdateCard= async () => {
     const newCard= {
         name: "Red-Eyes Black Dragon",
         type: "Monster",
@@ -50,22 +78,36 @@ it("should create a card and then update it", async () => {
 
     expect(updatedRes.statusCode).toBe(200);
     expect(updatedRes.body.data.value).toBe(4200);
-});
+};
 
-it("should delete a card by ID", async () => {
+it("should create a card and then update it", shouldCreateAndUpdateCard);
+
+/**
+ * Delete the previously created card by ID.
+ * @returns {Promise<void>}
+ */
+const shouldDeleteCardById= async () => {
     const res= await request(app)
         .delete(`/api/cards/${createdCardId}`)
         .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("message", "Card deleted successfully");
-});
+};
 
-it("should fetch all cards for authorised user", async () => {
+it("should delete a card by ID", shouldDeleteCardById);
+
+/**
+ * Fetch all cards for the authorized user.
+ * @returns {Promise<void>}
+ */
+const shouldFetchCardsForAuthorizedUser= async () => {
     const res= await request(app)
         .get("/api/cards")
         .set("Authorization", `Bearer ${token}`);
 
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body.data)).toBe(true);
-});
+};
+
+it("should fetch all cards for authorised user", shouldFetchCardsForAuthorizedUser);

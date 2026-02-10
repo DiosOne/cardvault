@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 
+/**
+ * Schema representing a trade request between two users.
+ * @type {mongoose.Schema}
+ */
 const tradeRequestSchema= new mongoose.Schema(
     {
         fromUser: {
@@ -28,5 +32,9 @@ const tradeRequestSchema= new mongoose.Schema(
     {timestamps: true}
 );
 
+/**
+ * TradeRequest model for trade workflow records.
+ * @type {mongoose.Model}
+ */
 const TradeRequest= mongoose.model("TradeRequest", tradeRequestSchema);
 export default TradeRequest;

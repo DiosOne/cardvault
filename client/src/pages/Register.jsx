@@ -5,6 +5,10 @@ import { resolveApiError } from '../utility/messages';
 import { notifySuccess, notifyError } from '../utility/notifications';
 import AuthLayout from '../components/AuthLayout';
 
+/**
+ * Registration page for new users.
+ * @returns {JSX.Element}
+ */
 export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -12,6 +16,11 @@ export default function Register() {
   const [error, setError] = useState('') ;
   const navigate= useNavigate();
 
+  /**
+   * Submit registration data and redirect to login on success.
+   * @param {import('react').FormEvent<HTMLFormElement>} e
+   * @returns {Promise<void>}
+   */
   const handleSubmit= async (e) => {
     e.preventDefault();
     try {

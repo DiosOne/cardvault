@@ -10,6 +10,10 @@ import { AuthContext } from './context/AuthContext';
 import PublicTrades from './pages/PublicTrades';
 import TradeInbox from './pages/TradeInbox';
 
+/**
+ * Configure the primary application routes and layout.
+ * @returns {JSX.Element}
+ */
 export default function App() {
   const {user}= useContext(AuthContext);
 

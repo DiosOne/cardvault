@@ -6,6 +6,10 @@ import { TradeContext } from '../context/TradeContext';
 import { getMessage, resolveApiError } from '../utility/messages';
 import { notifySuccess, notifyError } from '../utility/notifications';
 
+/**
+ * Public trade listings page with request flow.
+ * @returns {JSX.Element}
+ */
 export default function PublicTrades() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,27 +18,42 @@ export default function PublicTrades() {
   const { fetchTrades } = useContext(TradeContext);
   const userId = user?._id || user?.id;
 
-  useEffect(() => {
-    const fetchPublicCards = async () => {
-      try {
-        const res = await API.get('/cards/public');
-        setCards(res.data.data || []);
-      } catch (err) {
-        if (err.response?.status === 404) {
-          setCards([]);
-        } else {
-          const friendly= resolveApiError(err, 'PUBLIC_TRADES_ERROR');
-          setError(friendly);
-          notifyError(err, 'PUBLIC_TRADES_ERROR');
-        }
-      } finally {
-        setLoading(false);
+  /**
+   * Fetch public trade cards for the listing view.
+   * @returns {Promise<void>}
+   */
+  const fetchPublicCards = async () => {
+    try {
+      const res = await API.get('/cards/public');
+      setCards(res.data.data || []);
+    } catch (err) {
+      if (err.response?.status === 404) {
+        setCards([]);
+      } else {
+        const friendly= resolveApiError(err, 'PUBLIC_TRADES_ERROR');
+        setError(friendly);
+        notifyError(err, 'PUBLIC_TRADES_ERROR');
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  /**
+   * Trigger fetch of public cards on mount.
+   * @returns {void}
+   */
+  const handleFetchPublicCardsEffect= () => {
     fetchPublicCards();
-  }, []);
+  };
 
+  useEffect(handleFetchPublicCardsEffect, []);
+
+  /**
+   * Submit a trade request for a selected card.
+   * @param {{ _id: string, userId?: { _id?: string, id?: string }|string, name?: string }} card
+   * @returns {Promise<void>}
+   */
   const handleRequestTrade = async (card) => {
     if (!userId) {
       notifyError(getMessage('AUTH_REQUIRED'));

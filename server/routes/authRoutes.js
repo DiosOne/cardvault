@@ -14,8 +14,13 @@ const authLimiter= rateLimit({
     legacyHeaders: false,
 });
 
-//register
-router.post('/register', authLimiter, async (req, res) => {
+/**
+ * Handle user registration requests.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<void>}
+ */
+const handleRegister= async (req, res) => {
     try {
         const {username, email, password} = req.body;
 
@@ -38,10 +43,18 @@ router.post('/register', authLimiter, async (req, res) => {
         console.error("Register error:", error.message);
         res.status(500).json({message: MESSAGES.REGISTER_ERROR});
       }
-});
+};
 
-//login
-router.post("/login", authLimiter, async (req,res) => {
+//register
+router.post('/register', authLimiter, handleRegister);
+
+/**
+ * Handle user login and JWT issuance.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<void>}
+ */
+const handleLogin= async (req,res) => {
     try {
         const {email, password}= req.body;
 
@@ -80,6 +93,9 @@ router.post("/login", authLimiter, async (req,res) => {
         console.error("Login error", error.message);
         res.status(500).json({message: MESSAGES.SERVER_ERROR});
     }
-});
+};
+
+//login
+router.post("/login", authLimiter, handleLogin);
 
 export default router;

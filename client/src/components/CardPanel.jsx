@@ -1,3 +1,8 @@
+/**
+ * Panel wrapper for grouping card management content.
+ * @param {{ title: string, description?: string, children: import('react').ReactNode }} props
+ * @returns {JSX.Element}
+ */
 export default function CardPanel({title, description, children}) {
   return (
     <section className='card-panel'>

@@ -3,6 +3,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+/**
+ * Connect to MongoDB using the configured connection string.
+ * Logs success outside test runs and exits the process on fatal errors.
+ * @returns {Promise<void>}
+ */
 const connectDB= async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);

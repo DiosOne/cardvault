@@ -6,7 +6,10 @@ import { TradeContext } from '../context/TradeContext';
 import { MdNotificationsActive } from 'react-icons/md';
 import {confirmAction} from '../utility/notifications';
 
-
+/**
+ * Primary navigation bar with auth-aware links and theme toggle.
+ * @returns {JSX.Element}
+ */
 export default function Navbar() {
   const {user, logout} = useContext(AuthContext);
   const navigate= useNavigate();
@@ -14,17 +17,31 @@ export default function Navbar() {
   const {hasNewTrades} = useContext(TradeContext);
 
   //darkmode + remember
+  /**
+   * Toggle the persisted light/dark theme.
+   * @returns {void}
+   */
   const toggleTheme= () => {
     const newMode= !darkMode;
     setDarkMode(newMode);
   };
 
-  useEffect(() => {
+  /**
+   * Sync the theme setting to the DOM and localStorage.
+   * @returns {void}
+   */
+  const syncThemePreference= () => {
     document.body.classList.toggle('darkmode', darkMode);
     localStorage.setItem('theme', darkMode ? 'dark':'light');
-  }, [darkMode]);
+  };
+
+  useEffect(syncThemePreference, [darkMode]);
 
   //handle logout and nav home
+  /**
+   * Log the user out and navigate to login.
+   * @returns {void}
+   */
   const handleLogout= () => {
     if (!confirmAction('LOGOUT_CONFIRM')) return;
     logout();

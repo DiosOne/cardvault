@@ -1,5 +1,9 @@
 import { NavLink } from 'react-router-dom';
 
+/**
+ * Landing page with primary call-to-action links.
+ * @returns {JSX.Element}
+ */
 export default function Home() {
   return (
     <main className="home" role='main'>

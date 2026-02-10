@@ -2,6 +2,11 @@ import { useState } from 'react';
 import API from '../api/api';
 import { notifySuccess, notifyError } from '../utility/notifications';
 
+/**
+ * Form for editing an existing card entry.
+ * @param {{ card: { _id: string, name?: string, type?: string, rarity?: string, value?: number, description?: string, status?: string }, onSave: (card: object) => void, onCancel: () => void }} props
+ * @returns {JSX.Element}
+ */
 export default function EditCardForm({card, onSave, onCancel}) {
   const [formData, setFormData] = useState({
     name: card.name || '',
@@ -13,11 +18,21 @@ export default function EditCardForm({card, onSave, onCancel}) {
   });
 
   //form input updates
+  /**
+   * Update form state when field values change.
+   * @param {import('react').ChangeEvent<HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement>} e
+   * @returns {void}
+   */
   const handleChange = (e) => {
     const {name,value} = e.target;
     setFormData({...formData, [name]: value});
   };
 
+  /**
+   * Persist edits to the backend and notify the parent.
+   * @param {import('react').FormEvent<HTMLFormElement>} e
+   * @returns {Promise<void>}
+   */
   const handleSubmit= async (e) => {
     e.preventDefault();
     try {

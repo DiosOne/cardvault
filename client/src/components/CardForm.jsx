@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import Section from './Section';
 
+/**
+ * Form for creating a new card entry.
+ * @param {{ onAdd: (card: { name: string, type: string, rarity: string, value: number, status: string }) => void }} props
+ * @returns {JSX.Element}
+ */
 export default function CardForm({onAdd}) {
   const [form, setForm] = useState({
     name: '',
@@ -10,9 +15,19 @@ export default function CardForm({onAdd}) {
     status: 'owned',
   });
 
+  /**
+   * Update form state on input changes.
+   * @param {import('react').ChangeEvent<HTMLInputElement|HTMLSelectElement>} e
+   * @returns {void}
+   */
   const handleChange= (e) =>
     setForm({...form, [e.target.name]: e.target.value});
 
+  /**
+   * Submit a new card to the parent handler.
+   * @param {import('react').FormEvent<HTMLFormElement>} e
+   * @returns {void}
+   */
   const handleSubmit= (e) => {
     e.preventDefault();
     onAdd({

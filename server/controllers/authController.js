@@ -3,6 +3,12 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { MESSAGES } from "../utility/messages.js";
 
+/**
+ * Authenticate a user and return a JWT plus user details.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<void>}
+ */
 export const login= async (req, res) => {
     try {
         const {email, password}= req.body;

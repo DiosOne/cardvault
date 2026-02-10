@@ -1,3 +1,8 @@
+/**
+ * Generic section wrapper with optional title and aria metadata.
+ * @param {{ title?: string, className?: string, role?: string, live?: 'polite'|'assertive'|'off', children: import('react').ReactNode }} props
+ * @returns {JSX.Element}
+ */
 export default function Section({
   title,
   className,

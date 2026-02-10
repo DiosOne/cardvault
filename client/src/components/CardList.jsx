@@ -9,6 +9,11 @@ const STATUS_META = {
 
 const STATUS_ORDER = ['owned', 'for trade', 'wanted'];
 
+/**
+ * Normalize various user-facing status labels into canonical keys.
+ * @param {string} status
+ * @returns {'owned'|'for trade'|'wanted'}
+ */
 const normalizeStatus = (status) => {
   const normalized = (status || 'owned').toString().toLowerCase().trim();
   if (
@@ -25,11 +30,23 @@ const normalizeStatus = (status) => {
   return 'owned';
 };
 
+/**
+ * Check whether a string value contains a search query.
+ * @param {string} value
+ * @param {string} query
+ * @returns {boolean}
+ */
 const matchesText = (value, query) => {
   if (!query) return true;
   return (value || '').toString().toLowerCase().includes(query.toLowerCase().trim());
 };
 
+/**
+ * Check whether a numeric value meets a minimum filter value.
+ * @param {number|string} value
+ * @param {number|string} filterValue
+ * @returns {boolean}
+ */
 const matchesMinValue = (value, filterValue) => {
   if (filterValue === '' || filterValue === null || filterValue === undefined) return true;
   const min = Number(filterValue);
@@ -39,6 +56,11 @@ const matchesMinValue = (value, filterValue) => {
   return cardValue >= min;
 };
 
+/**
+ * Render cards with filtering and grouped status columns.
+ * @param {{ cards: Array<object>, onEdit: (card: object) => void, onDelete: (id: string) => void, onMoveToTrade: (card: object) => void, onCancelTrade: (card: object) => void, onAddWanted: (card: object) => void }} props
+ * @returns {JSX.Element}
+ */
 export default function CardList({
   cards,
   onEdit,
@@ -55,32 +77,46 @@ export default function CardList({
     status: 'all',
   });
 
+  /**
+   * Update a filter value based on input events.
+   * @param {import('react').ChangeEvent<HTMLInputElement|HTMLSelectElement>} event
+   * @returns {void}
+   */
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  const filteredCards = useMemo(
-    () =>
-      cards.filter((card) => {
-        if (!matchesText(card.name, filters.name)) return false;
-        if (!matchesText(card.type, filters.type)) return false;
-        if (!matchesText(card.rarity, filters.rarity)) return false;
-        if (!matchesMinValue(card.value, filters.value)) return false;
-        if (filters.status !== 'all' && normalizeStatus(card.status) !== filters.status) return false;
-        return true;
-      }),
-    [cards, filters],
-  );
+  /**
+   * Apply active filters to the full card list.
+   * @returns {Array<object>}
+   */
+  const computeFilteredCards = () =>
+    cards.filter((card) => {
+      if (!matchesText(card.name, filters.name)) return false;
+      if (!matchesText(card.type, filters.type)) return false;
+      if (!matchesText(card.rarity, filters.rarity)) return false;
+      if (!matchesMinValue(card.value, filters.value)) return false;
+      if (filters.status !== 'all' && normalizeStatus(card.status) !== filters.status) return false;
+      return true;
+    });
 
-  const groupedCards = useMemo(() => {
+  const filteredCards = useMemo(computeFilteredCards, [cards, filters]);
+
+  /**
+   * Group filtered cards by status for column rendering.
+   * @returns {{ owned: Array<object>, 'for trade': Array<object>, wanted: Array<object> }}
+   */
+  const computeGroupedCards = () => {
     const groups = { owned: [], 'for trade': [], wanted: [] };
     filteredCards.forEach((card) => {
       const statusKey = normalizeStatus(card.status);
       (groups[statusKey] || groups.owned).push(card);
     });
     return groups;
-  }, [filteredCards]);
+  };
+
+  const groupedCards = useMemo(computeGroupedCards, [filteredCards]);
 
   if (!cards.length)
     return (
