@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>cardvault  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>cardvault</h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#login'
+                  class="">
+                  login
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getusercards'
+                  class="">
+                  getUserCards
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createtrade'
+                  class="">
+                  createTrade
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getpubliccards'
+                  class="">
+                  getPublicCards
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#gettrades'
+                  class="">
+                  getTrades
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#addcard'
+                  class="">
+                  addCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#updatetrade'
+                  class="">
+                  updateTrade
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#updatecard'
+                  class="">
+                  updateCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#deletecard'
+                  class="">
+                  deleteCard
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='login'>
+      login
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Authenticate a user and return a JWT plus user details.</p>
+
+    <div class='pre p1 fill-light mt0'>login</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getusercards'>
+      getUserCards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Return all cards owned by the authenticated user.</p>
+
+    <div class='pre p1 fill-light mt0'>getUserCards</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createtrade'>
+      createTrade
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Create a trade request from the authenticated user to another user.</p>
+
+    <div class='pre p1 fill-light mt0'>createTrade</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getpubliccards'>
+      getPublicCards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Return cards marked as "for trade" or "wanted" for public browsing.</p>
+
+    <div class='pre p1 fill-light mt0'>getPublicCards</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='gettrades'>
+      getTrades
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fetch trades where the authenticated user is a participant.</p>
+
+    <div class='pre p1 fill-light mt0'>getTrades</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='addcard'>
+      addCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Create a new card linked to the authenticated user.</p>
+
+    <div class='pre p1 fill-light mt0'>addCard</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='updatetrade'>
+      updateTrade
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Update a trade's status or response message for a participant.</p>
+
+    <div class='pre p1 fill-light mt0'>updateTrade</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='updatecard'>
+      updateCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Update an existing card owned by the authenticated user.</p>
+
+    <div class='pre p1 fill-light mt0'>updateCard</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='deletecard'>
+      deleteCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Delete a card owned by the authenticated user.</p>
+
+    <div class='pre p1 fill-light mt0'>deleteCard</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>

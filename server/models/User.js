@@ -33,7 +33,6 @@ const userSchema= new mongoose.Schema(
 
 /**
  * Hash the user's password before saving if it changed.
- * @this {import("mongoose").Document & { password: string, isModified: (path: string) => boolean }}
  * @param {Function} next
  * @returns {Promise<void>}
  */
@@ -48,7 +47,6 @@ userSchema.pre('save', hashPasswordBeforeSave);
 
 /**
  * Compare a plaintext password with the stored hash.
- * @this {import("mongoose").Document & { password: string }}
  * @param {string} enteredPassword
  * @returns {Promise<boolean>}
  */

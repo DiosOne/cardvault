@@ -1,0 +1,2051 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>cardvault  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>cardvault</h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#home'
+                  class="">
+                  Home
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getid'
+                  class="">
+                  getId
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#register'
+                  class="">
+                  Register
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#login'
+                  class="">
+                  Login
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#dashboard'
+                  class="">
+                  Dashboard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#normalizestatus'
+                  class="">
+                  normalizeStatus
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#tradeinbox'
+                  class="">
+                  TradeInbox
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlesubmit'
+                  class="">
+                  handleSubmit
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlesubmit'
+                  class="">
+                  handleSubmit
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fetchcards'
+                  class="">
+                  fetchCards
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handletradeseffect'
+                  class="">
+                  handleTradesEffect
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#publictrades'
+                  class="">
+                  PublicTrades
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handleresponsechange'
+                  class="">
+                  handleResponseChange
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlefetchcardseffect'
+                  class="">
+                  handleFetchCardsEffect
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#fetchpubliccards'
+                  class="">
+                  fetchPublicCards
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handletradeaction'
+                  class="">
+                  handleTradeAction
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handleaddcard'
+                  class="">
+                  handleAddCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#renderheader'
+                  class="">
+                  renderHeader
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlefetchpubliccardseffect'
+                  class="">
+                  handleFetchPublicCardsEffect
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handledeletecard'
+                  class="">
+                  handleDeleteCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlerequesttrade'
+                  class="">
+                  handleRequestTrade
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlemovetotrade'
+                  class="">
+                  handleMoveToTrade
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlecanceltrade'
+                  class="">
+                  handleCancelTrade
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handleaddwanted'
+                  class="">
+                  handleAddWanted
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handleeditcard'
+                  class="">
+                  handleEditCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlesavecard'
+                  class="">
+                  handleSaveCard
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlecanceledit'
+                  class="">
+                  handleCancelEdit
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='home'>
+      Home
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Landing page with primary call-to-action links.</p>
+
+    <div class='pre p1 fill-light mt0'>new Home(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getid'>
+      getId
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Normalize an ID from a string or object.</p>
+
+    <div class='pre p1 fill-light mt0'>getId</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | null)</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='register'>
+      Register
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Registration page for new users.</p>
+
+    <div class='pre p1 fill-light mt0'>new Register(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='login'>
+      Login
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Login page for existing users.</p>
+
+    <div class='pre p1 fill-light mt0'>new Login(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='dashboard'>
+      Dashboard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Dashboard page for managing the user's card collection.</p>
+
+    <div class='pre p1 fill-light mt0'>new Dashboard(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='normalizestatus'>
+      normalizeStatus
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Normalize various status labels into canonical keys for rendering.</p>
+
+    <div class='pre p1 fill-light mt0'>normalizeStatus</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>status</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<code>"owned"</code> | <code>"for trade"</code> | <code>"wanted"</code>)</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='tradeinbox'>
+      TradeInbox
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Trade inbox page for viewing and responding to trade requests.</p>
+
+    <div class='pre p1 fill-light mt0'>new TradeInbox(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlesubmit'>
+      handleSubmit
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Submit registration data and redirect to login on success.</p>
+
+    <div class='pre p1 fill-light mt0'>handleSubmit</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlesubmit'>
+      handleSubmit
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Submit credentials and navigate on successful login.</p>
+
+    <div class='pre p1 fill-light mt0'>handleSubmit</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fetchcards'>
+      fetchCards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fetch cards for the current user from the API.</p>
+
+    <div class='pre p1 fill-light mt0'>fetchCards</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handletradeseffect'>
+      handleTradesEffect
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fetch latest trades and clear inbox notifications.</p>
+
+    <div class='pre p1 fill-light mt0'>handleTradesEffect</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='publictrades'>
+      PublicTrades
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Public trade listings page with request flow.</p>
+
+    <div class='pre p1 fill-light mt0'>new PublicTrades(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handleresponsechange'>
+      handleResponseChange
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Update the response draft for a specific trade.</p>
+
+    <div class='pre p1 fill-light mt0'>handleResponseChange</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tradeId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlefetchcardseffect'>
+      handleFetchCardsEffect
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Trigger card fetching on mount.</p>
+
+    <div class='pre p1 fill-light mt0'>handleFetchCardsEffect</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='fetchpubliccards'>
+      fetchPublicCards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Fetch public trade cards for the listing view.</p>
+
+    <div class='pre p1 fill-light mt0'>fetchPublicCards</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handletradeaction'>
+      handleTradeAction
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Submit a trade status update and optional message.</p>
+
+    <div class='pre p1 fill-light mt0'>handleTradeAction</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>tradeId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>action</span> <code class='quiet'>((<code>"accepted"</code> | <code>"declined"</code>))</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handleaddcard'>
+      handleAddCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Add a new card to the collection.</p>
+
+    <div class='pre p1 fill-light mt0'>handleAddCard</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>cardData</span> <code class='quiet'>({name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, type: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, rarity: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, value: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, status: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>})</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='renderheader'>
+      renderHeader
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Render the inbox header with refresh action.</p>
+
+    <div class='pre p1 fill-light mt0'>renderHeader</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlefetchpubliccardseffect'>
+      handleFetchPublicCardsEffect
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Trigger fetch of public cards on mount.</p>
+
+    <div class='pre p1 fill-light mt0'>handleFetchPublicCardsEffect</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handledeletecard'>
+      handleDeleteCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Delete a card by ID after confirmation.</p>
+
+    <div class='pre p1 fill-light mt0'>handleDeleteCard</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlerequesttrade'>
+      handleRequestTrade
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Submit a trade request for a selected card.</p>
+
+    <div class='pre p1 fill-light mt0'>handleRequestTrade</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>card</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlemovetotrade'>
+      handleMoveToTrade
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Mark a card as available for trade.</p>
+
+    <div class='pre p1 fill-light mt0'>handleMoveToTrade</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>card</span> <code class='quiet'>({_id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>})</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlecanceltrade'>
+      handleCancelTrade
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Remove a card from trade listings and mark as owned.</p>
+
+    <div class='pre p1 fill-light mt0'>handleCancelTrade</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>card</span> <code class='quiet'>({_id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>})</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handleaddwanted'>
+      handleAddWanted
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Create a wanted-card entry from an existing card's details.</p>
+
+    <div class='pre p1 fill-light mt0'>handleAddWanted</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>card</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handleeditcard'>
+      handleEditCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Enter edit mode for a selected card.</p>
+
+    <div class='pre p1 fill-light mt0'>handleEditCard</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>card</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlesavecard'>
+      handleSaveCard
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Update card state after a successful edit.</p>
+
+    <div class='pre p1 fill-light mt0'>handleSaveCard</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>updatedCard</span> <code class='quiet'>({_id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>})</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlecanceledit'>
+      handleCancelEdit
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Exit edit mode without saving.</p>
+
+    <div class='pre p1 fill-light mt0'>handleCancelEdit</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>

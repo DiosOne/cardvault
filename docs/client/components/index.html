@@ -1,0 +1,2396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>cardvault  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>cardvault</h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#footer'
+                  class="">
+                  Footer
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#authlayout'
+                  class="">
+                  AuthLayout
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cardpanel'
+                  class="">
+                  CardPanel
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#section'
+                  class="">
+                  Section
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#errorboundary'
+                  class=" toggle-sibling">
+                  ErrorBoundary
+                  <span class='icon'>▸</span>
+                </a>
+                
+                <div class='toggle-target display-none'>
+                  
+                  <ul class='list-reset py1-ul pl1'>
+                    <li class='h5'><span>Static members</span></li>
+                    
+                      <li><a
+                        href='#errorboundarygetderivedstatefromerror'
+                        class='regular pre-open'>
+                        .GetDerivedStateFromError
+                      </a></li>
+                    
+                    </ul>
+                  
+                  
+                    <ul class='list-reset py1-ul pl1'>
+                      <li class='h5'><span>Instance members</span></li>
+                      
+                      <li><a
+                        href='#errorboundarycomponentdidcatch'
+                        class='regular pre-open'>
+                        #componentDidCatch
+                      </a></li>
+                      
+                      <li><a
+                        href='#errorboundaryhandleretry'
+                        class='regular pre-open'>
+                        #handleRetry
+                      </a></li>
+                      
+                      <li><a
+                        href='#errorboundaryrender'
+                        class='regular pre-open'>
+                        #render
+                      </a></li>
+                      
+                    </ul>
+                  
+                  
+                  
+                </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cardform'
+                  class="">
+                  CardForm
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#tradealertbutton'
+                  class="">
+                  TradeAlertButton
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#editcardform'
+                  class="">
+                  EditCardForm
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#navbar'
+                  class="">
+                  Navbar
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#normalizestatus'
+                  class="">
+                  normalizeStatus
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlechange'
+                  class="">
+                  handleChange
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlechange'
+                  class="">
+                  handleChange
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#toggletheme'
+                  class="">
+                  toggleTheme
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlesubmit'
+                  class="">
+                  handleSubmit
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlesubmit'
+                  class="">
+                  handleSubmit
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#syncthemepreference'
+                  class="">
+                  syncThemePreference
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#matchestext'
+                  class="">
+                  matchesText
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlelogout'
+                  class="">
+                  handleLogout
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#matchesminvalue'
+                  class="">
+                  matchesMinValue
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cardlist'
+                  class="">
+                  CardList
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#handlefilterchange'
+                  class="">
+                  handleFilterChange
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#computefilteredcards'
+                  class="">
+                  computeFilteredCards
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#computegroupedcards'
+                  class="">
+                  computeGroupedCards
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='footer'>
+      Footer
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Render the site footer with branding copy.</p>
+
+    <div class='pre p1 fill-light mt0'>new Footer(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='authlayout'>
+      AuthLayout
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Layout wrapper for authentication forms with consistent heading and styling.</p>
+
+    <div class='pre p1 fill-light mt0'>new AuthLayout($0: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.title</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.children</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onSubmit</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.subtitle</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cardpanel'>
+      CardPanel
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Panel wrapper for grouping card management content.</p>
+
+    <div class='pre p1 fill-light mt0'>new CardPanel($0: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.title</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.description</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.children</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='section'>
+      Section
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generic section wrapper with optional title and aria metadata.</p>
+
+    <div class='pre p1 fill-light mt0'>new Section($0: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.title</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.className</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.role</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.live</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.children</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='errorboundary'>
+      ErrorBoundary
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>React error boundary to catch rendering errors and show fallback UI.</p>
+
+    <div class='pre p1 fill-light mt0'>new ErrorBoundary(props: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</div>
+  
+  
+    <p>
+      Extends
+      
+        Component
+      
+    </p>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>props</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Static Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='errorboundarygetderivedstatefromerror'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>GetDerivedStateFromError()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Update state when a child throws during render.</p>
+
+    <div class='pre p1 fill-light mt0'>GetDerivedStateFromError(): {hasError: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>}</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>{hasError: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>}</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='errorboundarycomponentdidcatch'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>componentDidCatch(error, info)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Log errors and notify users when a render error is caught.</p>
+
+    <div class='pre p1 fill-light mt0'>componentDidCatch(error: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>, info: any): void</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>error</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>info</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='errorboundaryhandleretry'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>handleRetry</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Reset the error state and call the optional reset callback.</p>
+
+    <div class='pre p1 fill-light mt0'>handleRetry</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='errorboundaryrender'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>render()</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Render fallback UI when errors occur, otherwise render children.</p>
+
+    <div class='pre p1 fill-light mt0'>render()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cardform'>
+      CardForm
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Form for creating a new card entry.</p>
+
+    <div class='pre p1 fill-light mt0'>new CardForm($0: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onAdd</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='tradealertbutton'>
+      TradeAlertButton
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Button link that highlights when new trades are available.</p>
+
+    <div class='pre p1 fill-light mt0'>new TradeAlertButton(props: {hasNewTrades: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>}): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>props</span> <code class='quiet'>({hasNewTrades: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>})</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>props.hasNewTrades</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='editcardform'>
+      EditCardForm
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Form for editing an existing card entry.</p>
+
+    <div class='pre p1 fill-light mt0'>new EditCardForm($0: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.card</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onSave</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onCancel</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='navbar'>
+      Navbar
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Primary navigation bar with auth-aware links and theme toggle.</p>
+
+    <div class='pre p1 fill-light mt0'>new Navbar(): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='normalizestatus'>
+      normalizeStatus
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Normalize various user-facing status labels into canonical keys.</p>
+
+    <div class='pre p1 fill-light mt0'>normalizeStatus</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>status</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<code>"owned"</code> | <code>"for trade"</code> | <code>"wanted"</code>)</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlechange'>
+      handleChange
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Update form state on input changes.</p>
+
+    <div class='pre p1 fill-light mt0'>handleChange</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlechange'>
+      handleChange
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Update form state when field values change.</p>
+
+    <div class='pre p1 fill-light mt0'>handleChange</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='toggletheme'>
+      toggleTheme
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Toggle the persisted light/dark theme.</p>
+
+    <div class='pre p1 fill-light mt0'>toggleTheme</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlesubmit'>
+      handleSubmit
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Submit a new card to the parent handler.</p>
+
+    <div class='pre p1 fill-light mt0'>handleSubmit</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlesubmit'>
+      handleSubmit
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Persist edits to the backend and notify the parent.</p>
+
+    <div class='pre p1 fill-light mt0'>handleSubmit</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>e</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='syncthemepreference'>
+      syncThemePreference
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Sync the theme setting to the DOM and localStorage.</p>
+
+    <div class='pre p1 fill-light mt0'>syncThemePreference</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='matchestext'>
+      matchesText
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Check whether a string value contains a search query.</p>
+
+    <div class='pre p1 fill-light mt0'>matchesText</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>query</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlelogout'>
+      handleLogout
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Log the user out and navigate to login.</p>
+
+    <div class='pre p1 fill-light mt0'>handleLogout</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='matchesminvalue'>
+      matchesMinValue
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Check whether a numeric value meets a minimum filter value.</p>
+
+    <div class='pre p1 fill-light mt0'>matchesMinValue</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>value</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>))</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>filterValue</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>))</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cardlist'>
+      CardList
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Render cards with filtering and grouped status columns.</p>
+
+    <div class='pre p1 fill-light mt0'>new CardList($0: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): JSX.Element</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.cards</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onEdit</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onDelete</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onMoveToTrade</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onCancelTrade</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+                <tr>
+  <td class='break-word'><span class='code bold'>$0.onAddWanted</span> <code class='quiet'>any</code>
+  </td>
+  <td class='break-word'><span></span></td>
+</tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>JSX.Element</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='handlefilterchange'>
+      handleFilterChange
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Update a filter value based on input events.</p>
+
+    <div class='pre p1 fill-light mt0'>handleFilterChange</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>event</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>void</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='computefilteredcards'>
+      computeFilteredCards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Apply active filters to the full card list.</p>
+
+    <div class='pre p1 fill-light mt0'>computeFilteredCards</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='computegroupedcards'>
+      computeGroupedCards
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Group filtered cards by status for column rendering.</p>
+
+    <div class='pre p1 fill-light mt0'>computeGroupedCards</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>{owned: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>, for trade: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>, wanted: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>>}</code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
