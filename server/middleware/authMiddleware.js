@@ -11,16 +11,27 @@ import { MESSAGES } from "../utility/messages.js";
 export const verifyToken= (req, res, next) => {
     try {
         const authHeader= req.headers.authorization;
-        const match= typeof authHeader === "string"
-            ? authHeader.match(/^Bearer\\s+(.+)$/i)
-            : null;
+        if (typeof authHeader !== "string") {
+            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
+        }
 
-        if (!match) {
+        const trimmedHeader= authHeader.trim();
+        if (trimmedHeader.length > 4096) {
+            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
+        }
+
+        const spaceIndex= trimmedHeader.indexOf(" ");
+        if (spaceIndex === -1) {
+            return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
+        }
+
+        const scheme= trimmedHeader.slice(0, spaceIndex).toLowerCase();
+        if (scheme !== "bearer") {
             return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
         }
 
         //Split "Bearer <token>" to isolate the JWT payload.
-        const token= match[1].trim();
+        const token= trimmedHeader.slice(spaceIndex + 1).trim();
         if (!token) {
             return res.status(401).json({message: MESSAGES.TOKEN_MISSING});
         }

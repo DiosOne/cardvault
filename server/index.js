@@ -30,10 +30,7 @@ const sanitizeForLog= (value) =>
  */
 const requestLogger= (req, res, next) => {
   const method= sanitizeForLog(req.method);
-  const url= sanitizeForLog(req.originalUrl);
-  const host= sanitizeForLog(req.headers.host);
-  const origin= sanitizeForLog(req.headers.origin);
-  console.log(`[${new Date().toISOString()}] ${method} ${url} Host: ${host} Origin: ${origin}`);
+  console.log(`[${new Date().toISOString()}] ${method}`);
   next();
 };
 
