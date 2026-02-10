@@ -1,6 +1,9 @@
+import mongoose from "mongoose";
 import Card from "../models/Card.js";
 import { asyncHandler } from "../utility/asyncHandler.js";
 import {MESSAGES} from "../utility/messages.js";
+
+const isValidObjectId= (value) => mongoose.Types.ObjectId.isValid(value);
 
 //get all cards for the logged in user
 /**
@@ -87,8 +90,15 @@ export const addCard= asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 export const updateCard= asyncHandler(async (req, res) => {
+    const cardId= req.params.id;
+    if (!isValidObjectId(cardId)) {
+        const error= new Error("Invalid ID format");
+        error.statusCode= 400;
+        throw error;
+    }
+
     const updatedCard= await Card.findOneAndUpdate(
-        {_id: req.params.id, userId: req.user.id},
+        {_id: cardId, userId: req.user.id},
         req.body,
         {new: true, runValidators: true}
     );
@@ -113,8 +123,15 @@ export const updateCard= asyncHandler(async (req, res) => {
  * @returns {Promise<void>}
  */
 export const deleteCard= asyncHandler(async (req, res) => {
+    const cardId= req.params.id;
+    if (!isValidObjectId(cardId)) {
+        const error= new Error("Invalid ID format");
+        error.statusCode= 400;
+        throw error;
+    }
+
     const deletedCard= await Card.findOneAndDelete({
-        _id: req.params.id,
+        _id: cardId,
         userId: req.user.id,
     });
     

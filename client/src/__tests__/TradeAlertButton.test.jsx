@@ -1,25 +1,12 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
-/**
- * Mock NavLink to render its children directly.
- * @param {{ children: import('react').ReactNode }} props
- * @returns {JSX.Element}
- */
-const MockNavLink = ({ children }) => <div>{children}</div>;
-
 vi.mock('react-router-dom', () => ({
-  NavLink: MockNavLink,
+  NavLink: ({ children }) => <div>{children}</div>,
 }));
 
-/**
- * Mock notification icon for predictable rendering.
- * @returns {JSX.Element}
- */
-const MockNotificationsIcon = () => <span aria-label='New trade requests'>Bell</span>;
-
 vi.mock('react-icons/md', () => ({
-  MdNotificationsActive: MockNotificationsIcon,
+  MdNotificationsActive: () => <span aria-label='New trade requests'>Bell</span>,
 }));
 
 import TradeAlertButton from '../components/TradeAlertButton';
