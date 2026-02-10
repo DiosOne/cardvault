@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap");
+
 /* Light Mode (default) */
 :root{
   --bg:#f9f9fb;
@@ -24,6 +26,12 @@ body{
   background-color: var(--bg);
   color: var(--text);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bakbak-one-regular{
+  font-family: "Bakbak One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 #root{

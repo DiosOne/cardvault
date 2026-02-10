@@ -53,7 +53,7 @@ export default function Navbar() {
   return (
     <header className='site-header'>
       <div className='brand-row'>
-        <h1 className='brand-title'>
+        <h1 className='brand-title bakbak-one-regular'>
           <NavLink to={brandDestination} aria-label='Go to CardVault homepage'>
             CardVault
           </NavLink>
