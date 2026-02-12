@@ -11,10 +11,22 @@ const app= express();
 
 app.use(cors());
 app.use(express.json());
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl} Host: ${req.headers.host} Origin: ${req.headers.origin}`);
-next();
-});
+/**
+ * Log inbound HTTP requests with basic routing metadata.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ * @returns {void}
+ */
+const allowedMethods= new Set(["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"]);
+
+const requestLogger= (req, res, next) => {
+  const method= allowedMethods.has(req.method) ? req.method : "UNKNOWN";
+  console.log(`[${new Date().toISOString()}] ${method}`);
+  next();
+};
+
+app.use(requestLogger);
 
 //Connect to MongoDB
 connectDB();
@@ -25,9 +37,17 @@ app.use("/api/cards", cardRoutes);
 app.use("/api/trades", tradeRoutes);
 
 //Root route
-app.get("/", (req, res) => {
+/**
+ * Health check endpoint for the API root.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {void}
+ */
+const rootHandler= (req, res) => {
   res.send("CardVault API is for sure running");
-});
+};
+
+app.get("/", rootHandler);
 
 import {errorHandler} from "./middleware/errorHandler.js";
 
@@ -40,5 +60,14 @@ export default app;
 //only start server if not running tests
 if (process.env.NODE_ENV !== "test") {
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  /**
+   * Start the HTTP server on the provided port.
+   * @param {number|string} port
+   * @returns {void}
+   */
+  const startServer= (port) => {
+    app.listen(port, () => console.log(`Server running on port ${port}`));
+  };
+
+  startServer(PORT);
 }

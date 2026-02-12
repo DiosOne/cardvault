@@ -1,14 +1,21 @@
 {
   "name": "cardvault",
   "private": "true",
-  "workspaces":["client", "server"],
-  "scripts": 
-    {
-      "dev": "npm run dev -w server",
-      "dev:client": "npm run dev -w client",
-      "start": "npm run start -w server",
-      "lint": "npm run lint -w server && npm run lint -w client",
-      "test": "npm run test -w server && npm run test -w client",
-      "build": "npm run build -w client"
-    }
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "start": "npm run start -w server",
+    "lint": "npm run lint -w server && npm run lint -w client",
+    "test": "npm run test -w server && npm run test -w client",
+    "build": "npm run build -w client",
+    "docs": "node scripts/build-docs.mjs"
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.9.19",
+    "documentation": "^14.0.3"
   }
+}

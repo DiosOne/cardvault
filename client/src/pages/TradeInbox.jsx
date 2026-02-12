@@ -3,27 +3,54 @@ import { TradeContext } from '../context/TradeContext';
 import { AuthContext } from '../context/AuthContext';
 import { notifyError, notifySuccess } from '../utility/notifications';
 
+/**
+ * Normalize an ID from a string or object.
+ * @param {string|{_id?: string, id?: string}|null|undefined} value
+ * @returns {string|null}
+ */
 const getId= (value) => {
   if (!value) return null;
   if (typeof value === 'string') return value;
   return value._id || value.id || null;
 };
 
+/**
+ * Trade inbox page for viewing and responding to trade requests.
+ * @returns {JSX.Element}
+ */
 export default function TradeInbox() {
   const {user} = useContext(AuthContext);
   const {trades, fetchTrades, clearNotifications, respondToTrade} = useContext(TradeContext);
   const userId= getId(user);
   const [responses, setResponses] = useState({});
 
-  useEffect(() => {
+  /**
+   * Fetch latest trades and clear inbox notifications.
+   * @returns {void}
+   */
+  const handleTradesEffect= () => {
     fetchTrades();
     clearNotifications();
-  }, [fetchTrades, clearNotifications]);
+  };
 
+  useEffect(handleTradesEffect, [fetchTrades, clearNotifications]);
+
+  /**
+   * Update the response draft for a specific trade.
+   * @param {string} tradeId
+   * @param {string} value
+   * @returns {void}
+   */
   const handleResponseChange= (tradeId, value) => {
     setResponses((prev) => ({...prev, [tradeId]: value}));
   };
 
+  /**
+   * Submit a trade status update and optional message.
+   * @param {string} tradeId
+   * @param {'accepted'|'declined'} action
+   * @returns {Promise<void>}
+   */
   const handleTradeAction= async (tradeId, action) => {
     try {
       await respondToTrade(tradeId, {
@@ -37,6 +64,10 @@ export default function TradeInbox() {
     }
   };
 
+  /**
+   * Render the inbox header with refresh action.
+   * @returns {JSX.Element}
+   */
   const renderHeader= () => (
     <header className='trade-inbox__header'>
       <div>

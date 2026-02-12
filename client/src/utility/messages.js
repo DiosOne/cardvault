@@ -28,9 +28,21 @@ export const CLIENT_MESSAGES= {
   GENERIC_ERROR: 'Something went wrong. Please try again.',
 };
 
+/**
+ * Return a client-facing message by key, with a fallback when missing.
+ * @param {string} key
+ * @param {string} [fallbackKey='GENERIC_ERROR']
+ * @returns {string}
+ */
 export const getMessage= (key, fallbackKey= 'GENERIC_ERROR') =>
   CLIENT_MESSAGES[key] || CLIENT_MESSAGES[fallbackKey];
 
+/**
+ * Resolve a friendly error message from API responses or thrown errors.
+ * @param {unknown} error
+ * @param {string} [fallbackKey='GENERIC_ERROR']
+ * @returns {string}
+ */
 export const resolveApiError= (error, fallbackKey= 'GENERIC_ERROR') => {
   if (!error) return getMessage(fallbackKey);
   if (typeof error === 'string') return error;

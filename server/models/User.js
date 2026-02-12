@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+/**
+ * Schema for application users.
+ * @type {mongoose.Schema}
+ */
 const userSchema= new mongoose.Schema(
     {
         username: {
@@ -27,17 +31,35 @@ const userSchema= new mongoose.Schema(
     {timestamps: true}
 );
 
-//hash PW before saving
-userSchema.pre('save', async function (next) {
+/**
+ * Hash the user's password before saving if it changed.
+ * @param {Function} next
+ * @returns {Promise<void>}
+ */
+const hashPasswordBeforeSave= async function (next) {
     if (!this.isModified('password')) return next();
     this.password= await bcrypt.hash(this.password, 10);
     next();
-});
+};
 
-//compare PW method for login
-userSchema.methods.comparePassword= async function (enteredPassword) {
+//hash PW before saving
+userSchema.pre('save', hashPasswordBeforeSave);
+
+/**
+ * Compare a plaintext password with the stored hash.
+ * @param {string} enteredPassword
+ * @returns {Promise<boolean>}
+ */
+const comparePassword= async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
+//compare PW method for login
+userSchema.methods.comparePassword= comparePassword;
+
+/**
+ * User model for authentication and ownership lookups.
+ * @type {mongoose.Model}
+ */
 const User= mongoose.model('User', userSchema);
 export default User;

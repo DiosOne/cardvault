@@ -4,18 +4,32 @@ import { AuthContext } from './AuthContext';
 import { TradeContext } from './TradeContext';
 import { notifyError } from '../utility/notifications';
 
+/**
+ * Normalize an entity ID from a string or Mongo-style object.
+ * @param {string|{_id?: string, id?: string}|null|undefined} entity
+ * @returns {string|null}
+ */
 const getEntityId= (entity) => {
   if (!entity) return null;
   if (typeof entity === 'string') return entity;
   return entity._id || entity.id || null;
 };
 
+/**
+ * Read the last-seen timestamp for the trade inbox from localStorage.
+ * @returns {number}
+ */
 const getStoredSeenAt= () => {
   if (typeof window === 'undefined') return 0;
   const stored= window.localStorage.getItem('tradeInboxSeenAt');
   return stored ? Number(stored) : 0;
 };
 
+/**
+ * Provide trade inbox data and actions to descendant components.
+ * @param {{ children: import('react').ReactNode }} props
+ * @returns {JSX.Element}
+ */
 export const TradeProvider= ({ children }) => {
   const {user} = useContext(AuthContext);
   const userId= getEntityId(user);
@@ -24,6 +38,10 @@ export const TradeProvider= ({ children }) => {
   const lastSeenRef= useRef(getStoredSeenAt());
 
   //fetch trades for user
+  /**
+   * Fetch trade data for the authenticated user and update notification state.
+   * @returns {Promise<void>}
+   */
   const fetchTrades= useCallback(async () => {
     if (!userId) {
       setTrades([]);
@@ -44,6 +62,7 @@ export const TradeProvider= ({ children }) => {
         if (getEntityId(trade.toUser) !== userId || trade.status !== 'pending') {
           continue;
         }
+        //Fallback to "now" when timestamps are missing to avoid false positives.
         const created= trade.createdAt ? new Date(trade.createdAt).getTime() : fallbackCreated;
         if (created > lastSeen) {
           hasFreshPending= true;
@@ -58,10 +77,22 @@ export const TradeProvider= ({ children }) => {
   }, [userId]);
 
   //fetch on login
-  useEffect(() => {
+  /**
+   * Trigger trade fetches when the dependency changes.
+   * @returns {void}
+   */
+  const handleFetchTradesEffect= () => {
     fetchTrades();
-  }, [fetchTrades]);
+  };
 
+  useEffect(handleFetchTradesEffect, [fetchTrades]);
+
+  /**
+   * Respond to a trade request and refresh the list.
+   * @param {string} tradeId
+   * @param {{ status?: string, responseMessage?: string }} payload
+   * @returns {Promise<object|undefined>}
+   */
   const respondToTrade= useCallback(
     async (tradeId, payload) => {
       if (!tradeId) return;
@@ -77,6 +108,10 @@ export const TradeProvider= ({ children }) => {
     [fetchTrades],
   );
 
+  /**
+   * Clear notification state and persist the latest "seen" timestamp.
+   * @returns {void}
+   */
   const clearNotifications= useCallback(() => {
     const now= Date.now();
     setHasNewTrades(false);

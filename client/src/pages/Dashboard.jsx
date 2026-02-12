@@ -11,6 +11,10 @@ import { notifySuccess, notifyError, confirmAction } from '../utility/notificati
 import TradeAlertButton from '../components/TradeAlertButton';
 
 
+/**
+ * Dashboard page for managing the user's card collection.
+ * @returns {JSX.Element}
+ */
 export default function Dashboard() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,23 +24,39 @@ export default function Dashboard() {
   const {hasNewTrades} = useContext(TradeContext);
 
   //fetch cards when page loads
-  useEffect(() => {
-    const fetchCards= async () => {
-      try {
-        const res = await API.get('/cards');
-        setCards(res.data.data || []);
-      } catch (err) {
-        const friendly= resolveApiError(err, 'CARD_FETCH_ERROR');
-        setError(friendly);
-        notifyError(err, 'CARD_FETCH_ERROR');
-      } finally {
-        setLoading(false);
-      }
-    };
+  /**
+   * Fetch cards for the current user from the API.
+   * @returns {Promise<void>}
+   */
+  const fetchCards= async () => {
+    try {
+      const res = await API.get('/cards');
+      setCards(res.data.data || []);
+    } catch (err) {
+      const friendly= resolveApiError(err, 'CARD_FETCH_ERROR');
+      setError(friendly);
+      notifyError(err, 'CARD_FETCH_ERROR');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /**
+   * Trigger card fetching on mount.
+   * @returns {void}
+   */
+  const handleFetchCardsEffect= () => {
     fetchCards();
-  }, []);
+  };
+
+  useEffect(handleFetchCardsEffect, []);
 
   //add new card
+  /**
+   * Add a new card to the collection.
+   * @param {{ name: string, type: string, rarity: string, value: number, status: string }} cardData
+   * @returns {Promise<void>}
+   */
   const handleAddCard= async (cardData) => {
     try {
       const res= await API.post('/cards', cardData);
@@ -49,6 +69,11 @@ export default function Dashboard() {
   };
 
   //delete a card
+  /**
+   * Delete a card by ID after confirmation.
+   * @param {string} id
+   * @returns {Promise<void>}
+   */
   const handleDeleteCard= async (id) => {
     if (!confirmAction('CARD_DELETE_CONFIRM')) return;
     try {
@@ -60,6 +85,11 @@ export default function Dashboard() {
     }
   };
 
+  /**
+   * Mark a card as available for trade.
+   * @param {{ _id: string }} card
+   * @returns {Promise<void>}
+   */
   const handleMoveToTrade = async (card) => {
     try {
       const res= await API.patch(`/cards/${card._id}`, {status: 'for trade'});
@@ -71,6 +101,11 @@ export default function Dashboard() {
     }
   };
 
+  /**
+   * Remove a card from trade listings and mark as owned.
+   * @param {{ _id: string }} card
+   * @returns {Promise<void>}
+   */
   const handleCancelTrade = async (card) => {
     try {
       const res= await API.patch(`/cards/${card._id}`, {status: 'owned'});
@@ -82,6 +117,11 @@ export default function Dashboard() {
     }
   };
 
+  /**
+   * Create a wanted-card entry from an existing card's details.
+   * @param {{ name: string, type: string, rarity: string, value: number, description?: string }} card
+   * @returns {Promise<void>}
+   */
   const handleAddWanted = async (card) => {
     try {
       const res= await API.post('/cards', {
@@ -101,13 +141,27 @@ export default function Dashboard() {
   };
 
   //edit a card
+  /**
+   * Enter edit mode for a selected card.
+   * @param {object} card
+   * @returns {void}
+   */
   const handleEditCard= (card) => setEditingCard(card);
 
+  /**
+   * Update card state after a successful edit.
+   * @param {{ _id: string }} updatedCard
+   * @returns {void}
+   */
   const handleSaveCard= (updatedCard) => {
     setCards((prev) => prev.map((c) => (c._id === updatedCard._id ? updatedCard : c)));
     setEditingCard(null);
   };
 
+  /**
+   * Exit edit mode without saving.
+   * @returns {void}
+   */
   const handleCancelEdit= () => setEditingCard(null);
 
   //loads and errors

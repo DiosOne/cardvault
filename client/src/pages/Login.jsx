@@ -7,6 +7,10 @@ import { resolveApiError } from '../utility/messages';
 import { notifySuccess, notifyError } from '../utility/notifications';
 import AuthLayout from '../components/AuthLayout';
 
+/**
+ * Login page for existing users.
+ * @returns {JSX.Element}
+ */
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +19,11 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate= useNavigate();
 
+  /**
+   * Submit credentials and navigate on successful login.
+   * @param {import('react').FormEvent<HTMLFormElement>} e
+   * @returns {Promise<void>}
+   */
   const handleSubmit= async (e) => {
     e.preventDefault();
     try {

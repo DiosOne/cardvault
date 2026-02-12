@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>cardvault  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>cardvault</h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#cardschema'
+                  class="">
+                  cardSchema
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#traderequestschema'
+                  class="">
+                  tradeRequestSchema
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#userschema'
+                  class="">
+                  userSchema
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#card'
+                  class="">
+                  Card
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#traderequest'
+                  class="">
+                  TradeRequest
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#hashpasswordbeforesave'
+                  class="">
+                  hashPasswordBeforeSave
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#comparepassword'
+                  class="">
+                  comparePassword
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#user'
+                  class="">
+                  User
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cardschema'>
+      cardSchema
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Schema for collectible cards owned by users or listed for trade.</p>
+
+    <div class='pre p1 fill-light mt0'>cardSchema</div>
+  
+    <p>
+      Type:
+      mongoose.Schema
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='traderequestschema'>
+      tradeRequestSchema
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Schema representing a trade request between two users.</p>
+
+    <div class='pre p1 fill-light mt0'>tradeRequestSchema</div>
+  
+    <p>
+      Type:
+      mongoose.Schema
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='userschema'>
+      userSchema
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Schema for application users.</p>
+
+    <div class='pre p1 fill-light mt0'>userSchema</div>
+  
+    <p>
+      Type:
+      mongoose.Schema
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='card'>
+      Card
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Card model for CRUD operations on the cards collection.</p>
+
+    <div class='pre p1 fill-light mt0'>Card</div>
+  
+    <p>
+      Type:
+      mongoose.Model
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='traderequest'>
+      TradeRequest
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>TradeRequest model for trade workflow records.</p>
+
+    <div class='pre p1 fill-light mt0'>TradeRequest</div>
+  
+    <p>
+      Type:
+      mongoose.Model
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='hashpasswordbeforesave'>
+      hashPasswordBeforeSave
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Hash the user's password before saving if it changed.</p>
+
+    <div class='pre p1 fill-light mt0'>hashPasswordBeforeSave</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>next</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;void></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='comparepassword'>
+      comparePassword
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Compare a plaintext password with the stored hash.</p>
+
+    <div class='pre p1 fill-light mt0'>comparePassword</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>enteredPassword</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>></code>:
+        
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='user'>
+      User
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>User model for authentication and ownership lookups.</p>
+
+    <div class='pre p1 fill-light mt0'>User</div>
+  
+    <p>
+      Type:
+      mongoose.Model
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>

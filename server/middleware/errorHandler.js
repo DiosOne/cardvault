@@ -1,3 +1,11 @@
+/**
+ * Express error handler that normalizes common error cases.
+ * @param {Error & { statusCode?: number, name?: string, errors?: Record<string, { message: string }> }} err
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ * @returns {void}
+ */
 export const errorHandler= (err, req, res, next) => {
     if (process.env.NODE_ENV !== "test") console.error(err);
 
@@ -5,6 +13,7 @@ export const errorHandler= (err, req, res, next) => {
     const statusCode= err.statusCode || 500;
     const message= 
         err.name === "ValidationError"
+            //Collect schema validation messages into a single response.
             ?Object.values(err.errors).map((val) => val.message).join(",")
             : err.message || "An unexpected error occured on the server.";
 

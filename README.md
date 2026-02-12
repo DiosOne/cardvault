@@ -30,6 +30,17 @@ cd server && npm run dev
 cd client && npm run dev
 ```
 
+### Generated Docs
+
+This repo ships JSDoc annotations across client and server. Generate HTML docs into `docs/`:
+
+```bash
+npm install
+npm run docs
+```
+
+Open `docs/index.html` to browse the categorized output (client containers, schemas, controllers, and more).
+
 ---
 
 ## Live Demo

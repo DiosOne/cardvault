@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 
+/**
+ * Schema for collectible cards owned by users or listed for trade.
+ * @type {mongoose.Schema}
+ */
 const cardSchema= new mongoose.Schema({
   name: { type: String, required: true },
   type: { type: String },
@@ -22,5 +26,9 @@ const cardSchema= new mongoose.Schema({
 { timestamps: true }
 );
 
+/**
+ * Card model for CRUD operations on the cards collection.
+ * @type {mongoose.Model}
+ */
 const Card= mongoose.model("Card", cardSchema);
 export default Card;

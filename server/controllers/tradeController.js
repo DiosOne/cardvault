@@ -3,6 +3,12 @@ import TradeRequest from "../models/tradeRequest.js";
 import { MESSAGES } from "../utility/messages.js";
 
 //new trade request
+/**
+ * Create a trade request from the authenticated user to another user.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<void>}
+ */
 export const createTrade= asyncHandler(async (req,res) => {
     const {toUser, cardId, message} = req.body;
 
@@ -26,6 +32,12 @@ export const createTrade= asyncHandler(async (req,res) => {
 });
 
 //show all trade requests to user
+/**
+ * Fetch trades where the authenticated user is a participant.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<void>}
+ */
 export const getTrades= asyncHandler(async (req,res) => {
     const trades= await TradeRequest.find({
         $or: [{fromUser: req.user.id}, {toUser: req.user.id}],
@@ -42,6 +54,12 @@ export const getTrades= asyncHandler(async (req,res) => {
 });
 
 //update trade status or response
+/**
+ * Update a trade's status or response message for a participant.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<void>}
+ */
 export const updateTrade= asyncHandler(async (req, res) => {
     const {status, responseMessage} = req.body;
     const trade= await TradeRequest.findById(req.params.id);
@@ -53,6 +71,7 @@ export const updateTrade= asyncHandler(async (req, res) => {
     }
 
     const requesterId= req.user.id;
+    //Allow only involved users to respond to or update this trade.
     const isParticipant=
         trade.fromUser.toString() === requesterId ||
         trade.toUser.toString() === requesterId;
