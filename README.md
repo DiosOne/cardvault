@@ -14,6 +14,7 @@ The sections below start with quick grading aids, then split the detailed docume
 ## Quick Start
 
 Prerequisites:
+
 - Node.js (LTS recommended)
 - npm
 - MongoDB Atlas connection string
@@ -48,6 +49,7 @@ Open `docs/index.html` to browse the categorized output (client containers, sche
 Live demo URL: TODO (add deployed link)
 
 Local demo:
+
 - Frontend: http://localhost:5173
 - API: http://localhost:5000
 
@@ -87,6 +89,7 @@ cardvault/
 ## Sample API Usage
 
 Register:
+
 ```bash
 curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
@@ -94,6 +97,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 ```
 
 Login:
+
 ```bash
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
@@ -101,6 +105,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 ```
 
 Create a card (replace TOKEN):
+
 ```bash
 curl -X POST http://localhost:5000/api/cards \
   -H "Authorization: Bearer TOKEN" \
@@ -109,6 +114,7 @@ curl -X POST http://localhost:5000/api/cards \
 ```
 
 Create a trade request (replace TOKEN and CARD_ID):
+
 ```bash
 curl -X POST http://localhost:5000/api/trades \
   -H "Authorization: Bearer TOKEN" \
@@ -266,18 +272,21 @@ npm test      # Jest + Supertest (ESM via --experimental-vm-modules)
 ## Testing & Coverage
 
 Frontend:
+
 ```bash
 cd client
 npm run test
 ```
 
 Backend:
+
 ```bash
 cd server
 npm test
 ```
 
 Notes:
+
 - Frontend tests include cards/forms/trade inbox; one public trades spec is currently skipped.
 - Backend tests validate auth and card CRUD plus trade routes.
 
