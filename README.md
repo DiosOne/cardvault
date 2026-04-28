@@ -57,11 +57,9 @@ Local demo:
 
 ## Screenshots
 
-Add screenshots in `docs/screenshots/` and update the links below.
-
-![Dashboard](docs/screenshots/dashboard.png)
-![Trade Inbox](docs/screenshots/trade-inbox.png)
-![Public Trades](docs/screenshots/public-trades.png)
+![Dashboard](docs/screenshots/cardvault-dash.png)
+![Trade Inbox](docs/screenshots/cardvault-inbox.png)
+![Public Trades](docs/screenshots/cardvault-trade.png)
 
 ---
 
@@ -263,7 +261,18 @@ npm test      # Jest + Supertest (ESM via --experimental-vm-modules)
 
 ## Known Issues / TODO
 
+- Before troubleshooting backend startup, confirm the MongoDB Atlas cluster is awake/reachable and `server/.env` has the current `MONGO_URI`.
 - `client/src/__tests__/PublicTrades.test.jsx` is skipped pending a router-context fix.
+- Fix card display stacking, 3-4 wide grid, with seperate selectable sections.
+  - Owned
+  - For Trade
+  - Wanted
+- Make sortable by type, price, rarity, alphabet - ascend/descend.
+- Add auto caps for all input variables.
+- Fix placeholder image doubling in rows on Dash.
+- Change trade inbox message layout. All text in row with card image, keep reply message underneath all.
+- Fix underline on navlinks.
+
 - Add deployment URL to the Live Demo section.
 - Replace placeholder screenshots with real UI captures.
 

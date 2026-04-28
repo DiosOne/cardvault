@@ -29,7 +29,9 @@ const requestLogger= (req, res, next) => {
 app.use(requestLogger);
 
 //Connect to MongoDB
-connectDB();
+if (process.env.NODE_ENV !== "test") {
+  connectDB();
+}
 
 //Routes
 app.use("/api/auth", authRoutes);

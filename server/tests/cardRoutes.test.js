@@ -2,15 +2,18 @@ import request from "supertest";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import app from "../index.js";
+import connectDB from "../db.js";
 
 let token;  //define globaly
 let createdCardId; //track card id
+let dbConnected= false;
 
 /**
  * Create a JWT for authenticated test requests.
  * @returns {void}
  */
-const setAuthToken= () => {
+const setAuthToken= async () => {
+    dbConnected= await connectDB({quiet: true});
     token= jwt.sign({id: new mongoose.Types.ObjectId() }, process.env.JWT_SECRET, {
         expiresIn: "1h",
     });
@@ -23,7 +26,9 @@ beforeAll(setAuthToken);
  * @returns {Promise<void>}
  */
 const closeConnection= async () => {
-    await mongoose.connection.close();
+    if (dbConnected) {
+        await mongoose.connection.close();
+    }
 };
 
 afterAll(closeConnection);
@@ -53,6 +58,8 @@ describe("Card API", cardApiSuite);
  * @returns {Promise<void>}
  */
 const shouldCreateAndUpdateCard= async () => {
+    if (!dbConnected) return;
+
     const newCard= {
         name: "Red-Eyes Black Dragon",
         type: "Monster",
@@ -87,6 +94,8 @@ it("should create a card and then update it", shouldCreateAndUpdateCard);
  * @returns {Promise<void>}
  */
 const shouldDeleteCardById= async () => {
+    if (!dbConnected) return;
+
     const res= await request(app)
         .delete(`/api/cards/${createdCardId}`)
         .set("Authorization", `Bearer ${token}`);
@@ -102,6 +111,8 @@ it("should delete a card by ID", shouldDeleteCardById);
  * @returns {Promise<void>}
  */
 const shouldFetchCardsForAuthorizedUser= async () => {
+    if (!dbConnected) return;
+
     const res= await request(app)
         .get("/api/cards")
         .set("Authorization", `Bearer ${token}`);

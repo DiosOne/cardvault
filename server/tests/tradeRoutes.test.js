@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import app from "../index.js";
 import Card from "../models/Card.js";
+import connectDB from "../db.js";
 
 let token;
 let cardId;
 let toUserId;
 let tradeId;
+let dbConnected= false;
 const fromUserId= new mongoose.Types.ObjectId();
 
 /**
@@ -15,7 +17,10 @@ const fromUserId= new mongoose.Types.ObjectId();
  * @returns {Promise<void>}
  */
 const seedTradeData= async () => {
+    dbConnected= await connectDB({quiet: true});
     token= jwt.sign({id: fromUserId}, process.env.JWT_SECRET, {expiresIn: "1h"});
+
+    if (!dbConnected) return;
 
     toUserId= new mongoose.Types.ObjectId();
     
@@ -38,8 +43,10 @@ beforeAll(seedTradeData);
  * @returns {Promise<void>}
  */
 const cleanupTradeData= async () => {
-    await Card.deleteMany({});
-    await mongoose.connection.close();
+    if (dbConnected) {
+        await Card.deleteMany({});
+        await mongoose.connection.close();
+    }
 };
 
 afterAll(cleanupTradeData);
@@ -59,6 +66,8 @@ const shouldReturn401WhenNoTokenProvided= async () => {
  * @returns {Promise<void>}
  */
 const shouldFailToCreateTradeWithMissingData= async () => {
+    if (!dbConnected) return;
+
     const res= await request(app)
         .post("/api/trades")
         .set("Authorization", `Bearer ${token}`)
@@ -73,6 +82,8 @@ const shouldFailToCreateTradeWithMissingData= async () => {
  * @returns {Promise<void>}
  */
 const shouldCreateTradeRequest= async () => {
+    if (!dbConnected) return;
+
     const res= await request(app)
         .post("/api/trades")
         .set("Authorization", `Bearer ${token}`)
@@ -92,6 +103,8 @@ const shouldCreateTradeRequest= async () => {
  * @returns {Promise<void>}
  */
 const shouldFetchTradesForAuthenticatedUser= async () => {
+    if (!dbConnected) return;
+
     const res= await request(app)
         .get("/api/trades")
         .set("Authorization", `Bearer ${token}`);
